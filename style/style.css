@@ -77,14 +77,14 @@ body, html {
   margin-top: 200px;
   position: absolute;
 }
-.projects .projects__content a {
+.projects .projects__content--bloc {
   color: #FFFFFF;
   text-decoration: none;
 }
-.projects .projects__content h1, .projects .projects__content p {
+.projects .projects__content--bloc h1, .projects .projects__content--bloc p {
   margin-left: 10px;
 }
-.projects .projects__content img {
+.projects .projects__content--bloc img {
   width: calc(100% - 30px);
   margin-left: 15px;
 }

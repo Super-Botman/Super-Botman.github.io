@@ -91,18 +91,17 @@ body, html{
     margin-top: 200px;
     position: absolute;
 
-    a{
+    &--bloc{
       color: #FFFFFF;
       text-decoration:none;
-    }
+      h1,p{
+        margin-left: 10px;
+      }
 
-    h1,p{
-      margin-left: 10px;
-    }
-
-    img{
-      width: calc(100% - 30px);
-      margin-left: 15px;
+      img{
+        width: calc(100% - 30px);
+        margin-left: 15px;
+      }
     }
 
     &--bloc:hover{
