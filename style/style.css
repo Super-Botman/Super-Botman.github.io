@@ -76,24 +76,37 @@ body, html {
   height: calc(85vh - 1.5em - 50px);
   margin-top: 200px;
   position: absolute;
+}
+.projects .projects__content a {
   color: #FFFFFF;
+  text-decoration: none;
+}
+.projects .projects__content h1, .projects .projects__content p {
+  margin-left: 10px;
+}
+.projects .projects__content img {
+  width: calc(100% - 30px);
+  margin-left: 15px;
+}
+.projects .projects__content--bloc:hover {
+  cursor: pointer;
 }
 .projects .projects__content--1rst {
-  margin: 20px;
+  margin: 0 50px 0 50px;
   background-color: rgb(153, 255, 72);
   height: calc(100% - 120px);
   box-shadow: 20px 20px rgba(153, 255, 72, 0.5);
   flex: 1;
 }
 .projects .projects__content--2nd {
-  margin: 20px;
+  margin: 0 0px 0 0px;
   background-color: rgb(255, 204, 72);
   height: calc(100% - 120px);
   box-shadow: 20px 20px rgba(255, 204, 72, 0.5);
   flex: 1;
 }
 .projects .projects__content--3rd {
-  margin: 20px;
+  margin: 0 50px 0 50px;
   background-color: rgb(63, 170, 248);
   height: calc(100% - 120px);
   box-shadow: 20px 20px rgba(63, 170, 248, 0.5);

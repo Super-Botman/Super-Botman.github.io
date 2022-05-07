@@ -63,8 +63,8 @@ body, html{
   }
 }
 
-@mixin bloc($color1, $color2){
-  margin: 20px;
+@mixin bloc($color1, $color2, $margin:50px){
+  margin: 0 $margin 0 $margin;
   background-color: $color1;
   height: calc(100% - 20px * 6);
   box-shadow: 20px 20px $color2;
@@ -90,12 +90,30 @@ body, html{
     height: calc(85vh - 1.5em - 50px);
     margin-top: 200px;
     position: absolute;
-    color: #FFFFFF;
+
+    a{
+      color: #FFFFFF;
+      text-decoration:none;
+    }
+
+    h1,p{
+      margin-left: 10px;
+    }
+
+    img{
+      width: calc(100% - 30px);
+      margin-left: 15px;
+    }
+
+    &--bloc:hover{
+      cursor: pointer;
+    }
+
     &--1rst{
       @include bloc(rgba(153,255,72,1), rgba(153,255,72,0.5));
     }
     &--2nd{
-      @include bloc(rgba(255,204,72,1), rgba(255,204,72,0.5));
+      @include bloc(rgba(255,204,72,1), rgba(255,204,72,0.5), 0px);
     }
     &--3rd{
       @include bloc(rgba(63,170,248,1), rgba(63,170,248,0.5));
