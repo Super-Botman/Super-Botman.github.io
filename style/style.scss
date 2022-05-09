@@ -17,10 +17,14 @@ body, html{
   }
 
   &--name {
+    color: #000000;
     margin-bottom: 0;
     margin-top: 2.5em;
     margin-right: 5%;
     float: right;
+    a{
+      color: #000000
+    }
   }
 
   &--line {
@@ -36,7 +40,8 @@ body, html{
     position: absolute;
     clear: both;
     width: 200px;
-    transform: translate(100px, 100px);
+    right: 250px;
+    top: 50px;
     &--arrow{
       transform: translate3d(200px, 70px, 0)rotateX(180deg) rotateZ(40deg);
     }
