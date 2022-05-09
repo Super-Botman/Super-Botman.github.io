@@ -31,15 +31,36 @@ body, html{
 
 .top {
   width: 100%;
+
+  .header__comment{
+    position: absolute;
+    clear: both;
+    width: 200px;
+    transform: translate(100px, 100px);
+    &--arrow{
+      transform: translate3d(200px, 70px, 0)rotateX(180deg) rotateZ(40deg);
+    }
+  }
   .header__top{
     position: absolute;
     width: 100%-(100%-95%)/2;
   }
+
+  .link__comment{
+    position: relative;
+    clear: both;
+    width: 200px;
+    transform: translate(75px,-20px);
+    &--arrow{
+      transform: rotateZ(130deg) translate(40px, 20px);
+    }
+  }
+
   .link {
     position: absolute;
     margin-top: 25%;
     margin-left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(calc(-50% + 100px), -50%);
 
     &--arrow {
       border: solid black;

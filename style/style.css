@@ -29,15 +29,33 @@ body, html {
 .top {
   width: 100%;
 }
+.top .header__comment {
+  position: absolute;
+  clear: both;
+  width: 200px;
+  transform: translate(100px, 100px);
+}
+.top .header__comment--arrow {
+  transform: translate3d(200px, 70px, 0) rotateX(180deg) rotateZ(40deg);
+}
 .top .header__top {
   position: absolute;
   width: 97.5%;
+}
+.top .link__comment {
+  position: relative;
+  clear: both;
+  width: 200px;
+  transform: translate(75px, -20px);
+}
+.top .link__comment--arrow {
+  transform: rotateZ(130deg) translate(40px, 20px);
 }
 .top .link {
   position: absolute;
   margin-top: 25%;
   margin-left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(-50% + 100px), -50%);
 }
 .top .link--arrow {
   border: solid black;
