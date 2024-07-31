@@ -1,0 +1,70 @@
+{% block files %}
+<ul>
+    {% set root_section = get_section(path="_index.md") -%}
+    {% set tabindex = 1 %}
+    <li class="file">
+        <span><a {% if current_path == "/" -%}class="selected"{%- endif -%}
+                 href='/'
+                 tabindex="{{ tabindex }}"> README</a></span>
+    </li>
+
+    {% for p in root_section.pages %}
+    {% set tabindex = tabindex + 1 %}
+    <li class="file">
+        <span><a {% if page and p == page -%}class="selected"{%- endif -%}
+                 href='{{ p.permalink | safe }}'
+                 tabindex="{{ tabindex }}">  {{ p.title }}</a></span>
+    </li>
+    {% endfor %}
+
+    {{- self::fs(root_section=root_section, tabindex=tabindex) -}}
+</ul>
+{% endblock %}
+
+
+{%- macro fs(root_section, tabindex, folder=False) -%}
+{%- for s in root_section.subsections -%}
+{% set tabindex = tabindex + 1 %}
+{%- set s = get_section(path=s) -%}
+
+{%if folder %}
+<ul class="subfolder">
+{% else %}
+<li class="folder">
+{% endif %}
+    <span>{%- if folder %}└──{%- endif %}
+        <a {% if section and s == section -%}class="selected"{%- endif -%}
+           href='{{s.permalink | safe }}'
+           tabindex="{{ tabindex }}">  {{ s.title }}
+        </a>
+    </span>
+
+    {% if not folder %}<ul>{% endif %}
+
+        {% for p in s.pages -%}
+            {% set tabindex = tabindex + 1 %}
+            <li class="file">
+                <span>└──
+                    <a {% if page and p == page -%}class="selected"{%- endif -%}
+                    href='{{ p.permalink | safe }}'
+                    tabindex="{{ tabindex }}">  {{ p.title }}</a>
+                </span>
+            </li>
+        {% endfor -%}
+
+        {% for s in root_section.subsections -%}
+            {% set s = get_section(path=s) -%}
+            {% set tabindex = tabindex + 1 %}
+            {{ self::fs(root_section=s, tabindex=tabindex, folder=True) }}
+        {% endfor -%}
+
+    {% if not folder %}</ul>{% endif %}
+
+{%if folder %}
+</ul>
+{% else %}
+</li>
+{% endif %}
+
+{%- endfor -%}
+{%- endmacro fs-%}

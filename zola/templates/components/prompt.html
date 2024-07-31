@@ -1,0 +1,11 @@
+{%- block prompt -%}
+<input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<h1 id="writer"></h1><b class="cursor" id="cursor"></b>
+{%- endblock -%}

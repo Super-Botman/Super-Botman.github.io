@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title></title>
+     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
+     <script src="/js/index.js"></script>
+     <script src="/js/prompt.js"></script>
+     <script src="/js/keyboard.js"></script>
+     <link rel="stylesheet" href="/css/base.css">
+     {%- if page -%}
+     <link rel="stylesheet" href="/css/page.css">
+     {%- endif -%}
+</head>
+<body onkeydown='exec(event)'>
+  <header>
+    <h1>Botman's blog</h1>
+  </header>
+  <main>
+    <div class="files" id="files" tabindex="0">
+    {%- include "components/files.html" -%}
+    </div>
+    <div class="viewer {% if page -%}page{%- endif -%}" id="viewer" tabindex="0">
+      {%- block content -%}{% endblock %}
+    </div>
+    <div class="prompt" id="terminal">
+    {%- include "components/prompt.html" -%}
+    </div>
+  </main>
+</body>
+</html>

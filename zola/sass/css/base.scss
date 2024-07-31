@@ -1,0 +1,179 @@
+@font-face {
+  font-family: JetBrainsMono;
+  src: url("/JetBrainsMonoNLNerdFont-Regular.ttf");
+}
+
+:root {
+  --bg-color: rgba(19, 19, 41, 0.96);
+  --font-color: #cdd6f4;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #dc8add var(--bg-color);
+}
+
+html {
+  background-image: url("/assets/background.jpg");
+  color: var(--font-color);
+  font-family: JetBrainsMono;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+/* html {cursor:none} */
+
+
+@media only screen and (max-width: 768px) {
+  .viewer {
+    margin: 3%;
+    position: relative;
+  }
+
+  .section {
+    margin-left: 3%;
+    margin-right: 3%;
+    padding: 0;
+
+    .section {
+      margin: 0;
+    }
+  }
+
+  .files {
+    box-shadow: 0px 3px 0px 0px var(--font-color);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .viewer {
+    width: calc(80% - 20px);
+    margin-left: 20%;
+    padding-left: 20px;
+    position: absolute;
+  }
+
+  .files {
+    position: sticky;
+    top: 0;
+    width: 20%;
+    height: calc(100% - 58px);
+
+    box-shadow: 3px 0px 0px 0px var(--font-color);
+    overflow-x: scroll;
+  }
+}
+
+header>h1 {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+main {
+  height: 90%;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: var(--bg-color);
+
+  ul {
+    list-style-type: none;
+
+    a {
+      color: var(--font-color);
+      text-decoration: none;
+      width: 100%;
+      display: inline;
+    }
+
+    a:hover,
+    .selected {
+      width: 90%;
+      background-color: rgba(66, 135, 245, 0.5);
+    }
+  }
+
+  .viewer {
+    overflow-y: scroll;
+    height: calc(100% - 58px);
+
+    .section {
+      padding: 0px;
+
+      .section {
+        a {
+          color: rgba(66, 135, 245, 1);
+        }
+      }
+    }
+  }
+
+  .files {
+    text-wrap: nowrap;
+
+    ul {
+      padding: 0;
+
+      li {
+        padding-left: 1em;
+        margin-top: 3px;
+
+        .file {
+          margin-top: 0;
+          padding: 0px;
+        }
+
+        .subfolder>.file {
+          padding-left: 2.5em;
+        }
+      }
+    }
+  }
+
+  .prompt {
+    position: relative;
+    bottom: 0;
+    height: 55px;
+    box-shadow: 0px -3px 0px 0px var(--font-color);
+
+    font-size: 10px;
+    display: inline-flex;
+    width: 100%;
+    align-content: center;
+
+    .cursor {
+      opacity: 0.6;
+      width: 15px;
+      background-color: #fff;
+      margin-top: 2ex;
+      margin-bottom: 2ex;
+      position: relative;
+      display: none;
+    }
+
+    h1 {
+      padding-left: 10px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    input {
+      left: -1000px;
+      position: absolute;
+    }
+  }
+}
+
+footer>p {
+  margin-bottom: 0;
+}
