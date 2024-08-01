@@ -27,7 +27,7 @@
 {%- set s = get_section(path=s) -%}
 
     {%- if folder -%}
-    <ul class="subfolder">
+    <li class="subfolder">
     {%- else -%}
     <li class="folder">
     {%- endif -%}
@@ -37,7 +37,8 @@
                tabindex="{{ tabindex }}">  {{ s.title }}
             </a>
         </span>
-        {% if not folder %}<ul>{% endif -%}
+
+        <ul>
         {% for p in s.pages -%}
             {%- set tabindex = tabindex - 1 %}
             <li class="file">
@@ -55,10 +56,10 @@
             {{ self::fs(root_section=s, tabindex=tabindex, folder=True) }}
         {% endfor -%}
 
-        {%- if not folder -%}</ul>{%- endif -%}
+        </ul>
 
     {%- if folder -%}
-    </ul>
+    </li>
     {%- else %}
     </li>
     {%- endif -%}

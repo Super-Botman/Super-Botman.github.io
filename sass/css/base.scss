@@ -173,12 +173,13 @@ main {
           color: var(--font-color);
         }
 
-        .file {
+        .file,
+        .subfolder {
           margin-top: 0;
           padding: 0px;
         }
 
-        .subfolder>.file {
+        .subfolder>ul {
           padding-left: 2.5em;
         }
       }
@@ -206,7 +207,8 @@ main {
       display: none;
     }
 
-    h1 {
+    label {
+      font-size: 2em;
       padding-left: 10px;
       margin-top: auto;
       margin-bottom: auto;
