@@ -8,6 +8,7 @@
      <script src="/js/index.js"></script>
      <script src="/js/prompt.js"></script>
      <script src="/js/keyboard.js"></script>
+     <script src="/js/tab.js"></script>
      <link rel="stylesheet" href="/css/base.css">
      {%- if page -%}
      <link rel="stylesheet" href="/css/page.css">
@@ -22,7 +23,12 @@
     {%- include "components/files.html" -%}
     </div>
     <div class="viewer {% if page -%}page{%- endif -%}" id="viewer" tabindex="0">
-      {%- block content -%}{% endblock %}
+      <div class="tab">
+      {%- include "components/tab.html" -%}
+      </div>
+      <div class="content" id="content">
+        {%- block content -%}{% endblock %}
+      </div>
     </div>
     <div class="prompt" id="terminal">
     {%- include "components/prompt.html" -%}

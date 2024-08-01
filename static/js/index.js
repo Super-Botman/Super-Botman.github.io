@@ -7,6 +7,8 @@ function init() {
   document.getElementById("setter").value = "";
 
   if (!Cookies.get("focused")) Cookies.set("focused", "viewer");
+  if (!Cookies.get("tabs")) Cookies.set("tabs", JSON.stringify([]));
 
+  render_tabs();
   document.getElementById(Cookies.get("focused")).focus();
 }
