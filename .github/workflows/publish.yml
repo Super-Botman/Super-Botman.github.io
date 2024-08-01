@@ -16,6 +16,10 @@ jobs:
       uses: shalzz/zola-deploy-action@v0.19.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
         
   deploy:
     environment:
