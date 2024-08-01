@@ -47,7 +47,7 @@ function exec(event) {
         if (is_viewer && is_page) {
           element.scrollBy(0, 30);
         } else {
-          next_element(1, element);
+          next_element(-1, element);
         }
         break;
 
@@ -55,7 +55,7 @@ function exec(event) {
         if (is_viewer && is_page) {
           element.scrollBy(0, -30);
         } else {
-          next_element(-1, element);
+          next_element(1, element);
         }
         break;
     }
@@ -65,9 +65,11 @@ function exec(event) {
 function next_element(incrementer, element) {
   const a = element.getElementsByClassName("selected")[0];
   const index = parseInt(a.attributes.tabindex.value);
+  console.log(index);
   const next_element = element.querySelector(
     `[tabindex='${index + incrementer}']`,
   );
+  console.log(next_element);
 
   if (next_element) {
     next_element.classList.add("selected");
