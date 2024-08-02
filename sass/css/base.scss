@@ -37,8 +37,19 @@ html {
 
 @media only screen and (max-width: 768px) {
   .viewer {
-    margin: 3%;
     position: relative;
+
+    .tab {
+      box-shadow: 3px -3px 0px 0px var(--font-color) inset !important;
+
+      ul {
+        margin-top: 3px !important;
+
+        li {
+          margin-bottom: 3px !important;
+        }
+      }
+    }
   }
 
   .section {
@@ -61,10 +72,6 @@ html {
     width: 80%;
     margin-left: 20%;
     position: absolute;
-
-    .content {
-      padding-left: 20px;
-    }
   }
 
   .files {
@@ -82,6 +89,7 @@ header>h1 {
   margin: 0;
   padding: 10px;
   text-align: center;
+  background-color: transparent;
 }
 
 main {
@@ -115,14 +123,14 @@ main {
     height: calc(100% - 58px);
 
     .content {
+      padding-left: 20px;
       height: calc(100% - 23px);
       overflow-y: scroll;
     }
 
     .tab {
-      width: calc(100% - 3px);
+      width: 100%;
       height: 22px;
-      margin-left: 3px;
       box-shadow: 0px 3px 0px 0px var(--font-color);
 
       ul {
@@ -131,6 +139,7 @@ main {
         padding: 0px;
         margin: 0;
         height: 100%;
+        margin-left: 3px;
 
         li:hover,
         .selected {
@@ -147,8 +156,11 @@ main {
 
         li {
           padding: 0px 20px 0px 20px;
-          box-shadow: 3px 0px 0px 0px var(--font-color);
+          box-shadow: -3px 0px 0px 0px var(--font-color) inset;
           color: rgba(205, 214, 244, 0.6) !important;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
