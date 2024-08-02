@@ -27,7 +27,10 @@ body {
   margin: 0;
 }
 
-/* html {cursor:none} */
+html {
+  cursor: none;
+  pointer-events: none;
+}
 
 
 @media only screen and (max-width: 768px) {
