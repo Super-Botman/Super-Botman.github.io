@@ -34,24 +34,23 @@ function del_tab(event) {
   const element = document.getElementById("tabs");
   let a;
   if (!event) {
-    a = element.getElementsByClassName("selected")[0];
+    a = element.getElementsByClassName("selected")[0].firstElementChild;
   } else {
     a = event.target.previousElementSibling;
   }
-  let name = a.textContent;
 
   const page = {
     link: a.href,
-    name: name,
+    name: a.innerText,
   };
 
   tabs = JSON.parse(Cookies.get("tabs"));
-  const new_tabs = tabs.filter((p) => p.name !== page.name);
+  const new_tabs = tabs.filter((p) => p.link !== page.link);
   tabs = new_tabs.length > 0 ? new_tabs : tabs;
-  Cookies.set("tabs", JSON.stringify(new_tabs));
+  Cookies.set("tabs", JSON.stringify(tabs));
 
   if (!event) {
-    window.location.href = new_tabs[new_tabs.length - 1].link;
+    window.location.href = tabs[tabs.length - 1].link;
   } else {
     render_tabs();
   }
