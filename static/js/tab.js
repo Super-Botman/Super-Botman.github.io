@@ -1,8 +1,14 @@
 function new_tab(element, is_enter, goto_link = true) {
   const a = element.getElementsByClassName("selected")[0];
-  let name = a.textContent.split(" ");
-  name.shift();
-  name = name.join(" ");
+
+  let name;
+  if (element.id == "content") {
+    name = a.textContent.replace("/", "");
+  } else {
+    name = a.textContent.split(" ");
+    name.shift();
+    name = name.join(" ");
+  }
 
   const page = {
     link: a.href,
@@ -24,9 +30,14 @@ function new_tab(element, is_enter, goto_link = true) {
   if (goto_link) window.location.href = page.link;
 }
 
-function del_tab() {
+function del_tab(event) {
   const element = document.getElementById("tabs");
-  const a = element.getElementsByClassName("selected")[0];
+  let a;
+  if (!event) {
+    a = element.getElementsByClassName("selected")[0];
+  } else {
+    a = event.target.previousElementSibling;
+  }
   let name = a.textContent;
 
   const page = {
@@ -35,10 +46,15 @@ function del_tab() {
   };
 
   tabs = JSON.parse(Cookies.get("tabs"));
-  tabs = tabs.filter((p) => p.name !== page.name);
-  Cookies.set("tabs", JSON.stringify(tabs));
+  const new_tabs = tabs.filter((p) => p.name !== page.name);
+  tabs = new_tabs.length > 0 ? new_tabs : tabs;
+  Cookies.set("tabs", JSON.stringify(new_tabs));
 
-  window.location.href = tabs[tabs.length - 1].link;
+  if (!event) {
+    window.location.href = new_tabs[new_tabs.length - 1].link;
+  } else {
+    render_tabs();
+  }
 }
 
 function next_tab() {
@@ -80,7 +96,13 @@ function render_tabs() {
       li.classList.add("selected");
     }
 
+    const button = document.createElement("button");
+    button.classList.add("closetab");
+    button.textContent = "x";
+    button.addEventListener("click", del_tab);
+
     tabs_container.appendChild(li);
     li.appendChild(a);
+    li.appendChild(button);
   });
 }

@@ -133,6 +133,12 @@ main {
       height: 22px;
       box-shadow: 0px 3px 0px 0px var(--font-color);
 
+      button {
+        all: unset;
+        cursor: pointer;
+        padding-left: 5px;
+      }
+
       ul {
         display: flex;
         flex-direction: row;
@@ -154,13 +160,19 @@ main {
           background-color: transparent;
         }
 
-        li {
-          padding: 0px 20px 0px 20px;
-          box-shadow: -3px 0px 0px 0px var(--font-color) inset;
-          color: rgba(205, 214, 244, 0.6) !important;
+        a {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          width: 50px;
+          display: block;
+        }
+
+        li {
+          padding: 0px 12px 0px 15px;
+          box-shadow: -3px 0px 0px 0px var(--font-color) inset;
+          color: rgba(205, 214, 244, 0.6) !important;
+          display: inherit;
         }
       }
     }

@@ -8,7 +8,7 @@
         </span>
     </li>
     {%- for p in root_section.pages %}
-    {%- set tabindex = tabindex - 1 -%}
+    {%- set_global tabindex = tabindex - 1 -%}
     <li class="file">
         <span><a {% if page and p == page -%}class="selected"{%- endif -%}
                  href='{{ p.permalink | safe }}'
@@ -23,7 +23,6 @@
 
 {%- macro fs(root_section, tabindex, folder=False) -%}
 {%- for s in root_section.subsections -%}
-{% set tabindex = tabindex - 1 %}
 {%- set s = get_section(path=s) -%}
 
     {%- if folder -%}
@@ -32,6 +31,7 @@
     <li class="folder">
     {%- endif -%}
         <span>{% if folder %}└──{%- endif %}
+            {% set_global tabindex = tabindex - 1 %}
             <a {% if section and s == section -%}class="selected"{%- endif -%}
                href='{{s.permalink | safe }}'
                tabindex="{{ tabindex }}">  {{ s.title }}
@@ -40,9 +40,9 @@
 
         <ul>
         {% for p in s.pages -%}
-            {%- set tabindex = tabindex - 1 %}
             <li class="file">
                 <span>└──
+                    {%- set tabindex = tabindex - 1 %}
                     <a {% if page and p == page -%}class="selected"{%- endif -%}
                     href='{{ p.permalink | safe }}'
                     tabindex="{{ tabindex }}">  {{ p.title }}</a>
