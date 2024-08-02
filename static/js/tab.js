@@ -49,7 +49,12 @@ function del_tab(event) {
   tabs = new_tabs.length > 0 ? new_tabs : tabs;
   Cookies.set("tabs", JSON.stringify(tabs));
 
-  if (!event) {
+  console.log(a);
+  console.log(page);
+  console.log(tabs);
+  console.log(new_tabs);
+
+  if (!event || page.link == window.location.href) {
     window.location.href = tabs[tabs.length - 1].link;
   } else {
     render_tabs();
