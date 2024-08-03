@@ -49,11 +49,6 @@ function del_tab(event) {
   tabs = new_tabs.length > 0 ? new_tabs : tabs;
   Cookies.set("tabs", JSON.stringify(tabs));
 
-  console.log(a);
-  console.log(page);
-  console.log(tabs);
-  console.log(new_tabs);
-
   if (!event || page.link == window.location.href) {
     window.location.href = tabs[tabs.length - 1].link;
   } else {
@@ -96,7 +91,11 @@ function render_tabs() {
     a.href = tab.link;
     a.textContent = tab.name;
 
-    if (window.location == tab.link) {
+    const location = window.location.href.endsWith("/")
+      ? window.location.href
+      : window.location.href + "/";
+    const link = tab.link.endsWith("/") ? tab.link : tab.link + "/";
+    if (location == tab.link) {
       li.classList.add("selected");
     }
 

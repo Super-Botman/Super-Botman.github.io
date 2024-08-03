@@ -1,6 +1,19 @@
 function writeit(from, event) {
-  let w = document.getElementById("writer");
-  w.innerHTML = from.value.replaceAll(" ", "&nbsp");
+  const w = document.getElementById("writer");
+  let value;
+  try {
+    value = JSON.parse(from.value);
+  } catch (e) {
+    value = from.value;
+  }
+
+  if (value.type == "error") {
+    w.innerHTML = `<span style="color:#C62828;">${value.message.replaceAll(" ", "&nbsp")}</span>`;
+  } else if (value.startsWith(":")) {
+    w.innerHTML = value.replaceAll(" ", "&nbsp");
+  } else {
+    value = "";
+  }
 }
 
 function moveIt(count, event) {

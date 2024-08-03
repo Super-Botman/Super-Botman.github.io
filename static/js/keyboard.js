@@ -21,7 +21,7 @@ function exec(event) {
   const is_page = element.classList.contains("page");
   const is_viewer = element.id == "viewer";
   const is_files = element.id == "files";
-  const is_prompt = element.id == "prompt";
+  const is_prompt = element.id == "setter";
 
   if (key && (is_viewer || is_files)) event.preventDefault();
 
@@ -56,7 +56,7 @@ function exec(event) {
 
       case "enter":
         if (is_prompt) {
-          // TODO: commands
+          command();
         } else {
           new_tab(element, true);
         }
@@ -71,23 +71,35 @@ function exec(event) {
       case "j":
         if (is_viewer && is_page) {
           element.scrollBy(0, 30);
-        } else {
-          next_element(-1, element);
+        } else if (!is_prompt) {
+          next_file(-1, element);
         }
         break;
 
       case "k":
         if (is_viewer && is_page) {
           element.scrollBy(0, -30);
-        } else {
-          next_element(1, element);
+        } else if (!is_prompt) {
+          next_file(1, element);
+        }
+        break;
+
+      case "l":
+        if (!is_prompt) {
+          element.scrollBy(30, 0);
+        }
+        break;
+
+      case "h":
+        if (!is_prompt) {
+          element.scrollBy(-30, 0);
         }
         break;
     }
   }
 }
 
-function next_element(incrementer, element) {
+function next_file(incrementer, element) {
   const a = element.getElementsByClassName("selected")[0];
   const index = parseInt(a.attributes.tabindex.value);
   const next_element = element.querySelector(
