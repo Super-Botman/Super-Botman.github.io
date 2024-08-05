@@ -7,8 +7,10 @@ function writeit(from, event) {
     value = from.value;
   }
 
-  if (value.type == "error") {
-    w.innerHTML = `<span style="color:#C62828;">${value.message.replaceAll(" ", "&nbsp")}</span>`;
+  if (value.type) {
+    const color = value.type == "error" ? "#C62828" : "#689F38";
+
+    w.innerHTML = `<span style="color:${color};">${value.message.replaceAll(" ", "&nbsp")}</span>`;
   } else if (value.startsWith(":")) {
     w.innerHTML = value.replaceAll(" ", "&nbsp");
   } else {

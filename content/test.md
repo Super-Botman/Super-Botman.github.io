@@ -4,18 +4,26 @@ title="README 2"
 
 # HOW TO
 
-`shift+h/l` pour passer de "l'explorateur de fichier" au contenu du fichier
+## Shotcuts
 
-`j/k`: pour scroller dans la partie contenu du fichier
+`shift+h/l`: to switch from file browser to file viewer 
 
-`j/k`: pour passer de fichiers en fichiers dans "l'explorateur de fichiers"
+`j/k`: to scroll through the file content 
 
-`enter`: pour aller sur la page qui est sélectionné
+`j/k`: to go through files in file browser 
 
-`esc+text`: pour taper dans la barre du bas, pour l'instant j'ai rien implem mais ça viendras plus tard
+`enter`: to open the currently selected file 
 
-`shift+t/enter`: pour ouvrir dans un nouvel onglet
+`esc+command`: see [## Commands](#Commands) 
 
-`tab`: pour passer au prochaine onglet
+`shift+t/enter`: to open the file in a new tab 
 
-`shift+q`: pour fermer un onglet
+`tab`: to go to the next tab 
+
+`shift+q`: to close the current tab 
+
+## Commands
+
+`:help`: to show this page
+
+`:set mouse=true|false`: to set the mouse (true=showed, false=hidden)
