@@ -27,28 +27,13 @@ body {
   margin: 0;
 }
 
-/*
-html {
-  cursor: none;
-  pointer-events: none;
-}
-*/
-
-
 @media only screen and (max-width: 768px) {
   .viewer {
     position: relative;
 
-    .tab {
-      box-shadow: 3px -3px 0px 0px var(--font-color) inset !important;
-
-      ul {
-        margin-top: 3px !important;
-
-        li {
-          margin-bottom: 3px !important;
-        }
-      }
+    .tab>ul {
+      margin-top: 3px !important;
+      margin-left: 0px !important;
     }
   }
 
@@ -93,6 +78,7 @@ header>h1 {
 }
 
 main {
+  overflow: clip;
   height: 90%;
   width: 95%;
   margin-left: 2.5%;
@@ -121,6 +107,7 @@ main {
 
   .viewer {
     height: calc(100% - 58px);
+    overflow: scroll;
 
     .content {
       padding-left: 20px;

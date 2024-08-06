@@ -30,29 +30,45 @@
       let word = text[i];
       const max_percentage = 300
 
-      let span_array = []
+      let p_array = []
+      let p = document.createElement("p");
+      p_array.push(p)
+      h1.appendChild(p)
+
       for(let j = 0; j < word.length; j++){ 
-        await sleep(100)
         const span = document.createElement("span")
         span.innerHTML = word[j].replace(" ", "&nbsp;")
-        span_array.push(span)
-        h1.appendChild(span)
+        p.appendChild(span) 
+
+        if (word[j] == " ") {
+          p = document.createElement("p");
+          p_array.push(p)
+          h1.appendChild(p)
+        }
+
         h1.style = `background-image: -webkit-linear-gradient(0deg, #fff, transparent 
                     ${(max_percentage/word.length)*(j+1)}%);`
-
+        await sleep(100)
       }
 
       await sleep(100*word.length);
 
-      for(let j = (word.length-1); j >= 0 ; j--){
-        await sleep(60)
-        h1.removeChild(span_array[j])
-        h1.style = `background-image: -webkit-linear-gradient(0deg, #fff, transparent 
-                    ${max_percentage*1.2 - ((max_percentage/word.length)*(j+1))}%);`
+      let percentage = 0;
+      for(let i = p_array.length-1; i >= 0; i--){
+        const p = p_array[i]
 
-      }
+        for(let k = (p.children.length-1); k >= 0 ; k--){
+          await sleep(60)
+          p.removeChild(p.children[k])
 
-      element.removeChild(h1)
+          percentage++
+          h1.style = `background-image: -webkit-linear-gradient(0deg, #fff, transparent 
+                      ${max_percentage*1.2 - ((max_percentage/word.length)*(percentage))}%);`
+
+        }
+    }
+
+     element.removeChild(h1)
     }
 
     for( let i = 100; i >= 0; i--) {

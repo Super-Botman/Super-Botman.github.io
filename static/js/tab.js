@@ -1,5 +1,6 @@
 function new_tab(element, is_enter, goto_link = true) {
   const a = element.getElementsByClassName("selected")[0];
+  if (!a) return;
 
   let name;
   if (element.id == "content") {
