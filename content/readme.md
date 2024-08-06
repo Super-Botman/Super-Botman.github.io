@@ -8,7 +8,6 @@ title="README"
 
 * [1. Shotcuts](#shotcuts)
 * [2. Commands](#commands)
-* [3. Info](#info)
 
 ## Shotcuts
 
@@ -37,7 +36,3 @@ title="README"
 `:q` exit website
 
 `:set mouse=true|false` to set the mouse (true=showed, false=hidden)
-
-## Info
-
-This website is actually empty but I will add some content in the future :D
