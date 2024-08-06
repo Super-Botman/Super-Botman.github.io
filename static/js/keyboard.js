@@ -3,6 +3,7 @@ const keys = {
   13: "enter",
   17: "ctrl",
   27: "esc",
+  32: "space",
   72: "h",
   74: "j",
   75: "k",
@@ -52,6 +53,18 @@ function exec(event) {
       case "esc":
         document.getElementById("setter").focus();
         document.getElementById("setter").value = "";
+        break;
+
+      case "space":
+        element = document.getElementById("intro");
+        if (element) {
+          for (let i = 100; i >= 0; i--) {
+            element.style = `background: radial-gradient(circle, rgba(26, 82, 205, ${i / 100}) 0%, rgba(2, 0, 36, ${i / 100}) 100%);`;
+            sleep(5);
+          }
+          element.remove();
+          Cookies.set("intro", "");
+        }
         break;
 
       case "enter":

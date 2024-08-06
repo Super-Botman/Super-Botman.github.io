@@ -8,12 +8,21 @@ function command() {
 
   switch (command) {
     case "help":
-      window.location.href = "/test";
+      window.location.href = "/readme";
       break;
 
     case "set":
       const success = set(args);
       setter.value = JSON.stringify(success);
+      break;
+
+    case "showintro":
+      Cookies.set("intro", "true");
+      window.location.href = "/";
+      break;
+
+    case "q":
+      window.location.href = "https://search.ononoki.org";
       break;
 
     default:

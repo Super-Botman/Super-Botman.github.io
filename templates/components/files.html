@@ -2,11 +2,6 @@
 <ul>
     {%- set root_section = get_section(path="_index.md") -%}
     {% set tabindex = -1 %}
-    <li class="file">
-        <span>
-            <a {% if current_path == "/" -%}class="selected"{% endif %} href='/' tabindex="{{ tabindex }}"> README</a>
-        </span>
-    </li>
     {%- for p in root_section.pages %}
     {%- set_global tabindex = tabindex - 1 -%}
     <li class="file">
