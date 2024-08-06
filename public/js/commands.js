@@ -6,6 +6,13 @@ function command() {
   input.shift();
   const args = input.join("").replace(" ", "").split("=");
 
+  if (
+    typeof custom_command != "undefined" &&
+    typeof custom_command === "function"
+  ) {
+    custom_command(command);
+  }
+
   switch (command) {
     case "help":
       window.location.href = "/readme";
@@ -14,11 +21,6 @@ function command() {
     case "set":
       const success = set(args);
       setter.value = JSON.stringify(success);
-      break;
-
-    case "showintro":
-      Cookies.set("intro", "true");
-      window.location.href = "/";
       break;
 
     case "q":
