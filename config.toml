@@ -7,4 +7,5 @@ highlight_theme = "ayu-mirage"
 
 [extra]
 blog_name="0xb0tm4n's website"
-custom_script = true
+custom_script = "custom_script.js"
+custom_css = "css/intro.css"
