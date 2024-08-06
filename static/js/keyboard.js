@@ -58,11 +58,7 @@ function exec(event) {
       case "space":
         element = document.getElementById("intro");
         if (element) {
-          for (let i = 100; i >= 0; i--) {
-            element.style = `background: radial-gradient(circle, rgba(26, 82, 205, ${i / 100}) 0%, rgba(2, 0, 36, ${i / 100}) 100%);`;
-            sleep(5);
-          }
-          element.remove();
+          window.location.href = "/readme";
           Cookies.set("intro", "");
         }
         break;
