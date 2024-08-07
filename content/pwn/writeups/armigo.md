@@ -40,11 +40,10 @@ Ok, so we just have to find a pop instruction and this should be easy because we
 
 ![pop](/images/armigo/pop.png)
 
-So, i'm gonna summarize,
-we have:
-    - a pop instruction
-    - a "cat flag" string
-    - a debug function who run our shell command
+So, i'm gonna summarize, we have:
+- a pop instruction
+- a "cat flag" string
+- a debug function who run our shell command
 
 so we're juste gonna build our rop like this:
 ```exploit
