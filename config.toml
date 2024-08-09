@@ -1,5 +1,5 @@
 base_url = "https://super-botman.github.io"
-theme = "zola-theme"
+theme = "neovim-theme"
 
 [markdown]
 highlight_code = true

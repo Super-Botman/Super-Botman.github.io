@@ -1,6 +1,3 @@
-[submodule "hugo/themes/ananke"]
-	path = hugo/themes/ananke
-	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
-[submodule "themes/zola-theme"]
-	path = themes/zola-theme
-	url = git@github.com:Super-Botman/zola-theme.git
+[submodule "themes/neovim-theme"]
+	path = themes/neovim-theme
+	url = git@github.com:Super-Botman/neovim-theme.git
