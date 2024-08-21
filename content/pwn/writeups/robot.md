@@ -32,7 +32,7 @@ it's a comparaison between our input hashed and a predefined hash, we don't are 
 # Exploitation
 
 ## Actual situation
-Now it's exploit time ! In first we can see that when a user create a robot, this robot is stored in the heap, to do this the program alloc a `struct` called `robot` who contains one chars of 16bits and two pointers so the chunk allocated will be of `32bytes` other interesting things is that when we read the manual the program will read the 32bits of the first chunk stored !
+Now it's exploit time ! In first we can see that when a user create a robot, this robot is stored in the heap, to do this the program alloc a `struct` called `robot` who contains one chars of 16bytes and two pointers so the chunk allocated will be of `32bytes` other interesting things is that when we read the manual the program will read the 32bits of the first chunk stored !
 
 ## Exploit - leak
 So now, we can understand how we are going to exploit this thing !
@@ -43,63 +43,28 @@ In first we going to allocate a first chunk by create a new robot so the heap wi
 |        HEAP        |
 +--------------------+
 |       name[16]     |
-|       *bleep       |  32 bits
+|       *bleep       |  32 bytes
 |       *rool        |
 +--------------------+
 ```
-
-the we free the bloc so free will rewrite first byte but ptr will stay so, if we create a new manuel we'll rewrite the previous bloc so we juste have to rewrite of 16 bits to rewrite only the metadata and the username, our chunk will look like this:
-```
-+--------------------+
-|        HEAP        |
-+--------------------+
-|        manuel      |
-|       *bleep       |  32 bits
-|       *rool        |
-+--------------------+
-```
-
-now, if we read the manuel we'll leak the ptr, now we have leak the soft to bypass PIE we can now calculate the offset to go to our `execl` and then what's we'll do ?!
-
-## New situation
-OK ! now we have leaked what's we want so we can exploit it but how ?! if you remember in the struct we defind pointer, this pointers are called by our program to make some actions so we can rewrite one of this, the we triger actions and then we print the flag ! let's do this !
+So if we free the chunk and then create a new manuel, malloc will allocate the manuel into our older freed chunk were we have the metadata of the chunk with an address to leak the PIE
 
 ## Exploit - CE
+To gain a RCE we'll overwrite the pointers of the function bleep and replace it with the `execl` function, with this we can call `execl` with `/bin/sh` as parameter and get a shell
 
-So, now our heap look like this
-```
-+--------------------+
-|        HEAP        |
-+--------------------+
-|        manuel      |
-|       *bleep       |  32 bits
-|       *rool        |
-+--------------------+
-```
-
-so we're going to create a new robot and heap look like this
+firstly we're going to create a new robot so the freed chunk will be realocated
+and we create a new manuel and write 16 bytes and then the `execl` function address, to rewrite the bleep pointer
 ```
 +--------------------+
 |        HEAP        |
 +--------------------+
 |       name[16]     |
-|       *bleep       |  32 bits
-|       *rool        |
-+--------------------+
-```
-
-we create a new manuel and write 16 bits and then our address, so our chunk will look like this
-```
-+--------------------+
-|        HEAP        |
-+--------------------+
-|       name[16]     |
-|       *execl       |  32 bits
+|       *execl       |  32 bytes
 |       *roll        |
 +--------------------+
 ```
 
-then trigered the `bleep` function by typing 2 and tada ! we got our flag !
+then we trigger the `bleep` function by typing 2 and tada ! we got our flag !
 
 # Exploitation - exploit
 
