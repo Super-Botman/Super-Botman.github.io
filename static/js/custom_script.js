@@ -20,7 +20,8 @@ async function custom_init() {
       "Enjoy!"
     ]
 
-    const element = document.getElementById("intro")
+    const element = document.getElementById("body")
+    element.innerHTML = ""
 
     if (Cookies.get('intro') == '') {
       element.remove()
