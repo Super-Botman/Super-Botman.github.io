@@ -10,6 +10,10 @@ function custom_command(command, args) {
 }
 
 async function custom_init() {
+  if (Cookies.get("intro") == "" && window.location.href == "/") {
+    window.location.href = "/readme";
+  }
+  
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const text = [
@@ -23,11 +27,6 @@ async function custom_init() {
   const element = document.getElementsByTagName("body")[0];
   element.innerHTML = "";
   element.classList.add("intro");
-
-  if (Cookies.get("intro") == "") {
-    element.remove();
-    window.location.href = "/readme";
-  }
 
   element.style = `background: radial-gradient(circle, rgba(26, 82, 205, 1) 0%, rgba(2, 0, 36, 1) 100%);`;
 
