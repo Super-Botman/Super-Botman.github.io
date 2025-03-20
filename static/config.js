@@ -11,8 +11,8 @@ const keys = {
       element = document.getElementsByClassName("intro")[0];
       console.log(element);
       if (element) {
+        Cookies.set("intro", "false");
         window.location.href = "/readme";
-        Cookies.set("intro", "");
       }
     },
   },
