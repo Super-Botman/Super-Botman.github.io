@@ -8,7 +8,8 @@ const commands = {
 const keys = {
   normal: {
     " ": (event, element) => {
-      element = document.getElementById("intro");
+      element = document.getElementsByClassName("intro")[0];
+      console.log(element);
       if (element) {
         window.location.href = "/readme";
         Cookies.set("intro", "");
@@ -37,7 +38,6 @@ async function custom_init() {
 
     element.innerHTML = "";
     element.classList.add("intro");
-    element.style = `background: radial-gradient(circle, rgba(26, 82, 205, 1) 0%, rgba(2, 0, 36, 1) 100%);`;
 
     for (let i = 0; i < text.length; i++) {
       const h1 = document.createElement("h1");
@@ -67,11 +67,6 @@ async function custom_init() {
       }
 
       element.removeChild(h1);
-    }
-
-    for (let i = 100; i >= 0; i--) {
-      element.style = `background: radial-gradient(circle, rgba(26, 82, 205, ${i / 100}) 0%, rgba(2, 0, 36, ${i / 100}) 100%);`;
-      await sleep(5);
     }
 
     element.remove();
