@@ -1,7 +1,11 @@
 +++
 title = "FCSC 2025 | Bigorneau"
 +++
+# [Pwn] Bigorneau |  FCSC 2025 
 
+* [1. Checksec](#checksecs)
+* [2. Writeup](#writeup)
+* [3. Full exploit](#full-exploit)
 
 ## Checksecs
 ```
@@ -70,6 +74,7 @@ syscall
 
 Finally, I wrote a small script to send the first-stage shellcode followed by the real `execve` shellcode with a little padding to reach `rip` and boom, pwned:
 
+## Full exploit
 ```python
 from pwn import *
 

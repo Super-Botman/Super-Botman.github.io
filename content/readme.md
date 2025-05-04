@@ -19,7 +19,7 @@ title="README"
 
 `enter` to open the currently selected file 
 
-`esc+command` see [## Commands](#Commands) 
+`esc+command` see [Commands](#Commands) 
 
 `shift+t/enter` to open the file in a new tab 
 

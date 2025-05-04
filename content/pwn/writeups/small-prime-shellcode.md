@@ -1,6 +1,12 @@
 +++
 title = "FCSC 2025 | Small Prime Shellcode"
 +++
+# [Pwn] Small Prime Shellcode | FCSC 2025
+
+* [1. Checksec](#checksecs)
+* [2. Writeup](#writeup)
+* [3. Full exploit](#full-exploit)
+
 
 ## Checksecs
 ```
@@ -61,6 +67,8 @@ You may ask why I use both `add` and `sub` instead of just `sub`. This is becaus
 
 All I had to do was put everything into an exploit and boom:
 
+
+## Full exploit
 ```python
 from pwn import *
 from sympy import nextprime

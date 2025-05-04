@@ -1,19 +1,15 @@
 +++
 title = "FCSC 2025 | HTTP3"
 +++
+# [Pwn] HTTP3 |  FCSC 2025 
+
+* [1. Checksec](#checksecs)
+* [2. Writeup](#writeup)
+* [3. Full exploit](#full-exploit)
 
 ## Checksecs
 ```
 [*] '/home/botman/Documents/challenges/FCSC/pwn/http3/libc-2.39.so'
-    Arch:       amd64-64-little
-    RELRO:      Full RELRO
-    Stack:      Canary found
-    NX:         NX enabled
-    PIE:        PIE enabled
-    FORTIFY:    Enabled
-    SHSTK:      Enabled
-    IBT:        Enabled
-[*] '/home/botman/Documents/challenges/FCSC/pwn/http3/libc.so.6'
     Arch:       amd64-64-little
     RELRO:      Full RELRO
     Stack:      Canary found
@@ -166,6 +162,8 @@ And we can see that before there is not verifications of the `n` variable so we 
 - find the correct offset and use the oob to fetch our fake header which point to our flag twice so we trigger the error and get the flag
 
 And here it is:
+
+## Full exploit
 ```py
 from pwn import p32, flat, u64, p64
 from hpack import Encoder

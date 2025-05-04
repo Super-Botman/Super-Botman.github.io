@@ -1,8 +1,17 @@
 +++
 title = "FCSC 2023 | Robot"
 +++
+# [Pwn] Robot | FCSC 2023
 
-# Intro
+* [1. Writeup](#writeup)
+    * [1.1 Reverse](#reverse)
+    * [1.2 Leak](#leak)
+    * [1.3 RCE](#rce)
+* [2. Full exploit](#full-exploit)
+
+## Writeup
+
+### Reverse
 So, first in first what does we have to do ? After a fast analyse of the source code we can see that the function who's interesting is `admin`:
 
 ```c
@@ -29,12 +38,9 @@ void admin(char *pwd)
 
 it's a comparaison between our input hashed and a predefined hash, we don't are in a crypto chall so we don't care about that, our objective is to jump directly to the execl to print the flag.
 
-# Exploitation
-
-## Actual situation
 Now it's exploit time ! In first we can see that when a user create a robot, this robot is stored in the heap, to do this the program alloc a `struct` called `robot` who contains one chars of 16bytes and two pointers so the chunk allocated will be of `32bytes` other interesting things is that when we read the manual the program will read the 32bits of the first chunk stored !
 
-## Exploit - leak
+### Leak 
 So now, we can understand how we are going to exploit this thing !
 
 In first we going to allocate a first chunk by create a new robot so the heap will look like this:
@@ -49,7 +55,7 @@ In first we going to allocate a first chunk by create a new robot so the heap wi
 ```
 So if we free the chunk and then create a new manuel, malloc will allocate the manuel into our older freed chunk were we have the metadata of the chunk with an address to leak the PIE
 
-## Exploit - CE
+### RCE
 To gain a RCE we'll overwrite the pointers of the function bleep and replace it with the `execl` function, with this we can call `execl` with `/bin/sh` as parameter and get a shell
 
 firstly we're going to create a new robot so the freed chunk will be realocated
@@ -66,7 +72,7 @@ and we create a new manuel and write 16 bytes and then the `execl` function addr
 
 then we trigger the `bleep` function by typing 2 and tada ! we got our flag !
 
-# Exploitation - exploit
+## Full exploit
 
 ```python
 #!/bin/python

@@ -3,7 +3,8 @@ theme = "neovim-theme"
 
 [markdown]
 highlight_code = true
-highlight_theme = "ayu-mirage"
+extra_syntaxes_and_themes = ["highlight_themes"]
+highlight_theme = "tokyonight"
 
 [extra]
 blog_name="0xb0tm4n's website"
