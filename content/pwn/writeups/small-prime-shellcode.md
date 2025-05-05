@@ -33,7 +33,7 @@ For this challenge, the only constraint for our shellcode was to use **only 6 pr
 
 To create this shellcode, I started by searching through the [ARM documentation](https://developer.arm.com/documentation/ddi0602/2025-03?lang=en). I found some small results, but discovered a terrible truth: with this constraint, it was **impossible** to change the value of `x8`, and since `x8` stores the [syscall number](https://arm64.syscall.sh/), it was impossible to make any syscalls this way.
 
-> <span style="color:#316dca">**ⓘ NOTES**</span>
+> <span style="color: #82aaff;">**ⓘ NOTES**</span>
 >
 > Changing the value of `x8` was impossible because, in ARM, the destination register is always located at the end of the opcode. All instructions allowing a write to `x8` ended with an 8 and, therefore, weren't prime numbers.
 
