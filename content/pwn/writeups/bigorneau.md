@@ -42,7 +42,7 @@ mov rdx, shellcode_len
 syscall
 ```
 
-> <span style="color: #82aaff;">**ⓘ NOTES**</span>
+> <span style="color: #82aaff;">** NOTES**</span>
 >
 > As you can see, I only set `rsi` and `rdx`, as `rax` was already `0x0` ([read syscall](https://x64.syscall.sh/)) thanks to the preface added by `bigorneau.py`.
 
@@ -68,7 +68,7 @@ pop rdx
 syscall
 ```
 
-> <span style="color: #82aaff;">**ⓘ NOTES**</span>
+> <span style="color: #82aaff;">** NOTES**</span>
 >
 > If I had pushed `0x100` onto the stack, the shellcode would have looked like `0x54545e68000100005a0f05`, introducing two extra bytes `0x0` and `0x1`. By reusing the existing `0xf` and `0x5` bytes, I wrote `push 0x0f050f05`, resulting in the shellcode `0x54545e68050f050f5a0f05`.
 
