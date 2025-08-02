@@ -1,3 +1,4 @@
 [submodule "themes/neovim-theme"]
 	path = themes/neovim-theme
 	url = git@github.com:Super-Botman/neovim-theme.git
+	branch = develop
