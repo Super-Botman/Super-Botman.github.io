@@ -8,5 +8,3 @@ highlight_theme = "tokyonight"
 
 [extra]
 blog_name="0xb0tm4n's website"
-config_js = "config.js"
-custom_css = "/css/intro.css"
