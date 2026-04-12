@@ -1,13 +1,15 @@
 +++
 title = "FCSC 2025 | HTTP3"
 +++
-# [Pwn] HTTP3 |  FCSC 2025 
 
-* [1. Checksec](#checksecs)
-* [2. Writeup](#writeup)
-* [3. Full exploit](#full-exploit)
+# [Pwn] HTTP3 | FCSC 2025
+
+- [1. Checksec](#checksecs)
+- [2. Writeup](#writeup)
+- [3. Full exploit](#full-exploit)
 
 ## Checksecs
+
 ```
 [*] '/home/botman/Documents/challenges/FCSC/pwn/http3/libc-2.39.so'
     Arch:       amd64-64-little
@@ -39,24 +41,29 @@ title = "FCSC 2025 | HTTP3"
 ```
 
 ## TL;DR
+
 Objective: read the flag stored into the heap
 
 Solution:
+
 - leak using duplicate header error
 - create a fake header pointing to flag
-- use oob to select fake header 
+- use oob to select fake header
 - show it using duplicate header
 
 ## Writeup
+
 This challenge was the 3rd of a series about http servers based, this time it was based on [HTTP/2 protocole](https://www.rfc-editor.org/rfc/rfc7540). The objective of this chall was to leak the heap and read the flag from it.
 
 ### The leak
+
 The first thing to find any leak it to start by searching for functions that return data to the user and check if there is any bad data handling like some way of returning more data than it normally would have.
 
 So I begin with a little `grep -n -P 'print|write|put' src/*` to have an idea of where I can find interesting code:
 ![grep write/put/print in src](/images/http3/grep_write.png)
 
 I will first take a look at the snprintf code because it seems to return some user-controlled data
+
 ```c
 static bool handleHeaders(int tx, const char *flag, size_t id, const struct headers *headers) {
     ...
@@ -74,18 +81,20 @@ static bool handleHeaders(int tx, const char *flag, size_t id, const struct head
    ...
 }
 ```
+
 So what we see is that if any headers are duplicated in our request, the server will return a 400 err response with the name of the duplicated header, the interesting part is that we can controle the value of `key->size` and `key->data` so maybe we'll be able to leak to data using this function, the first thing to do in this case is to take a look at the man page of our possibly vunlerable function:
 
 ![snprintf man page](/images/http3/man.png)
 And boom, we found the vuln, as you can see if the input buffer as to be truncated `snprintf` doesn't return the actual numbers of bytes wrote but the `key->size` value, so if we send a header name bigger than 0x100 we'll be able to leak the data after our body variable so we'll be able to leak the stack and maybe some heap addresses.
 
-
 ### OOB
+
 Now that we have a way to leak our heap address the only thing left is to find a way to print our flag, to do so we'll use the error handler again as it's the only way we have to print data that we control, so starting from that we have to find a way to modify the `key->data` pointer to point it into our flag.
 
 To do so I will begin by looking at the source of the key struct with this little grep `grep -n -P 'key' src/*`
 ![grep key in src](/images/http3/grep_key.png)
 We can directly see that the `key` is populated by `getIndexed` function so we can take a look at it
+
 ```c
 static const struct header *getIndexed(const struct header *table, size_t idx) {
   if (0 == idx)
@@ -157,6 +166,7 @@ struct headers *parse(struct header *table, size_t size, const char data[static 
 Basically the parse function will determine the type of header by looking at the numbers of bits sets in the first byte, type 0 is encoded as `0b10000000`, type 1 `0b11000000`, ... And each type have a function, so 0 is simply an indexed header, that means that the header returned will be the header at the index specified after the type bits, for example if you want to specify the header `:method GET` you'll have to send the header `0x80 | 0x1` with `0x80` as the header type and `0x1` the index of the header in the headers table.
 
 And we can see that before there is not verifications of the `n` variable so we found our second vulns, now we just have to add all of this together and write an exploit that will:
+
 - leak the heap address and the flag address
 - write a fake header into the heap using the type 3 which allow us to add new custom headers into the header table
 - find the correct offset and use the oob to fetch our fake header which point to our flag twice so we trigger the error and get the flag
@@ -164,6 +174,7 @@ And we can see that before there is not verifications of the `n` variable so we 
 And here it is:
 
 ## Full exploit
+
 ```py
 from pwn import p32, flat, u64, p64
 from hpack import Encoder
@@ -272,7 +283,6 @@ def exploit(io, elf):
     return flag
 ```
 
-
 [download here](/exploits/http3.py)
 
-**Written by *0xB0tm4n***
+**Written by _0xB0tm4n_**

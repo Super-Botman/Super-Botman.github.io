@@ -2,9 +2,11 @@ base_url = "https://super-botman.github.io"
 theme = "neovim-theme"
 
 [markdown]
-highlight_code = true
-extra_syntaxes_and_themes = ["highlight_themes"]
-highlight_theme = "tokyonight"
+render_emoji = true
+
+[markdown.highlighting]
+extra_themes = ["highlight_themes/tokyo-night.json"]
+theme = "tokyo-night"
 
 [extra]
 blog_name="0xb0tm4n's website"
