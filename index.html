@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"></head>
+
+<body onkeydown="exec(event)">
+    <main>
+      <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+    <span>├── <a href="https://super-botman.github.io/readme/" tabindex="-2">README</a></span>
+    </li><li class="folder">
+    <span>├── <a href="https://super-botman.github.io/web/" tabindex="-3">Web</a></span>
+    <ul><li class="folder">
+    <span>│   └── <a href="https://super-botman.github.io/web/writeups/" tabindex="-4">Writeups</a></span>
+    <ul><li class="file">
+    <span>│       ├── <a href="https://super-botman.github.io/web/writeups/thomghost/" tabindex="-5">THM | Thomghost</a></span>
+    </li><li class="file">
+    <span>│       └── <a href="https://super-botman.github.io/web/writeups/boiler/" tabindex="-6">THM | Boiler</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li><li class="folder">
+    <span>└── <a href="https://super-botman.github.io/pwn/" tabindex="-7">Pwn</a></span>
+    <ul><li class="folder">
+    <span>    └── <a href="https://super-botman.github.io/pwn/writeups/" tabindex="-8">Writeups</a></span>
+    <ul><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/pwn103/" tabindex="-9">THM | pwn101 task 103</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/aarchibald/" tabindex="-10">Hackropole | Aarchibald</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/wsd/" tabindex="-11">FCSC 2026 | wsd</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/bigorneau/" tabindex="-12">FCSC 2025 | Bigorneau</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/alfred/" tabindex="-13">Hackropole | Alfred</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/robot/" tabindex="-14">FCSC 2023 | Robot</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/autodiag/" tabindex="-15">FCSC 2026 | Autodiag</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/armigo/" tabindex="-16">Hackropole | Armigo</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/" tabindex="-17">FCSC 2025 | Small Prime Shellcode</a></span>
+    </li><li class="file">
+    <span>        └── <a href="https://super-botman.github.io/pwn/writeups/http3/" tabindex="-18">FCSC 2025 | HTTP3</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li>
+</ul>
+</div>
+      <div class="viewer " id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="readme">README</h1>
+<p>A quick reference for every shortcut and command in this file browser.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="https://super-botman.github.io/readme/#shortcuts">1. Shortcuts</a></li>
+<li><a href="https://super-botman.github.io/readme/#commands">2. Commands</a></li>
+</ul>
+<h2 id="shortcuts">Shortcuts</h2>
+<table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>shift+l</code></td><td>Switch focus to the file viewer</td></tr>
+<tr><td><code>shift+h</code></td><td>Switch focus to the file browser</td></tr>
+<tr><td><code>j</code></td><td>Scroll down a file, or select the next file in the browser</td></tr>
+<tr><td><code>k</code></td><td>Scroll up a file, or select the previous file in the browser</td></tr>
+<tr><td><code>l</code></td><td>Scroll right</td></tr>
+<tr><td><code>h</code></td><td>Scroll left</td></tr>
+<tr><td><code>enter</code></td><td>Open the selected file — or run a command, if you're typing one (see <a href="https://super-botman.github.io/readme/#commands">Commands</a>)</td></tr>
+<tr><td><code>esc</code></td><td>Focus the command prompt</td></tr>
+<tr><td><code>shift+t</code></td><td>Open the selected file or folder in a new tab</td></tr>
+<tr><td><code>shift+q</code></td><td>Close the current tab</td></tr>
+<tr><td><code>tab</code></td><td>Move to the next link on the page (standard browser behavior)</td></tr>
+</tbody></table>
+<h2 id="commands">Commands</h2>
+<p>Press <code>esc</code> to focus the prompt, then type a command below.</p>
+<table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>:help</code></td><td>Show this page</td></tr>
+<tr><td><code>:q</code></td><td>Leave the site</td></tr>
+<tr><td><code>:set mouse=true|false</code></td><td>Show (<code>true</code>) or hide (<code>false</code>) the mouse cursor</td></tr>
+</tbody></table>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

